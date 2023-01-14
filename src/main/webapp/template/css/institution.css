@@ -1,0 +1,18 @@
+.institution-box{
+    padding: 20px;
+}
+#institution-list thead th{
+    height: 44px;
+    /* text-align: center; */
+}
+#institution-list tbody tr{
+    height: 44px;
+}
+#institution-list tr td{
+    border:1px solid #ccc;
+}
+#institution-list tr th{
+    border:1px solid #ccc;
+    width: 50%;
+    background:#eee;
+}

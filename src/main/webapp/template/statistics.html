@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>我的问卷-统计</title>
+    <title>我的问卷- 免费好用的问卷调查系统,调查问卷,免费,简单,模板</title>
+    <meta name="description" content="问卷，是免费、专业的问卷调查系统。提供多种方式创建问卷，简单高效的编辑方式，强大的逻辑设置功能，专业的数据统计和样本甄别，让您轻松开启调研工作。">
+    <meta name="keywords" content="调查问卷,问卷调查,市场调研,问卷系统,问卷,模板,免费,简单,调研,市场调查,满意度,问卷调查网,在线问卷调查,微信问卷,投票小程序,投票">
+    <link rel="shortcut icon" href="image/logo/favicon.ico">
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/my-questionnaire.css">
+    <script src="js/page.js"></script>
+    <!-- zui -->
+    <link href="./zui/css/zui.min.css" rel="stylesheet">
+    <!--重置样式-->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/statistics.css">
+    <!--滚动条样式-->
+    <link rel="stylesheet" href="css/scrollbar.css"/>
+    <!--日期选择插件为独立组件，你需要从本地或 CDN 单独引入 lib 目录下的资源：-->
+    <link href="./zui/lib/datetimepicker/datetimepicker.css" rel="stylesheet">
+    <script src="./js/ScrollBar.js"></script>
+</head>
+<body>
+    <div class="page" style="width: 90%;margin: 0 auto">
+        <div class="header" style="width: 100%">
+            <a class="page-title active" onclick="changePage(event)">问卷调查系统</a>
+            <a class="" onclick="changePage(event)">创建问卷</a>
+            <a onclick="changePage(event)">我的问卷</a>
+            <a onclick="changePage(event)">回答小组</a>
+            <a onclick="changePage(event)">调查资讯</a>
+            <a onclick="changePage(event)">帮助中心</a>
+            <a class="login-area" onclick="changePage(event)">
+                <div class="bell"></div>
+                <div class="user-icon">
+                    <img class="user-header-icon" src="image/icon/icon-header.jpg" alt="" >
+                    <span class="nickname ellipsis">小明</span>
+                </div>
+                <div class="btn-exit">退出</div>
+            </a>
+        </div>
+        <!--操作栏-->
+        <div class="operation clearfix">
+            <!--基本操作-->
+            <div class="base-operator">
+                <div class="active" onclick="changeOperation(event)">编辑</div>
+                <div onclick="changeOperation(event)">皮肤</div>
+                <div onclick="changeOperation(event)">设置</div>
+                <div onclick="changeOperation(event)">投放</div>
+                <div onclick="changeOperation(event)">统计</div>
+            </div>
+            <!--效果预览-->
+            <div class="effect-operator" >
+                <div class="active" onclick="changeOperation(event)">文本编辑</div>
+                <div onclick="changeOperation(event)">预览</div>
+                <div onclick="changeOperation(event)">开始回收</div>
+            </div>
+        </div>
+        <!--问卷主内容-->
+        <div class="main clearfix">
+            <!--左侧菜单-->
+            <div class="slider-menu clearfix ">
+                <div class="wrap-slider scrollBar">
+                    <div>
+                        <!--<div class="slider-item">回收概况</div>
+                        <div class="slider-item">回收数据</div>-->
+                        <div class="slider-item active">统计图表</div>
+                        <!--<div class="slider-item">交叉分析</div>
+                        <div class="slider-item">中奖结果</div>
+                        <div class="slider-item">报名与签到</div>-->
+                    </div>
+                </div>
+                <!--<div class="scroll-bar"></div>-->
+            </div>
+            <!--右侧图表统计容器-->
+            <div class="statistics-container">
+                <!--第一行-->
+                <div class="statistics-header clearfix">
+                    <div class="statistics-header-left">
+                        <h2 class="ellipsis">题目标题</h2>
+                        <i class="ellipsis">id:1323434134</i>
+                    </div>
+                    <div class="statistics-header-right">
+                        <!--下拉选项-->
+                        <div class="dropdown show-all">
+                            <button class="btn" type="button" data-toggle="dropdown">菜单按钮<span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="###">显示全部</a></li>
+                                <li><a href="###">只显示表</a></li>
+                            </ul>
+                        </div>
+                        <div class="print"></div>
+                        <div class="share"></div>
+                        <div class="export">导出统计结果</div>
+                    </div>
+                </div>
+                <!--日期选择-->
+                <div class="datetimepicker-area">
+                    <span>选择时间</span>
+                    <div class="input-group date form-date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input class="form-control" size="16" type="text" value="2019-11-8" readonly="">
+                        <span class="input-group-addon"><span class="icon-calendar"></span></span>
+                    </div>
+                    <div class="input-group date form-date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input class="form-control" size="16" type="text" value="2019-11-19" readonly="">
+                        <span class="input-group-addon"><span class="icon-calendar"></span></span>
+                    </div>
+                </div>
+                <!--筛选题目-->
+                <div class="filter-topic">
+                    <span>筛选题目</span>
+                    <a>编辑筛选条件</a>
+                </div>
+                <!--统计结果-->
+                <div class="statistics-table">
+                    <!--tab页-->
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="###" data-target="#tab2Content1" data-toggle="tab">第1页</a></li>
+                        <li><a href="###" data-target="#tab2Content2" data-toggle="tab">第2页</a></li>
+                        <li><a href="###" data-target="#tab2Content3" data-toggle="tab">第3页</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="tab2Content1">
+                            <div class="subject-title">1.[图片]2019年是平年还是闰年？[图片]</div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>选项</th>
+                                        <th>小计</th>
+                                        <th>百分比</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>...</td>
+                                        <td>...</td>
+                                        <td>...</td>
+                                    </tr>
+                                    <tr>
+                                        <td>...</td>
+                                        <td>...</td>
+                                        <td>...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="tab2Content2">
+                            <p>我是第二页</p>
+                        </div>
+                        <div class="tab-pane fade" id="tab2Content3">
+                            <p>我是第三页</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="./jquery/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="./zui/js/zui.min.js"></script>
+    <script src="./zui/lib/datetimepicker/datetimepicker.js"></script>
+    <script type="text/javascript">
+        // 仅选择日期
+        $(".form-date").datetimepicker(
+            {
+                language:  "zh-CN",
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                minView: 2,
+                forceParse: 0,
+                format: "yyyy-mm-dd"
+            }
+        );
+        window.onload = function (ev) {
+            var scrollbar = document.getElementsByClassName("scrollBar")[0]
+            if (scrollbar) {
+                var scroll = new ScrollBar(scrollbar)
+                console.log(scroll)
+            }
+        }
+    </script>
+</body>
+</html>

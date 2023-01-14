@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./zui/css/zui.min.css">
+    <link rel="stylesheet" href="./zui/lib/datagrid/zui.datagrid.min.css">
+    <link rel="stylesheet" href="./css/module/jquery.treetable.css">
+    <link rel="stylesheet" href="./css/module/jquery.treetable.theme.default.css">
+    <link rel="stylesheet" href="./css/institution.css">
+    <title>机构管理</title>
+</head>
+<body>
+    <div class="institution-box">
+        <div class="nav-btn">
+            <button class="btn btn-primary expand" type="button">全部展开</button>
+            <button class="btn btn-primary collapseAll" type="button">全部折叠</button>
+        </div>
+        <table id="institution-list">
+            <thead>
+                <th>机构名称</th>
+                <th>机构代码</th>
+            </thead>
+            <tbody>
+                <tr data-tt-id="1" data-tt-parent-id="root">
+                    <td>机构名称</td>
+                    <td>111</td>
+                </tr>
+                <tr data-tt-id="2" data-tt-parent-id="1">
+                    <td>一部</td>
+                    <td>111</td>
+                </tr>
+                <tr data-tt-id="3" data-tt-parent-id="2">
+                    <td>一部</td>
+                    <td>111</td>
+                </tr>
+                <tr data-tt-id="4" data-tt-parent-id="root">
+                    <td>机构名称</td>
+                    <td>111</td>
+                </tr>
+                <tr data-tt-id="5" data-tt-parent-id="4">
+                    <td>机构名称</td>
+                    <td>111</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+   <script src="./jquery/jquery-1.11.0.min.js"></script>
+    <script src="./zui/js/zui.min.js"></script>
+    <script src="./zui/lib/datagrid/zui.datagrid.min.js"></script>
+    <script src="./js/common/request.js"></script>
+    <script src="./js/module/jquery.treetable.js"></script>
+    <script src="./js/institution.js"></script>
+</body>
+</html>

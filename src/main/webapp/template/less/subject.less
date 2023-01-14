@@ -1,0 +1,262 @@
+@charset "UTF-8";
+.panel-page{
+  counter-reset: count;
+  .wrap-subject{
+    width: ~"calc(100% - 290px)";
+    padding: 10px 145px;
+    background-color: #fafafa;
+    font-size: 16px;
+    color: #666;
+    .radio-subject{
+      float: left;
+      width: ~"calc(100% - 30px)";
+      .radio-title{
+        width: 100%;
+        line-height: 30px;
+        span:before{
+          content: counter(count) + "、";
+          counter-increment: count;
+        }
+        i{
+          color: #f00;
+        }
+      }
+      .radio-remark{
+        font-size: 14px;
+        width: 100%;
+        line-height: 30px;
+      }
+      .radio-option{
+        .input{
+
+        }
+      }
+    }
+    .subject-operation{
+      float: right;
+      width: 30px;
+      background-color: #f4f4f4;
+      div{
+        width: ~"calc(100% - 20px)";
+        height: 30px;
+        padding: 0 10px;
+        background: url("../image/icon/icon-edit.png") no-repeat center center / 20px 20px;
+        cursor: pointer;
+      }
+      &:first-child{
+        background: url("../image/icon/icon-edit.png") no-repeat center center / 20px 20px;
+      }
+    }
+  }
+}
+
+.question-item{
+  margin-top: 25px;
+  cursor: pointer;
+  min-height: 200px;
+  width: ~"calc(100% - 147px)";
+  padding: 0 0 0 145px;
+  overflow: hidden;
+  -webkit-transition: height 0.5s;
+  -moz-transition: height 0.5s;
+  -o-transition: height 0.5s;
+  transition: height 0.5s;
+  //display: table;
+  border:1px solid #FFF;
+  &:hover{
+    width: ~"calc(100% - 147px)";
+    min-height: 198px;
+    border: 1px solid #CCC;
+    background-color: #FAFAFA;
+  }
+  .question-item-wrap{
+    float: left;
+    //display: table-cell;
+    //width: 100%;
+    width:~"calc(100% - 54px)";
+    .question-item-title{
+      width:~"calc(100% - 20px)";
+      margin: 10px;
+      line-height: 30px;
+      font-size: 16px;
+      color: rgba(0,0,0,1);
+      span{
+        word-break: break-all;
+        word-wrap: break-word;
+        //display: inline-block;
+        input{
+          border-bottom:1px solid #000;
+          width:20px;
+          height: 20px;
+        }
+        &:nth-child(3){
+          color: #ff0000;
+        }
+      }
+      .question-desc{
+        word-break: break-all;
+        margin: 0 10px;
+        min-height: 30px;
+        font-size: 14px;
+      }
+      img{
+        &.videoImage{
+          display: none;
+        }
+      }
+    }
+    .question-item-content{
+      width:~"calc(100% - 20px)";
+      margin: 10px;
+      .radio-primary{
+        margin: 10px;
+        min-height: 30px;
+        font-size: 16px;
+        label{
+          width: 100%;
+          line-height: 20px;
+          word-break: break-all;
+          &:after{
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            top:~"calc(50% - 14px)";
+          }
+          &:before{
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            top:~"calc(50% - 9px)";
+          }
+          input{
+            border-bottom: 1px solid #000;
+            width: 20px;
+            height: 20px;
+          }
+          img.videoImage{
+            display: none;
+          }
+        }
+      }
+
+      .checkbox-primary{
+        margin: 10px;
+        min-height: 30px;
+        font-size: 16px;
+        label{
+          line-height: 20px;
+          &:before,&:after{
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+          }
+          &:after{
+            top:~"calc(50% - 10px)";
+          }
+          input{
+            border-bottom: 1px solid #000;
+            width: 20px;
+            height: 20px;
+          }
+          img.videoImage{
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  //侧边栏
+  .slider-list{
+    float: right;
+    //display: table-cell;
+    vertical-align: middle;
+    width: 0px;
+    opacity: 0;
+    background-color: #F5f5f5;
+    border-left: 1px solid #CCC;
+    -webkit-transition: width 0.5s,opacity 0.5s;
+    -moz-transition: width 0.5s,opacity 0.5s;
+    -o-transition: width 0.5s,opacity 0.5s;
+    -ms-transition: width 0.5s,opacity 0.5s;
+    transition: width 0.5s,opacity 0.5s;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    .wrap-item{
+      width: 20px;
+      height: 18px;
+      padding:11px 15px;
+      cursor: pointer;
+      box-sizing: content-box;
+      transition: width 0.5ms;
+      &:hover{
+        background-color: #479DE6;
+        &:nth-child(1) div{
+          background-position: -443px -366px;
+        }
+        &:nth-child(2) div{
+          background-position: -443px -200px;
+        }
+        &:nth-child(3) div{
+          background-position: -444px -60px;
+        }
+        &:nth-child(4) div{
+          background-position: -443px -101px;
+        }
+        &:nth-child(5) div{
+          background-position: -443px -20px;
+        }
+      }
+      div{
+        height: 18px;
+        background-image: url("../image/sprite/sprites_ico.png");
+        background-repeat: no-repeat;
+        background-position: -443px -330px;
+        box-sizing: content-box;
+      }
+      &:nth-child(1) div{
+        background-position: -443px -330px;
+      }
+      &:nth-child(2) div{
+        background-position: -443px -218px;
+      }
+      &:nth-child(3) div{
+        background-position: -444px -40px;
+      }
+      &:nth-child(4) div{
+        background-position: -443px -122.5px;
+      }
+      &:nth-child(5) div{
+        background-position: -443px 0px;
+      }
+    }
+  }
+
+  .increment-width{
+    opacity: 1;
+    width: 52px;
+  }
+  .question-item-hidden{
+    height: 0px;
+  }
+}
+
+.mask{
+  width: 100%;
+  height: 100%;
+  background-color: #FFF;
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  div{
+    width: 86px;
+    height: 36px;
+  }
+}

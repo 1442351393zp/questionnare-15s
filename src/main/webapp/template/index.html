@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统问卷调查首页</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="swiper/css/swiper.min.css">
+    <script src="swiper/js/swiper.min.js"></script>
+    <script src="js/page.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var mySwiper = new Swiper ('.swiper-container', {
+                autoplay: true,//可选选项，自动滑动
+                loop: true, // 循环模式选项
+                // 如果需要分页器
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+                // 如果需要滚动条
+                scrollbar: {
+                    el: '.swiper-scrollbar',
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+   <div class="header">
+       <a class="page-title active" onclick="changePage(event)">问卷调查系统</a>
+       <a class="" onclick="changePage(event)">创建问卷</a>
+       <a onclick="changePage(event)">我的问卷</a>
+       <a onclick="changePage(event)">回答小组</a>
+       <a onclick="changePage(event)">调查资讯</a>
+       <a onclick="changePage(event)">帮助中心</a>
+       <a class="login-area">
+           <div class="remind"></div>
+           <div class="user-icon"></div>
+           <div class="btn-exit">退出</div>
+       </a>
+   </div>
+   <div class="carousel">
+       <div class="swiper-container">
+           <div class="swiper-wrapper">
+               <div class="swiper-slide">
+                   <div class="slider-desc">
+                       <h2>跨终端跨平台自适应</h2>
+                       <h3>PC、手机、平板不同终端自适应，调研随时随地</h3>
+                       <div class="bg-slider-desc" style="background: url(./image/bg/index_slider_p0.png) no-repeat"></div>
+                   </div>
+               </div>
+               <div class="swiper-slide">
+                   <div class="slider-desc">
+                       <h2>免费简约的问卷系统</h2>
+                       <h3>所有功能全部免费，简约好用，轻松开启在线调试</h3>
+                       <div class="bg-slider-desc" style="background: url(./image/bg/index_slider_p1.png) no-repeat"></div>
+                   </div>
+               </div>
+               <div class="swiper-slide">
+                   <div class="slider-desc">
+                       <h2>数据实时在线统计分析</h2>
+                       <h3>回收数据实时在线统计，图表化展示，清晰直观</h3>
+                       <div class="bg-slider-desc" style="background: url(./image/bg/index_slider_p2.png) no-repeat"></div>
+                   </div>
+               </div>
+               <div class="swiper-slide">
+                   <div class="slider-desc">
+                       <h2>多方式创建编辑问卷</h2>
+                       <h3>自由创建、导入问卷、使用模板三种方式随意选择 </h3>
+                       <div class="bg-slider-desc" style="background: url(./image/bg/index_slider_p3.png) no-repeat"></div>
+                   </div>
+               </div>
+           </div>
+           <!-- 如果需要分页器 -->
+           <div class="swiper-pagination"></div>
+           <!-- 如果需要导航按钮 -->
+           <!--<div class="swiper-button-prev"></div>-->
+           <!--<div class="swiper-button-next"></div>-->
+           <!-- 如果需要滚动条 -->
+           <div class="swiper-scrollbar"></div>
+       </div>
+   </div>
+</body>
+</html>

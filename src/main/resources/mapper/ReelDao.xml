@@ -1,0 +1,976 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infoac.cas.dao.ReelDao">
+    <!--卷表  -->
+    <sql id="reelTable">
+		REEL
+	</sql>
+	
+	 <!--页表 -->
+    <sql id="pageTable">
+		PAGE
+	</sql>
+	
+	<!-- 页表字段 -->
+	<sql id="pageField">
+		PAGEID,
+		CREATETIME,
+		RID,
+		PAGENUM
+	</sql>
+	
+	<!-- 文件夹表 -->
+	<sql id="folderTable">
+		FOLDER
+	</sql>
+	
+	<!-- 文件夹表字段 -->
+	<sql id="folderField">
+		FOLDERID,
+		CREATETIME,
+		FOLDERNAME,
+		REELID,
+		DELFLAG,
+		USERID
+	</sql>
+   <!-- 新增卷 -->
+   <insert id="reelSave" parameterType="com.infoac.cas.dto.ReelDTO">
+		INSERT INTO REEL(
+			RID,
+			TITLE,
+			ENDLANGUAGE,
+			USERID,
+			CREATETIME,
+			REELSTATUS,
+			DELFLAG,
+			STARTLANGUAGE,
+			FOLDERID,
+			SHOWNO,
+			ANONYMOUS,
+			ONCECHANCE,
+			INITIATE,
+			RETRIEVE,
+			ISLIMIT,
+			ENDTIME,
+			SETUP,
+			MYYEAR,
+			BKSETTING,
+			CANAL,
+			CANALONLINE,
+			CANALTEXT
+		) VALUES
+		(
+			#{rId},
+			#{title},
+			#{endLanguage},
+			#{userId},
+			#{createTime},
+			#{reelStatus},
+			#{delFlag},
+			#{startLanguage},
+			#{folderId},
+			#{showNo},
+			#{anonymous},
+			#{onceChance},
+			#{initiate},
+			#{retrieve},
+			#{isLimit},
+			#{endTime},
+			#{setup},
+			#{myyear},
+			#{bksetting},
+			#{canal},
+			#{canalOnline},
+			#{canalText}
+		)
+	</insert>
+	
+    <!--新增时如果修改标题和备注进行修改-->
+	<update id="updateReel" parameterType="com.infoac.cas.dto.ReelDTO">
+		update
+		<include refid="reelTable"></include>
+		set
+		UPDATETIME = #{updateTime}
+		<!--  TITLE = #{title},
+		STARTLANGUAGE = #{startLanguage}-->
+		where RID = #{rId}
+	</update>
+	
+	<!--修改标题-->
+	<update id="updateTitleReel" parameterType="com.infoac.cas.dto.ReelDTO">
+		update
+		<include refid="reelTable"></include>
+		set
+		UPDATETIME = #{updateTime},
+		TITLE = #{title},
+		STARTLANGUAGE = #{startLanguage}
+		where RID = #{rId}
+	</update>
+	
+	<!--修改开始语-->
+	<update id="updateRemarkReel" parameterType="com.infoac.cas.dto.ReelDTO">
+		update
+		<include refid="reelTable"></include>
+		set
+		UPDATETIME = #{updateTime},
+		STARTLANGUAGE = #{startLanguage}
+		where RID = #{rId}
+	</update>
+	
+	<!--修改开始语-->
+	<update id="updateEndLanguageReel" parameterType="com.infoac.cas.dto.ReelDTO">
+		update
+		<include refid="reelTable"></include>
+		set
+		UPDATETIME = #{updateTime},
+		ENDLANGUAGE = #{endLanguage}
+		where RID = #{rId}
+	</update>
+
+    <!--修改皮肤设置-->
+    <update id="updateBKsetting" parameterType="com.infoac.cas.dto.BKsettingDTO">
+        update
+        <include refid="reelTable"></include>
+        set
+        UPDATETIME = #{updateTime},
+        BKSETTING = #{bksetting}
+        where RID = #{rid}
+    </update>
+
+    <!-- 新增页 -->
+   <insert id="pageSave" parameterType="com.infoac.cas.dto.PageDTO">
+		INSERT INTO PAGE(
+			PAGEID,
+			CREATETIME,
+			RID,
+			PAGENUM
+		) VALUES 
+		(
+			#{pageId},
+			#{createTime},
+			#{rId},
+			#{pagenum}
+		)
+	</insert>
+
+    <insert id="subjectSave" parameterType="com.infoac.cas.dto.SubjectDTO">
+		INSERT INTO SUBJECT(
+			SUBJECTID,
+			TOPIC,
+			REMARK,
+			SUBJECTTYPE,
+			MUST,
+			CREATTIME,
+			USERID,
+			PAGEID,
+			USERNAME,
+			TOPICIMGURL,
+			TOPICVIDEOURL,
+			REELID,
+			subjectnum
+		) VALUES 
+		(
+			#{subjectId},
+			#{topic},
+			#{remark},
+			#{subjectType},
+			#{must},
+			#{creatTime},
+			#{userId},
+			#{pageId},
+			#{userName},
+			#{topicImgUrl},
+			#{topicVideoUrl},
+			#{reelId},
+			#{subjectnum}
+		)
+	</insert>
+	
+	
+	
+	
+	<insert id="opntionsSave" parameterType="com.infoac.cas.dto.OptionsDTO">
+		INSERT INTO OPTIONS(
+			OPTIONSID,
+			SUBJECTID,
+			OPTIONS,
+			ORDERID,
+			OPTIONIMGURL,
+			OPTIONVIDEOURL,
+			REELID,
+			CREATETIME,
+			OPTIONNUM,
+			ISMULTIPLECHOICE
+		) VALUES 
+		(
+			#{optionsId},
+			#{subjectId},
+			#{options},
+			#{orderId},
+			#{optionImgUrl},
+			#{optionVideoUrl},
+			#{reelId},
+			#{createTime},
+			#{optionnum},
+			#{isMultipleChoice}
+		)
+	</insert>
+	
+	
+	<update id="opntionsUpdate" parameterType="com.infoac.cas.dto.OptionsDTO">
+		update OPTIONS set
+		OPTIONS = #{options}
+		where OPTIONSID = #{optionsId}
+	</update>
+	
+	<insert id="folderSave" parameterType="com.infoac.cas.dto.FolderDTO">
+		INSERT INTO 
+		<include refid="folderTable"></include>(
+			<include refid="folderField"></include>
+		) VALUES 
+		(
+			#{folderId},
+			#{createTime},
+			#{folderName},
+			#{reelId},
+			#{delFlag},
+			#{userId}
+		)
+	</insert>
+	
+	
+	<!-- 新增标题卷 -->
+   <insert id="reeTitlelSave" parameterType="com.infoac.cas.dto.ReelDTO">
+		INSERT INTO REEL(
+			RID,
+			TITLE,
+			ENDLANGUAGE,
+			USERID,
+			CREATETIME,
+			REELSTATUS,
+			DELFLAG,
+			FOLDERID,
+			SHOWNO,
+			ANONYMOUS,
+			ONCECHANCE,
+			INITIATE,
+			RETRIEVE,
+			ISLIMIT,
+			ENDTIME,
+			SETUP
+		) VALUES 
+		(
+			#{rId},
+			#{title},
+			#{endLanguage},
+			#{userId},
+			#{createTime},
+			#{reelStatus},
+			#{delFlag},
+			#{folderId},
+			#{showNo},
+			#{anonymous},
+			#{onceChance},
+			#{initiate},
+			#{retrieve},
+			#{isLimit},
+			#{endTime},
+			#{setup}
+		)
+	</insert>
+	
+	 <select id="queryAllSubject" parameterType="String" resultType="com.infoac.cas.dto.AllSubjectDTO">
+	   SELECT * FROM REEL,PAGE,SUBJECT,OPTIONS WHERE RID=#{rId}
+	</select>
+
+    <select id="queryAllReel" parameterType="String" resultType="com.infoac.cas.dto.AllSubjectDTO">
+	   SELECT r.*,us.NICKNAME as createPeo FROM REEL r left join USER us on r.USERID = us.ID where r.reelstatus =#{status} and r.myyear = #{year} order by r.createtime desc
+	</select>
+	
+	<select id="queryReel" parameterType="String" resultType="com.infoac.cas.dto.AllSubjectDTO">
+	    SELECT * FROM REEL where RID=#{rId}
+	</select>
+	
+	<select id="queryPage" parameterType="String" resultType="com.infoac.cas.dto.PageDTO">
+	    SELECT * FROM PAGE where RID=#{rId} ORDER BY PAGENUM asc
+	</select>
+
+    <select id="queryMaxPage" parameterType="String" resultType="com.infoac.cas.dto.PageDTO">
+	    SELECT * FROM PAGE where RID=#{rId} ORDER BY PAGENUM desc limit 1
+	</select>
+
+	<select id="querySubject" parameterType="String" resultType="com.infoac.cas.dto.SubjectDTO">
+	    SELECT * FROM SUBJECT where PAGEID=#{pageId} order by SUBJECTNUM asc
+	</select>
+
+    <select id="queryMaxSubject" parameterType="String" resultType="com.infoac.cas.dto.SubjectDTO">
+	    SELECT * FROM SUBJECT where PAGEID=#{pageId} ORDER BY SUBJECTNUM desc limit 1
+	</select>
+	
+	<select id="queryOptions" parameterType="String" resultType="com.infoac.cas.dto.OptionsDTO">
+	    SELECT * FROM OPTIONS where SUBJECTID=#{subjectId} order by OPTIONNUM asc
+	</select>
+	
+	<resultMap type="com.infoac.cas.dto.ReelDTO" id="reelMap1">
+		<id column="rId" property="RID"/>
+		<result column="TITLE" property="title"/>
+		<result column="ENDLANGUAGE" property="endLanguage"/>
+		<result column="USERID" property="userId"/>
+		<result column="CREATETIME" property="createTime"/>
+		<result column="REELSTATUS" property="reelStatus"/>
+		<result column="DELFLAG" property="delFlag"/>
+		<result column="STARTLANGUAGE" property="startLanguage"/>
+	</resultMap>
+	
+	<resultMap type="com.infoac.cas.dto.ReelDTO" id="reelMap">
+		<id column="RID" property="rId"/>
+		<result column="TITLE" property="title"/>
+	    <result column="endLanguage" property="ENDLANGUAGE"/>
+		<result column="userId" property="USERID"/>
+		<result column="createTime" property="CREATETIME"/>
+		<result column="reelStatus" property="REELSTATUS"/>
+		<result column="delFlag" property="DELFLAG"/>
+		<result column="startLanguage" property="STARTLANGUAGE"/> 
+	</resultMap>
+	
+	
+	<select id="queryList" resultType="com.infoac.cas.dto.AllSubjectDTO">
+	    SELECT * FROM REEL WHERE DELFLAG = '0' and folderId = '' order by CREATETIME desc
+	</select>
+	
+	<select id="queryByRIdReel" parameterType="String" resultType="com.infoac.cas.dto.AllSubjectDTO">
+	    SELECT r.*,us.NICKNAME as createPeo FROM REEL r left join USER us on  r.USERID = us.ID where RID=#{rId}
+	</select>
+	
+	<select id="queryPageByIdAndrId" parameterType="String" resultType="com.infoac.cas.dto.PageDTO">
+	    SELECT * FROM PAGE where PAGEID=#{pageId} order by PAGENUM asc
+	</select>
+	
+	<delete id="deletePageById" parameterType="String">
+		DELETE FROM PAGE WHERE PAGEID = #{pageId} 
+	</delete>
+	
+	<delete id="deleteOptionsById" parameterType="String">
+		DELETE FROM OPTIONS WHERE SUBJECTID = #{subjectId} 
+	</delete>
+	
+	<delete id="deleteSubjectById" parameterType="String">
+		DELETE FROM SUBJECT WHERE PAGEID = #{pageId}
+	</delete>
+	
+	<delete id="deleteSubjectId" parameterType="String">
+		DELETE FROM SUBJECT WHERE SUBJECTID = #{subjectId}
+	</delete>
+	<!--list列表页移动到垃圾篓  -->
+	<update id="removeBasket" parameterType="com.infoac.cas.dto.ReelDTO">
+		update
+		<include refid="reelTable"></include>
+		set
+		DELFLAG = '1'
+		where RID = #{rId}
+	</update>
+	
+	<!--文件夹下的问卷移动到垃圾篓  -->
+	<update id="removeFolderToBasket">
+		update
+		<include refid="reelTable"></include>
+		set
+		DELFLAG = '1',
+		FOLDERID = ''
+		where RID = #{rId}
+	</update>
+	
+	<!--移出垃圾篓 恢复到正常-->
+	<update id="recoverBasket" parameterType="com.infoac.cas.dto.ReelDTO">
+		update
+		<include refid="reelTable"></include>
+		set
+		DELFLAG = '0'
+		where RID = #{rId}
+	</update>
+	
+	<select id="queryBasketList" resultType="com.infoac.cas.dto.FolderDTO">
+	    SELECT 
+	    <include refid="folderField"></include>
+	    FROM FOLDER WHERE DELFLAG = #{delFlag} and USERID = #{userId} order by CREATETIME desc
+	</select>
+	
+	<select id="queryByIdBasketList" resultType="com.infoac.cas.dto.FolderDTO">
+	    SELECT 
+	    <include refid="folderField"></include>
+	    FROM FOLDER WHERE FOLDERID = #{folderId} and USERID = #{userId}
+	</select>
+	
+	<select id="queryByfolderIdReel" resultType="com.infoac.cas.dto.AllSubjectDTO">
+	 SELECT
+            r.RID,
+            r.TITLE,
+            r.USERID,
+            r.CREATETIME,
+            r.REELSTATUS,
+            r.DELFLAG,
+            r.STARTLANGUAGE,
+            r.SHOWNO,
+            r.ANONYMOUS,
+            r.ONCECHANCE,
+            r.INITIATE,
+            r.RETRIEVE,
+            r.ISLIMIT,
+            r.SETUP,
+            r.ENDTIME,
+            r.FOLDERID,
+            r.UPDATETIME,
+            r.ENDLANGUAGE,
+            r.CANALTEXT,
+            (select count(*) from REEL_ANSWER_RECORD d where status = 1 and d.reel_id = r.RID)AS recycleNum
+            FROM REEL r WHERE r.DELFLAG = #{delFlag} and r.folderId = #{folderId}
+            order by r.CREATETIME DESC
+	   <!--  SELECT * FROM REEL WHERE DELFLAG = '0' AND FOLDERID = #{folderId} -->
+	</select>
+	<!-- 查询垃圾篓全部数据 -->
+	<select id="queryTrashBasketList" resultType="com.infoac.cas.dto.AllSubjectDTO">
+	     SELECT
+	     r.RID,
+	     r.TITLE,
+	     r.USERID,
+	     r.CREATETIME,
+	     r.REELSTATUS,
+	     r.DELFLAG,
+	     r.STARTLANGUAGE,
+	     r.SHOWNO,
+	     r.ANONYMOUS,
+	     r.ONCECHANCE,
+	     r.INITIATE,
+	     r.RETRIEVE,
+	     r.ISLIMIT,
+	     r.SETUP,
+	     r.ENDTIME,
+	     r.FOLDERID,
+	     r.UPDATETIME,
+	     r.ENDLANGUAGE,
+	     r.CANALTEXT,
+	     (select count(*) from REEL_ANSWER_RECORD d where status = 1 and d.reel_id = r.RID)AS recycleNum
+	     FROM REEL r WHERE DELFLAG = '1' and r.folderId = '' and r.USERID = #{userId} order by CREATETIME desc
+	</select>
+	
+	<select id="findReelOne" parameterType="String" resultType="com.infoac.cas.dto.ReelDTO">
+	    SELECT SHOWNO,ANONYMOUS,ONCECHANCE,SETUP FROM REEL WHERE RID = #{reelId}
+	</select>
+	
+	<select id="findReelByRid" parameterType="String" resultType="com.infoac.cas.dto.ReelDTO">
+	    SELECT RID,TITLE,startLanguage,CREATETIME FROM REEL WHERE RID = #{reelId}
+	</select>
+	
+	<select id="queryPageList" parameterType="String" resultType="com.infoac.cas.dto.PageDTO">
+	    SELECT PAGEID as pageId,RID as rId FROM PAGE WHERE RID = #{reelId} order by PAGENUM asc;
+	</select>
+	
+	<select id="querySubjectList" parameterType="String" resultType="com.infoac.cas.dto.SubjectDTO">
+	    SELECT SUBJECTID as subjectId,TOPIC,REMARK,SUBJECTTYPE,PAGEID as pageId,REELID,MUST FROM SUBJECT WHERE REELID = #{reelId}
+	    order by SUBJECTNUM asc;
+	</select>
+
+    <select id="querySubjectListRecord" parameterType="String" resultType="com.infoac.cas.dto.SubjectDTO">
+	    select  a.subjectId,a.TOPIC,a.REMARK,a.SUBJECTTYPE,a.pageId,a.REELID,a.MUST,a.SUBJECTNUM,g.content from
+        (SELECT s.SUBJECTID as subjectId,s.TOPIC,s.REMARK,s.SUBJECTTYPE,s.PAGEID as pageId,s.REELID,s.MUST,s.SUBJECTNUM FROM SUBJECT s
+	    inner  join  REEL_ANSWER_RECORD r on s.REELID= r.REEL_ID
+	    where r.id=#{recordid}  and r.user_id=#{userid})a
+	    left join GAPFILLING g on a.subjectId = g.SUBJECTID and g.type = #{type} and g.recordid=#{recordid}
+        order by a.SUBJECTNUM asc;
+	</select>
+
+	<!-- 查询某个卷的所有题目 -->
+	<select id="querySubjectListByReelId" parameterType="String" resultType="com.infoac.cas.dto.SubjectDTO">
+	    SELECT * FROM SUBJECT WHERE REELID = #{reelId} order by SUBJECTNUM asc;
+	</select>
+	
+	<select id="queryOptionsList" parameterType="String" resultType="com.infoac.cas.dto.OptionsDTO">
+	    SELECT OPTIONSID as optionsId,SUBJECTID as subjectId,ORDERID,REELID,OPTIONS,isMultipleChoice FROM OPTIONS WHERE REELID = #{reelId}
+	    order by optionnum asc
+	</select>
+
+    <select id="queryOptionsListRecord" parameterType="String" resultType="com.infoac.cas.dto.OptionsDTO">
+	    SELECT a.optionsId,a.subjectId,a.ORDERID,a.REELID,a.OPTIONS,a.optionnum,g.content,isMultipleChoice from
+(SELECT o.OPTIONSID as optionsId,o.SUBJECTID as subjectId,o.ORDERID,o.REELID,o.OPTIONS,o.optionnum,o.isMultipleChoice FROM OPTIONS o
+	    inner join REEL_ANSWER_RECORD r on o.REELID= r.REEL_ID
+	    where r.id=#{recordid}  and r.user_id=#{userid}
+	    )a left join GAPFILLING g on a.OPTIONSID = g.OPTIONSID and g.type = #{type} and g.recordid=#{recordid}
+order by a.optionnum asc;
+	</select>
+	
+	<!-- 删除卷 -->
+	<delete id="deleteReelById" parameterType="String">
+		DELETE FROM REEL WHERE RID = #{rId}
+	</delete>
+	
+	<!-- 根据rid删除页 -->
+	<delete id="deletePageRId" parameterType="String">
+		DELETE FROM PAGE WHERE RID = #{rId}
+	</delete>
+	
+	<select id="queryPageRId" parameterType="String" resultType="com.infoac.cas.dto.PageDTO">
+	    SELECT 
+	    <include refid="pageField"></include>
+	    FROM 
+	    <include refid="pageTable"></include>
+	    where RID=#{rId} order by PAGENUM asc 
+	</select>
+	
+	<!-- 删除文件夹及以下数据 -->
+	<delete id="deleteFolder" parameterType="String">
+		DELETE FROM FOLDER WHERE FOLDERID = #{folderId}
+	</delete>
+	<!-- 根据folderId查询reelId -->
+	<select id="queryReelId" parameterType="String" resultType="String">
+	    SELECT RID FROM REEL where FOLDERID=#{folderId}
+	</select>
+	<!-- 根据folderId查询reel表数据 -->
+	<select id="queryReelfolderId" parameterType="String" resultType="com.infoac.cas.dto.ReelDTO">
+	    SELECT * FROM REEL where FOLDERID=#{folderId}
+	</select>
+	<!--文件夹移动到垃圾篓  -->
+	<update id="removeFolderBasket" parameterType="com.infoac.cas.dto.FolderDTO">
+		update FOLDER set DELFLAG = '1' where FOLDERID = #{folderId}
+	</update>
+	
+	<!--文件夹移出垃圾篓 恢复到正常-->
+	<update id="recoverFolderBasket" parameterType="com.infoac.cas.dto.ReelDTO">
+		update FOLDER set DELFLAG = '0' where FOLDERID = #{folderId}
+	</update>
+	<!-- 查询已经删除的文件夹 -->
+	<select id="queryRemoveFolderList" resultType="com.infoac.cas.dto.FolderDTO">
+	    SELECT 
+	    <include refid="folderField"></include> 
+	    FROM FOLDER WHERE DELFLAG = '1' and USERID = #{userId} order by CREATETIME desc
+	</select>
+	<!-- 单独新增标题 -->
+   <insert id="titleSave" parameterType="com.infoac.cas.dto.ReelDTO">
+		INSERT INTO REEL(
+			RID,
+			TITLE,
+			ENDLANGUAGE,
+			USERID,
+			CREATETIME,
+			REELSTATUS,
+			DELFLAG,
+			STARTLANGUAGE,
+			FOLDERID,
+			SHOWNO,
+			ANONYMOUS,
+			ONCECHANCE,
+			INITIATE,
+			RETRIEVE,
+			ISLIMIT,
+			ENDTIME,
+			SETUP
+		) VALUES 
+		(
+			#{rId},
+			#{title},
+			#{endLanguage},
+			#{userId},
+			#{createTime},
+			#{reelStatus},
+			#{delFlag},
+			#{startLanguage},
+			#{folderId},
+			#{showNo},
+			#{anonymous},
+			#{onceChance},
+			#{initiate},
+			#{retrieve},
+			#{isLimit},
+			#{endTime},
+			#{setup}
+		)
+	</insert>
+	
+	<select id="querySubjectId" parameterType="String" resultType="com.infoac.cas.dto.SubjectDTO">
+	    SELECT * FROM SUBJECT where SUBJECTID=#{subjectId}
+	</select>
+	
+	<!--题修改-->
+	<update id="updateSubject" parameterType="com.infoac.cas.dto.SubjectDTO">
+		update SUBJECT set
+		TOPIC = #{topic},
+		REMARK = #{remark},
+		SUBJECTTYPE = #{subjectType},
+		MUST = #{must}
+		where SUBJECTID = #{subjectId}
+	</update>
+
+    <!--拖拽修改ti序号-->
+    <update id="updateSubjectNum" parameterType="com.infoac.cas.dto.SubjectDTO">
+		update SUBJECT set
+		SUBJECTNUM = #{subjectnum},
+		UPDATETIME = #{updatetime},
+		PAGEID = #{pageId}
+		where SUBJECTID = #{subjectId} and REELID = #{reelId}
+	</update>
+
+    <!--拖拽修改ye序号-->
+    <update id="updatePageNum" parameterType="com.infoac.cas.dto.PageDTO">
+		update PAGE set
+		PAGENUM = #{pagenum}
+		where RID = #{rId} and PAGEID = #{pageId}
+	</update>
+
+
+	<!-- 查询当前登录人用的是什么 视图  -->
+	<select id="queryViewStatus" parameterType="String" resultType="String">
+	    SELECT STATUS FROM VIEWSTATUS where USERID=#{userId}
+	</select>
+	
+	<!-- 新增视图切换功能0：列表视图，1：九宫格视图  -->
+   <insert id="addViewStatus" parameterType="com.infoac.cas.dto.ViewStatusDTO">
+		INSERT INTO VIEWSTATUS(
+			VIEWID,
+			STATUS,
+			USERID,
+			USERNAME,
+			CREATETIME
+		) VALUES 
+		(
+			#{viewId},
+			#{status},
+			#{userId},
+			#{userName},
+			#{createTime}
+		)
+	</insert>
+	
+	<!--题修改-->
+	<update id="updateViewStatus" parameterType="com.infoac.cas.dto.ViewStatusDTO">
+		update VIEWSTATUS set
+		STATUS = #{status}
+		where USERID = #{userId}
+	</update>
+	
+	<!-- 根据reelid删除选项数据 -->
+	<delete id="deleteOptionsReelId" parameterType="String">
+		DELETE FROM OPTIONS WHERE REELID = #{reelId} 
+	</delete>
+	
+	<!-- 根据optionsId删除选项数据 -->
+	<delete id="deleteOptionsId" parameterType="String">
+		DELETE FROM OPTIONS WHERE OPTIONSID = #{optionsId} 
+	</delete>
+	
+	<!-- 根据reelid删除题数据 -->
+	<delete id="deleteSubjectReelId" parameterType="String">
+		DELETE FROM SUBJECT WHERE REELID = #{reelId} 
+	</delete>
+	
+	<!-- 根据reelid删除页数据 -->
+	<delete id="deletePageReelId" parameterType="String">
+		DELETE FROM PAGE WHERE RID = #{reelId} 
+	</delete>
+	
+	<!-- 根据reelid删除页数据 -->
+	<delete id="deleteReelReelId" parameterType="String">
+		DELETE FROM REEL WHERE REELID = #{reelId} 
+	</delete>
+	<!-- 列表页进入查询卷表数据和回收量 -->
+    <select id="queryListRecycle" resultType="com.infoac.cas.dto.AllSubjectDTO">
+        SELECT
+        r.RID,
+        r.TITLE,
+        r.USERID,
+        r.CREATETIME,
+        r.REELSTATUS,
+        r.DELFLAG,
+        r.STARTLANGUAGE,
+        r.SHOWNO,
+        r.ANONYMOUS,
+        r.ONCECHANCE,
+        r.INITIATE,
+        r.RETRIEVE,
+        r.ISLIMIT,
+        r.SETUP,
+        r.ENDTIME,
+        r.FOLDERID,
+        r.UPDATETIME,
+        r.ENDLANGUAGE,
+        r.CANALTEXT,
+        (select count(*) from REEL_ANSWER_RECORD d where status = 1 and d.reel_id = r.RID)AS recycleNum
+        FROM REEL r WHERE r.DELFLAG = '0' and r.folderId = '' and r.USERID = #{userId}
+        order by r.CREATETIME DESC
+    </select>
+    <!--<select id="queryListRecycle" resultType="com.infoac.cas.dto.AllSubjectDTO">
+            SELECT
+            r.RID,
+            r.TITLE,
+            r.USERID,
+            r.CREATETIME,
+            r.REELSTATUS,
+            r.DELFLAG,
+            r.STARTLANGUAGE,
+            r.SHOWNO,
+            r.ANONYMOUS,
+            r.ONCECHANCE,
+            r.INITIATE,
+            r.RETRIEVE,
+            r.ISLIMIT,
+            r.SETUP,
+            r.ENDTIME,
+            r.FOLDERID,
+            r.UPDATETIME,
+            r.ENDLANGUAGE,
+            r.CANALTEXT,
+            (
+	        SELECT count(1) FROM (
+            <foreach collection="years" index="index" item="item">
+            <if test="index != 0">
+                UNION ALL
+            </if>
+            <if test="years.size > 1">
+                (
+            </if>
+	        SELECT DISTINCT a.RECEIVERID FROM ANSWER_${item} a WHERE a.REELID=r.RID
+            <if test="years.size > 1">
+                )
+            </if>
+            </foreach>
+            )
+	        )AS recycleNum
+            FROM REEL r WHERE r.DELFLAG = '0' and r.folderId = ''
+            order by r.CREATETIME DESC
+    </select>-->
+	<!-- 抽屉数据查询包括多少页多少题回收量等 -->
+	<select id="queryByRIdReelRecycle"  resultType="com.infoac.cas.dto.AllSubjectDTO">
+        SELECT DISTINCT
+        r.RID,
+        r.TITLE,
+        r.USERID,
+        r.CREATETIME,
+        r.REELSTATUS,
+        r.DELFLAG,
+        r.STARTLANGUAGE,
+        r.SHOWNO,
+        r.ANONYMOUS,
+        r.ONCECHANCE,
+        r.INITIATE,
+        r.RETRIEVE,
+        r.ISLIMIT,
+        r.SETUP,
+        r.ENDTIME,
+        r.FOLDERID,
+        r.UPDATETIME,
+        r.ENDLANGUAGE,
+        (select count(*) from REEL_ANSWER_RECORD d where status = 1 and d.reel_id = r.RID)AS recycleNum,
+        (SELECT count(p.PAGEID)
+        FROM PAGE p WHERE p.RID=r.RID)AS pageNum,
+        (SELECT count(s.SUBJECTID)
+        FROM SUBJECT s WHERE s.REELID=r.RID)AS subjectNum
+        FROM REEL r left join PAGE p on r.RID=p.RID left join SUBJECT s on  r.RID=s.REELID WHERE r.RID=#{rId}
+        <!-- </foreach>  -->
+    </select>
+    <!-- <foreach collection="years" index="index" item="item">
+        <if test="index != 0">
+        UNION ALL
+        </if> -->
+	     <!--SELECT DISTINCT
+	     r.RID,
+	     r.TITLE,
+	     r.USERID,
+	     r.CREATETIME,
+	     r.REELSTATUS,
+	     r.DELFLAG,
+	     r.STARTLANGUAGE,
+	     r.SHOWNO,
+	     r.ANONYMOUS,
+	     r.ONCECHANCE,
+	     r.INITIATE,
+	     r.RETRIEVE,
+	     r.ISLIMIT,
+	     r.SETUP,
+	     r.ENDTIME,
+	     r.FOLDERID,
+	     r.UPDATETIME,
+	     r.ENDLANGUAGE,
+	     (
+	      SELECT count(1) FROM (
+        <foreach collection="years" index="index" item="item">
+            <if test="index != 0">
+                UNION ALL
+            </if>
+            <if test="years.size > 1">
+                (
+            </if>
+	        SELECT DISTINCT a.RECEIVERID FROM ANSWER_${item} a WHERE a.REELID=r.RID
+            <if test="years.size > 1">
+                )
+            </if>
+        </foreach>
+        )
+	     )AS recycleNum,
+	     (SELECT count(p.PAGEID) 
+	     FROM PAGE p WHERE p.RID=r.RID)AS pageNum,
+	     (SELECT count(s.SUBJECTID) 
+	     FROM SUBJECT s WHERE s.REELID=r.RID)AS subjectNum
+	     FROM REEL r left join PAGE p on r.RID=p.RID left join SUBJECT s on  r.RID=s.REELID WHERE r.RID=#{rId}
+	     &lt;!&ndash; </foreach>  &ndash;&gt;
+	</select>-->
+	
+	<!-- 根据subjectId查询有哪几个选项-->
+    <select id="querySubjectById" resultType="com.infoac.cas.dto.OptionsDTO">
+        SELECT OPTIONSID,CREATETIME from options where SUBJECTID =#{subjectId}
+            
+    </select>
+	
+	<!-- 查询0：正常文件夹所有文件夹的名字 1：垃圾篓中文件夹所有文件夹的名字-->
+    <select id="queryAllFolder" resultType="com.infoac.cas.dto.FolderDTO">
+        SELECT FOLDERID,FOLDERNAME from FOLDER where DELFLAG =#{delFlag} and USERID = #{userId}
+    </select>
+    
+    <!--将选中的卷移动到文件夹下-->
+	<update id="moveToFolder">
+		update REEL set
+		FOLDERID = #{folderId}
+		where RID = #{rId}
+	</update>
+	  <!--将文件夹下的问卷移出-->
+	<update id="shiftOutFolder">
+		update REEL set
+		FOLDERID = ''
+		where RID = #{rId}
+	</update>
+	  <!--将垃圾篓文件夹下的问卷移到0：正常列表中1：废纸篓中-->
+	<update id="shiftOutTrashBasketFolder">
+		update REEL set
+		FOLDERID = '',
+		DELFLAG =  #{delFlag}
+		where RID = #{rId}
+	</update>
+	<!-- 根据REELID查询页和题的数据 -->
+	<select id="queryPageAndSubect" parameterType="String" resultType="com.infoac.cas.dto.SubjectDTO">
+	   SELECT s.TOPIC,p.PAGENUM,p.PAGEID,s.SUBJECTID 
+	   FROM SUBJECT s LEFT JOIN PAGE p 
+	   on s.PAGEID=p.PAGEID  
+	   where s.REELID=#{reelId} order by p.PAGEID,s.SUBJECTNUM asc  
+	</select>
+	
+	<!-- 统计报表-->
+	<select id="countPic" parameterType="String" resultType="com.infoac.cas.dto.CountPicDTO">
+       SELECT r.RID,r.TITLE,p.pageid,s.TOPIC,o.OPTIONS,o.OPTIONSID,o.isMultipleChoice,
+       (SELECT sum(z) FROM (
+       <foreach collection="years" index="index" item="item">
+	       <if test="index != 0">
+		   UNION ALL
+           </if>
+	       (
+             (SELECT count(*) z FROM ANSWER_${item} v WHERE v.SUBJECTID=#{subjectId} 
+             <if test="startTime != '' and startTime != null">
+			    and CREATEDATE &gt;= #{startTime}
+	         </if>
+	         <if test="endTime != '' and endTime != null">
+		        and CREATEDATE &lt;= #{endTime}
+	         </if>
+	         )
+	       )
+	   </foreach>
+       ))AS countNum,
+       (SELECT sum(b) FROM (
+       <foreach collection="years" index="index" item="item">
+	       <if test="index != 0">
+		   UNION ALL
+           </if>
+	       (
+			 (SELECT count(*) b FROM ANSWER_${item} b  WHERE b.OPTIONSID=o.OPTIONSID
+			   <if test="startTime != '' and startTime != null">
+				   and CREATEDATE &gt;= #{startTime}
+		       </if>
+		       <if test="endTime != '' and endTime != null">
+			      and CREATEDATE &lt;= #{endTime}
+		       </if>
+		     )
+	       )
+	   </foreach>
+	   ))AS NUM
+	   FROM reel r LEFT JOIN page p ON r.RID=p.RID LEFT JOIN SUBJECT s ON p.PAGEID=s.PAGEID 
+	   LEFT JOIN OPTIONS o ON s.SUBJECTID=o.SUBJECTID
+	   WHERE r.RID =#{reelId}
+       AND p.PAGEID= #{pageId}
+       AND s.SUBJECTID=#{subjectId}
+      
+	</select>
+	
+	<!-- 统计报表-->
+	<select id="queryCompareCountPic" parameterType="String" resultType="com.infoac.cas.dto.CountPicDTO">
+        SELECT r.RID,r.TITLE,p.pageid,s.TOPIC,o.OPTIONS,o.OPTIONSID, o.OPTIONSID,o.isMultipleChoice,
+       (SELECT sum(z) FROM (
+        <foreach collection="years" index="index" item="item">
+	       <if test="index != 0">
+		   UNION ALL
+           </if>
+	       (
+	       (SELECT count(*) z FROM ANSWER_${item} v WHERE v.SUBJECTID=#{subjectId})
+	       )
+	    </foreach>
+       ))AS countNum,
+       (SELECT sum(b) FROM (
+       <foreach collection="years" index="index" item="item">
+	       <if test="index != 0">
+		   UNION ALL
+           </if>
+	       (
+	       (SELECT count(*) b FROM ANSWER_${item} b  WHERE b.OPTIONSID=o.OPTIONSID and b.OPTIONSID= '0') 
+	       )
+	       </foreach> 
+		  ))AS NUM
+		FROM reel r LEFT JOIN page p ON r.RID=p.RID LEFT JOIN SUBJECT s ON p.PAGEID=s.PAGEID 
+		LEFT JOIN OPTIONS o ON s.SUBJECTID=o.SUBJECTID
+		 WHERE r.RID =#{reelId}
+       AND p.PAGEID= #{pageId}
+       AND s.SUBJECTID=#{subjectId}
+	</select>
+	
+	 <select id="getTextAnswerList" parameterType="String" resultType="com.infoac.cas.dto.TextAnswerDTO">
+		 select t.TEXTANSWER,u.username as textAnswerName from (
+		 <foreach collection="years" index="index" item="item">
+		 <if test="index != 0">
+			 UNION ALL
+			 </if>
+				 select a.TEXTANSWER,receiverid  from ANSWER_${item} a where  SUBJECTID=#{subjectId} and  REELID=#{rId}
+			 <if test="startTime != '' and startTime != null">
+				 and CREATEDATE &gt;= #{startTime}
+			 </if>
+			 <if test="endTime != '' and endTime != null">
+				 and CREATEDATE &lt;= #{endTime}
+			 </if>
+		 </foreach>
+        ) t inner join user u on t.receiverid=u.id
+	 </select>
+	<select id="getIncludeAnswerList" resultType="com.infoac.cas.dto.TextAnswerDTO">
+		select t.TEXTANSWER,u.username as textAnswerName from (
+		<foreach collection="years" index="index" item="item">
+			<if test="index != 0">
+				UNION ALL
+			</if>
+			SELECT a.TEXTANSWER FROM ANSWER_${item} a WHERE a.SUBJECTID=#{subjectId} and  REELID=#{rId}
+			<if test="startTime != '' and startTime != null">
+				and CREATEDATE &gt;= #{startTime}
+			</if>
+			<if test="endTime != '' and endTime != null">
+				and CREATEDATE &lt;= #{endTime}
+			</if>
+		</foreach>
+		) t inner join user u on t.receiverid=u.id
+	</select>
+	<select id="getNoIncludeAnswerList" resultType="com.infoac.cas.dto.TextAnswerDTO">
+		select t.TEXTANSWER,u.username as textAnswerName from (
+		<foreach collection="years" index="index" item="item">
+			<if test="index != 0">
+				UNION ALL
+			</if>
+			SELECT a.TEXTANSWER FROM ANSWER_${item} a WHERE a.SUBJECTID=#{subjectId} and  REELID=#{rId}
+			<if test="startTime != '' and startTime != null">
+				and CREATEDATE &gt;= #{startTime}
+			</if>
+			<if test="endTime != '' and endTime != null">
+				and CREATEDATE &lt;= #{endTime}
+			</if>
+		</foreach>
+		) t inner join user u on t.receiverid=u.id
+	</select>
+</mapper>

@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infoac.cas.dao.AnswerDao">
+
+    <!--字段映射与转换-->
+	<sql id="answerField">
+		ID,
+		REELID,
+		PAGEID,
+		SUBJECTID,
+		OPTIONSID,
+		USERID,
+		CREATEDATE,
+		RECEIVERID,
+		RECEIVERNAME,
+		ANSWERRECORDID,
+		TEXTANSWER
+	</sql>
+     <insert id="saveAnswer" parameterType="java.util.Map" >
+        INSERT INTO answer_${year} (
+			<include refid="answerField"></include>
+		) VALUES 
+		<!--<foreach collection="answerList" index="index" item="item" separator="," >-->
+		(
+			#{answer.id},
+			#{answer.reelId},
+			#{answer.pageId},
+			#{answer.subjectId},
+			#{answer.optionsId},
+			#{answer.userId},
+			#{answer.createDate},
+			#{answer.receiverId},
+			#{answer.receiverName},
+			#{answer.answerRecordId},
+			#{answer.textAnswer}
+		)
+		<!--</foreach>-->
+    </insert>
+    
+    <select id="findAnswerCount" resultType="java.lang.Integer">
+    SELECT  SUM(a) FROM (
+        <foreach collection="years" index="index" item="item">
+        <if test="index != 0">
+		UNION ALL
+        </if>
+            <if test="years.size > 1">
+                (
+            </if>
+		SELECT count(*) as a FROM ANSWER_${item}
+		<where>
+			REELID=#{reelId} and RECEIVERID=#{userId}
+		</where>
+            <if test="years.size > 1">
+                )
+            </if>
+		</foreach>
+	)
+	</select>
+	
+	<select id="queryAnswerRId"  resultType="com.infoac.cas.dto.SubjectDTO">
+        <foreach collection="years" index="index" item="item">
+        <if test="index != 0">
+		UNION ALL
+        </if>
+            <if test="years.size > 1">
+                (
+            </if>
+		SELECT count(*) as countNum,SUBJECTID FROM ANSWER_${item}
+		<where>
+			REELID=#{reelId} and USERID=#{userId}
+		</where>
+		 GROUP BY SUBJECTID
+            <if test="years.size > 1">
+                )
+            </if>
+		</foreach> 
+	</select>
+	<!-- 单独查询options表有几个回收数量 -->
+	<select id="queryAnswerOptionsId"  resultType="com.infoac.cas.dto.OptionsDTO">
+	   <!--  SELECT  SUM(num) FROM (
+        <foreach collection="years" index="index" item="item">
+        <if test="index != 0">
+		UNION ALL
+        </if> -->
+        <foreach collection="years" index="index" item="item">
+        <if test="index != 0">
+		UNION ALL
+        </if>
+            <if test="years.size > 1">
+                (
+            </if>
+        SELECT count(*)as countNum,ROUND(count(*)/
+        (SELECT count(*)  FROM ANSWER_${item} WHERE SUBJECTID=#{subjectId})*100,2) AS percentage,OPTIONSID
+		 FROM ANSWER_${item} 
+		 where OPTIONSID=#{optionsId}
+			<if test="startTime != '' and startTime != null">
+				and CREATEDATE &gt;= #{startTime}
+		    </if>
+		    <if test="endTime != '' and endTime != null">
+				and CREATEDATE &lt;= #{endTime}
+		    </if>
+		
+		 GROUP BY OPTIONSID
+            <if test="years.size > 1">
+                )
+            </if>
+		</foreach> 
+	
+	</select>
+	<select id="findAnswerListByUser"  resultType="com.infoac.cas.dto.AnswerUserDTO">
+		SELECT noo,REELID,TITLE,answerDate,reelStatus,RECEIVERID as answerUserId,ENDLANGUAGE as endLanguage,recordId,createPeo from (
+	    SELECT rownum noo,REELID,TITLE,answerDate,reelStatus,RECEIVERID,ENDLANGUAGE,recordId,createPeo from (
+	    SELECT rownum,REELID,TITLE,answerDate,reelStatus,RECEIVERID,ENDLANGUAGE,recordId,createPeo from (
+          SELECT DISTINCT r.RID as REELID,r.TITLE,re.start_time as answerDate,r.REELSTATUS as reelStatus,
+          re.user_id as RECEIVERID,r.ENDLANGUAGE,re.id as recordId,us.NICKNAME as createPeo
+          FROM reel_answer_record re
+          LEFT JOIN REEL r on  re.reel_id=r.rid right join ANSWER_${answer.year} an on re.reel_id = an.reelid
+          left join USER us on  r.USERID = us.id
+          WHERE re.user_id=#{answer.userId}  order by re.start_time desc
+		) a ) c
+		<![CDATA[ where rownum <= #{answer.page}*#{answer.recPerPage} ) b where b.noo>(#{answer.page}-1)*#{answer.recPerPage} ]]>
+	</select>
+
+
+    <select id="findunAnswerCountByUser"  resultType="long" parameterType="com.infoac.cas.entity.AnswerVo">
+SELECT count(1) from (
+	    SELECT REELID,TITLE,answerDate,reelStatus,RECEIVERID,ENDLANGUAGE,recordId from (
+	    SELECT REELID,TITLE,answerDate,reelStatus,RECEIVERID,ENDLANGUAGE,recordId from (
+          SELECT DISTINCT r.RID as REELID,r.TITLE,re.start_time as answerDate,r.REELSTATUS as reelStatus,
+          re.user_id as RECEIVERID,r.ENDLANGUAGE,re.id as recordId
+          FROM reel_answer_record re
+          LEFT JOIN REEL r on  re.reel_id=r.rid right join ANSWER_${answer.year} an on re.reel_id = an.reelid
+          WHERE re.user_id=#{answer.userId}  order by re.start_time desc
+		) a )
+    </select>
+
+    <!--<select id="findunAnswerCountByUser"  resultType="long" parameterType="com.infoac.cas.entity.AnswerVo">
+
+        select count(1) from REEL where rid not in (
+        select distinct REELID from ANSWER_${answer.year} where RECEIVERID=#{answer.userId}
+        ) and REELSTATUS = '0' and MYYEAR = #{answer.year}
+
+    </select>-->
+    <select id="findunAnswerListByUser"  resultType="com.infoac.cas.dto.AllSubjectDTO">
+        SELECT *
+        FROM (select *,rownum r from (
+            select * from REEL where rid not in (
+              select distinct REELID from ANSWER_${answer.year} where RECEIVERID=#{answer.userId}
+            ) and REELSTATUS = '0' and MYYEAR = #{answer.year}
+            order by createtime desc
+        )
+        )
+        <if test="answer.page != 0">
+            where
+            <![CDATA[r>(#{answer.page}-1)*#{answer.recPerPage} and r<=#{answer.page}*#{answer.recPerPage} ]]>
+        </if>
+
+    </select>
+
+    <select id="msgExpire"  resultType="com.infoac.cas.dto.AllSubjectDTO">
+        select * from REEL
+        where  REELSTATUS = '0'  and RETRIEVE='0'  and SETUP ='0' and EXPIRE ='1'
+       <![CDATA[  and ENDTIME >= #{time} and ENDTIME <= #{time2} ]]>
+        order by createtime asc
+    </select>
+    <!--三小时推动状态修改-->
+    <update id="updateExpire" parameterType="String">
+		update REEL set
+		EXPIRE = '0'
+		where RID = #{rId}
+	</update>
+
+	<select id="findAnswerCountByUser"  resultType="long" parameterType="com.infoac.cas.entity.AnswerVo">
+	SELECT count(1) from    (select DISTINCT REELID,ANSWERRECORDID FROM ANSWER_${answer.year}
+	    LEFT JOIN REEL ON RID=REELID
+		<where>
+			RECEIVERID=#{answer.userId} )
+		</where> 
+	</select>
+	<select id="findAnswersByUser"  resultType="com.infoac.cas.dto.AnswerDTO" >
+	SELECT OPTIONSID,TEXTANSWER FROM ANSWER_${year}
+		<where>
+			RECEIVERID=#{userId} and REELID=#{reelId} and ANSWERRECORDID=#{recordId}
+        </where>
+	</select>
+
+
+    <delete id="deleteByReelid" parameterType="String">
+		DELETE FROM ANSWER_${year}  WHERE REELID = #{reelid}
+	</delete>
+
+
+    <sql id="collectField">
+        ID,
+		USER_ID,
+		TOPIC,
+		REMARK,
+		MUST,
+		SUBJECT_TYPE,
+		OPTIONS
+	</sql>
+    <insert id="saveCollect" parameterType="com.infoac.cas.dto.CollectDTO">
+        INSERT INTO collect (
+        <include refid="collectField"></include>
+        ) VALUES
+        (
+        #{collectDTO.id},
+        #{collectDTO.userId},
+        #{collectDTO.topic},
+        #{collectDTO.remark},
+        #{collectDTO.must},
+        #{collectDTO.subjectType},
+        #{collectDTO.options}
+        )
+    </insert>
+
+    <insert id="saveCollectsys" parameterType="com.infoac.cas.dto.CollectDTO">
+        INSERT INTO collectsys (
+        ID,
+		TOPIC,
+		TITLE,
+		REMARK,
+		MUST,
+		SUBJECT_TYPE,
+		OPTIONS,
+		TYPE
+        ) VALUES
+        (
+        #{collectDTO.id},
+        #{collectDTO.topic},
+        #{collectDTO.title},
+        #{collectDTO.remark},
+        #{collectDTO.must},
+        #{collectDTO.subjectType},
+        #{collectDTO.options},
+        #{collectDTO.type}
+        )
+    </insert>
+
+    <select id="collectList"  parameterType="String" resultType="com.infoac.cas.dto.CollectDTO">
+        select
+        <include refid="collectField"></include>
+        from collect
+        where
+        USER_ID=#{userId}
+    </select>
+
+    <select id="contentList"  resultType="com.infoac.cas.dto.CollectDTO">
+        select * from COLLECTSYS
+    </select>
+
+    <select id="findCollection"  parameterType="String" resultType="com.infoac.cas.dto.CollectDTO">
+        select
+        <include refid="collectField"></include>
+        from collect
+        where
+        ID=#{id}
+    </select>
+
+    <select id="findCollectsys"  parameterType="String" resultType="com.infoac.cas.dto.CollectDTO">
+        select
+        *
+        from collectsys
+        where
+        ID=#{id}
+    </select>
+
+    <delete id="delCollection" parameterType="com.infoac.cas.dto.CollectDTO">
+		delete from collect
+		where
+			ID = #{collectDTO.id}
+			and USER_ID = #{collectDTO.userId}
+	</delete>
+
+	<!--====================================统计页面开始========================================-->
+
+	<!--查询每个年份分表中的结果-->
+	<select id="getYearsTableResult"  resultType="com.infoac.cas.dto.YearsTableAnswerDTO">
+		<foreach collection="yearsList" index="index" item="item">
+			<if test="index != 0">
+				UNION ALL
+			</if>
+			<if test="yearsList.size > 1">
+				(
+			</if>
+			SELECT ${item} as yearStr , *
+			FROM ANSWER_${item}
+			<where>
+				<if test="id != '' and id != null">
+					and id = #{id}
+				</if>
+				<if test="reelId != '' and reelId != null">
+					and reelId = #{reelId}
+				</if>
+				<if test="subjectId != '' and subjectId != null">
+					and subjectid = #{subjectId}
+				</if>
+				<if test="receiverId != '' and receiverId != null">
+					and receiverid = #{receiverId}
+				</if>
+			</where>
+			<if test="yearsList.size > 1">
+				)
+			</if>
+		</foreach>
+	</select>
+
+	<!--修改单个选项答案，一般不用-->
+	<update id="updateOptions" parameterType="String">
+		update ANSWER_${year} set optionsid = #{optionsId}
+		<where>
+			<if test="id != '' and id != null">
+				and id = #{id}
+			</if>
+		</where>
+	</update>
+
+	<!--删除某人个某份问卷中某个题目的答案,参数一个不能少，否则报错不允许删除-->
+	<delete id="deleteSubjectAnswer">
+		delete from ANSWER_${year}
+		where
+			reelId = #{reelId}
+			and subjectid = #{subjectId}
+			and receiverid = #{receiverId}
+	</delete>
+
+	<!--查询某个问卷某用户（或者所有用户）某(多)道题所有选项及答案-->
+	<select id="getSubjectAnswer" parameterType="String" resultType="com.infoac.cas.dto.SubjectAnswerDTO">
+		SELECT
+			t1.subjectid ,
+			t1.topic ,
+			t1.subjecttype subjectType,
+			t1.must mustItem,
+			t1.remark,
+			t2.optionsid,
+			t2.isMultipleChoice,
+			t2.reelid ,
+			t2.options ,
+		    t3.textanswer,
+			<!--t3表数据少，可能会出现无receiverId的记录，影响数据处理-->
+			<!--t3.receiverid as receiverId,-->
+			#{receiverid} as receiverId,
+			case when t3.receiverid is null then 0
+			else 1 end as checked,
+-- 			t4.id as answerRecordId
+			#{answerRecordId} as answerRecordId
+		FROM "QUESTIONNAIRE"."SUBJECT" t1
+		left join "QUESTIONNAIRE"."OPTIONS" t2 on t1.subjectid = t2.subjectid
+		left join  (
+			<foreach collection="yearsList" item="year" index="index">
+				<if test="index > 0">
+					UNION ALL
+				</if>
+				select * from "QUESTIONNAIRE".ANSWER_${year}
+-- 				不加限制条件的话结果集不符合数据要求
+				<!--<if test="receiverid != null and receiverid != ''">-->
+					where receiverid = #{receiverid}
+				<!--</if>-->
+	-- 			当一个人回答同一道题多次时需要用answerRecordId区分具体哪一次
+				<if test="answerRecordId != null and answerRecordId !='' ">
+					and answerRecordId = #{answerRecordId}
+				</if>
+			</foreach>
+		)t3 on t2.optionsid = t3.optionsid
+-- 		left join "QUESTIONNAIRE"."REEL_ANSWER_RECORD" t4
+-- 		on t3.receiverid = t4.user_id and t1.reelid = t4.reel_id
+		<where>
+		    1 = 1
+		    <if test="subjectid != null and subjectid != '' ">
+				and t1.subjectid = #{subjectid}
+			</if>
+			and t2.reelid = #{reelid}
+		</where>
+		<!--控制题目、选项排序-->
+		order by
+		--t1.creattime,
+		--t2.createtime asc
+		t1.subjectnum,
+		t2.optionnum asc
+
+	</select>
+	
+	<!--修改题时，若删除选项，根据optionsId删除填报数据-->
+	<delete id="deleteAnswerOptionsId">
+	<foreach collection="years" index="index" item="item">
+		delete from ANSWER_${item} where OPTIONSID = #{optionsId};
+		</foreach>
+	</delete>
+
+
+	<!--========================================统计页面结束==========================================-->
+
+
+    <!--========================================桌面紅點數字==========================================-->
+    <select id="countDeskCount"  resultType="java.lang.Integer" >
+        SELECT count(id) FROM DESK_COUNT
+        where userid=#{userId}
+    </select>
+
+    <select id="countUnminelist"  resultType="java.lang.Integer" >
+        SELECT count(id) FROM DESK_COUNT
+        where userid=#{userId} and rid = #{rId}
+    </select>
+
+    <delete id="delDeskCount">
+            delete from DESK_COUNT where userid=#{userId};
+    </delete>
+    <delete id="delDeskCountByrid">
+            delete from DESK_COUNT where rid=#{rId};
+    </delete>
+
+    <delete id="delDeskOne">
+            delete from DESK_COUNT where userid=#{userId}  and rid = #{rId};
+    </delete>
+
+    <insert id="insertDeskCount" parameterType="String">
+        INSERT INTO DESK_COUNT (
+        ID,
+		USERID,
+		RID
+        ) VALUES
+        (
+        #{id},
+        #{userId},
+        #{rId}
+        )
+    </insert>
+
+    <!--========================================填空==========================================-->
+    <insert id="insertGap" parameterType="com.infoac.cas.dto.GapFillingDTO">
+        INSERT INTO GAPFILLING (
+        FILLINID,
+		CONTENT,
+		CREATETIME,
+		SUBJECTID,
+		OPTIONSID,
+		RECORDID,
+		USERID,
+		RID,
+		TYPE
+        ) VALUES
+        (
+        #{gap.fillinId},
+        #{gap.content},
+        #{gap.createTime},
+        #{gap.subjectId},
+        #{gap.optionsId},
+        #{gap.recordId},
+        #{gap.userId},
+        #{gap.rId},
+        #{gap.type}
+        )
+    </insert>
+
+
+    <select id="listGap"  resultType="com.infoac.cas.dto.GapFillingDTO" parameterType="com.infoac.cas.dto.GapFillingDTO" >
+        SELECT * FROM GAPFILLING
+        where USERID=#{gap.userId} and RID=#{gap.rId} and RECORDID = #{gap.recordId} and type = #{gap.type} and SUBJECTID= #{gap.subjectId}
+        <if test="gap.optionsId != null and gap.optionsId != ''">
+            and OPTIONSID = #{gap.optionsId}
+        </if>
+    </select>
+
+    <delete id="delGap">
+            delete from GAPFILLING where RID=#{rId};
+    </delete>
+    
+    
+    <!-- 统计报表 筛选 包含-->
+	<select id="queryAnswerRecordId" parameterType="String" resultType="String">
+	  <foreach collection="years" index="index" item="item">
+	     <if test="index != 0">
+		 UNION ALL
+         </if>
+	    (
+        SELECT a.ANSWERRECORDID FROM ANSWER_${item} a WHERE a.OPTIONSID=#{optionsId}
+        <if test="startTime != '' and startTime != null">
+			and CREATEDATE &gt;= #{startTime}
+	    </if>
+	    <if test="endTime != '' and endTime != null">
+		    and CREATEDATE &lt;= #{endTime}
+	    </if>
+	    )
+	  </foreach>
+	</select> 
+	
+	<!-- 统计报表 筛选 不包含-->
+	<select id="queryNotIncludeAnswerRecordId" parameterType="String" resultType="String">
+	   <foreach collection="years" index="index" item="item">
+	     <if test="index != 0">
+		 UNION ALL
+         </if>
+	     (
+         SELECT a.ANSWERRECORDID FROM ANSWER_${item} a WHERE a.OPTIONSID != #{optionsId} and a.SUBJECTID=#{subjectId}
+         <if test="startTime != '' and startTime != null">
+			and CREATEDATE &gt;= #{startTime}
+	     </if>
+	     <if test="endTime != '' and endTime != null">
+		    and CREATEDATE &lt;= #{endTime}
+	     </if>
+	     )
+	  </foreach>
+	</select> 
+  <!-- 统计报表 根据题和答题id找该答卷其他选择的选项-->
+	<select id="queryoptionsId" parameterType="String" resultType="com.infoac.cas.dto.ReceivedDataInfo">
+	  <foreach collection="years" index="index" item="item">
+	     <if test="index != 0">
+		 UNION ALL
+         </if>
+	      (
+          SELECT a.SUBJECTID,a.OPTIONSID 
+          FROM ANSWER_${item} a 
+          WHERE a.ANSWERRECORDID = #{answerRecordId} and a.SUBJECTID =#{subjectId}
+          )
+	  </foreach>
+	</select>
+
+
+    <insert id="saveListenerUnmine" parameterType="com.infoac.cas.dto.ListenerUnmineDTO">
+        INSERT INTO LISTENERUNMINE (
+		RID,
+		USERID
+        ) VALUES
+        (
+        #{listen.rid},
+        #{listen.userid}
+        )
+    </insert>
+
+    <select id="getListercount" resultType="java.lang.Integer"  parameterType="java.lang.String" >
+        SELECT count(1) FROM LISTENERUNMINE
+        where  USERID=#{uid}
+    </select>
+
+
+    <delete id="delListenerUnmine">
+            delete from LISTENERUNMINE where  USERID=#{uid};
+    </delete>
+
+
+</mapper>

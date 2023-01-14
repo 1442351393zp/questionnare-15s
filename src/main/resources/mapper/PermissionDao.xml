@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infoac.cas.dao.PermissionDao">
+  <select id = "permissionDao" resultType="com.infoac.cas.dto.PermissionDTO"> 
+   select ID,NAME,PID,ZINDEX,DESCPT,CODE,PATH from PERMISSION ORDER BY ZINDEX ; 
+  </select>
+  
+  <insert id = "Addpermission"  parameterType = "com.infoac.cas.dto.PermissionDTO">
+  insert into PERMISSION 
+  (ID,NAME,PID,ZINDEX,DESCPT,CODE,PATH)
+  values
+  (#{id},#{name},#{pid},#{zindex},#{descpt},#{code},#{path})
+</insert>
+<update id ="updatePerm" parameterType = "com.infoac.cas.dto.PermissionDTO">
+  update  permission
+ <set>
+  <if  test="name!=null">
+   name=#{name},
+  </if>
+  <if test ="pid!=null">
+   pid=#{pid},
+  </if>
+  <if test="zindex!=null">
+   zindex=#{zindex},
+  </if>
+  
+  <if test="descpt!=null">
+    descpt=#{descpt},
+  </if>
+  <if test="code!=null">
+    code=#{code},
+  </if>
+  <if test="path!=null">
+   path=#{path},
+  </if>
+  </set>
+  where id = #{id}
+ </update>
+ <select id ="findChildPerm" resultType="com.infoac.cas.dto.PermissionDTO" >
+ select ID,NAME,PID,ZINDEX,DESCPT,CODE,PATH from PERMISSION
+ where pid=#{pid}
+</select>
+<delete id="deletByPermission" parameterType="string">
+ delete from permission
+ where id = #{id}
+</delete>
+<!-- 查询所有权限数数据 -->
+<select id ="findPerms"  resultType="com.infoac.cas.dto.PermissionVO">
+ select id,name,pid,descpt,code,path,zindex from permission
+</select>
+<!-- 根据角色id查询权限数据 -->
+<select id ="selectper" resultType="com.infoac.cas.dto.PermissionVO">
+ select p.id,p.name,p.pid,p.descpt,p.code,p.path,p.zindex
+ from permission p
+ LEFT JOIN role_permission rp ON rp.permitid = p.id
+ where rp.roleid = #{roleid}
+</select> 
+<!-- 清除角色对应的权限表数据 -->
+<delete id ="deleteRolePermission" parameterType="com.infoac.cas.dto.RolePermissionKey" >
+  delete  from  ROLE_PERMISSION where roleid =#{roleid}
+</delete>
+ <!-- 保存新角色或者修改角色对应的权限数据表 -->
+<insert id = "insetrUserrole" parameterType="com.infoac.cas.dto.RolePermissionKey">
+  insert into ROLE_PERMISSION (permitid,roleid) values(#{permitid},#{roleid})
+</insert>
+  <select id="findPermission" parameterType="String"  resultType="com.infoac.cas.dto.PermissionDTO">
+   select ID,NAME,PID,ZINDEX,DESCPT,CODE,PATH from PERMISSION
+   where id=#{id}
+ </select>  
+</mapper>

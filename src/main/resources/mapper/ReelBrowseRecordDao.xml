@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infoac.cas.dao.ReelBrowseRecordDao">
+
+    <!-- 新增浏览记录 -->
+    <insert id="save" parameterType="com.infoac.cas.dto.ReelBrowseRecordDTO">
+		INSERT INTO REEL_BROWSE_RECORD(
+			ID,
+			REEL_ID,
+			USER_ID,
+			BROWSE_TIME,
+			REMARK,
+			CREATE_OP_ID,
+			CREATE_OP_NAME,
+			CREATE_ORG_ID,
+			CREATE_ORG_NAME
+		) VALUES
+		(
+			#{browse.id},
+			#{browse.reelId},
+			#{browse.userId},
+			sysdate,
+			#{browse.remark},
+			#{browse.createOpId},
+			#{browse.createOpName},
+			#{browse.createOrgId},
+			#{browse.createOrgName}
+		)
+	</insert>
+
+	<select id="getBrowseCount" parameterType="String" resultType="java.lang.Integer">
+		select count(*) from REEL_BROWSE_RECORD
+		<if test="reelId != null and reelId != ''">
+			where reel_id = #{reelId}
+		</if>
+	</select>
+
+
+</mapper>

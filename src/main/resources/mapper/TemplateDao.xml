@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infoac.cas.dao.TemplateDao">
+<!-- 展示模板列表 -->
+<select id="templatelist" resultType="com.infoac.cas.dto.TemplateDTO">
+ select  typeid,typepid,typename ,typperank 
+ from TEMPLE_TYPE 
+ order by typperank
+</select>
+<!-- 添加模板 -->
+<insert id="insertTemplate" parameterType="com.infoac.cas.dto.TemplateDTO">
+ insert into TEMPLE_TYPE(
+  typeid,
+  typepid,
+  typename,
+  typperank
+ )VALUES(
+  #{typeid},
+  #{typepid},
+  #{typename},
+  #{typperank}
+  )
+</insert>
+<!-- 修改模板 -->
+<update id="updateTemplate" parameterType="com.infoac.cas.dto.TemplateDTO">
+     UPDATE TEMPLE_TYPE
+            <set>
+            <if test="template.typename != null and template.typename != '' " >
+                typename = #{template.typename},
+            </if>
+            <if test="template.typperank != null and template.typperank != ''">
+                typperank = #{template.typperank},
+            </if>
+        </set>
+		WHERE typeid = #{template.typeid}
+	</update>
+<!-- 查询选中的模板数据 -->
+<select id="selectTemplate" resultType="com.infoac.cas.dto.TemplateDTO" >
+select  typeid,typepid,typename ,typperank 
+ from TEMPLE_TYPE 
+</select>
+<!-- 查看是否有子节点 -->
+<select id="findChildTemplate" resultType="com.infoac.cas.dto.TemplateDTO">
+select  typeid,typepid,typename ,typperank 
+ from TEMPLE_TYPE
+ where typepid=#{typepid}
+</select>
+<!-- 删除节点下的数据 -->
+<delete id="deletByTemplate" parameterType="string">
+delete from TEMPLE_TYPE
+ where typeid = #{typeid}
+</delete>
+<select id="templatelists" resultType="com.infoac.cas.dto.TemplateVO">
+ select  typeid,typepid,typename ,typperank 
+ from TEMPLE_TYPE
+</select>
+    <!-- 查询模板类型下问卷的信息 以及分页展示效果 -->
+<select id="templateLists"  resultType="com.infoac.cas.entity.ReelVO">
+  select RID ,TITLE from (
+  select rownum r,RID ,TITLE
+  from REEL where typeid=#{typeid}
+  )
+    <if test="page!= null and page!=''">
+        where
+        <![CDATA[r>(#{page}-1)*#{recPerPage} and r<=#{page}*#{recPerPage}]]>
+    </if>
+</select>
+   <!-- 查询模板卷的具体类容-->
+    <select id="subjectlist" resultType="com.infoac.cas.dto.SubjectDTO">
+     select SUBJECTID,TOPIC,REELID ,CREATTIME from SUBJECT
+     where reelId=#{reelId} order by CREATTIME ASC
+    </select>
+    <!-- 保存问卷为模板问卷-->
+    <update id="svaeTemple"  parameterType="com.infoac.cas.dto.ReelDTO">
+        UPDATE REEL
+        <set>
+            <if test="istype != null and istype != '' " >
+                ISTYPE = #{istype},
+            </if>
+            <if test="typeid != null and typeid != ''">
+                TYPEID = #{typeid},
+            </if>
+        </set>
+        WHERE RID = #{rId}
+    </update>
+    <!-- 查询卷的所有信息-->
+    <select id="addTempldateReel" parameterType="String"  resultType="com.infoac.cas.dto.ReelDTO">
+    select
+      RID,
+      TITLE,
+      STARTLANGUAGE,
+      ENDLANGUAGE
+    from
+     REEL
+    where
+     RID=#{reelid}
+    </select>
+    <insert id="addReel"  parameterType="com.infoac.cas.dto.ReelDTO">
+        insert  INTO  REEL(
+            RID,
+			TITLE,
+			ENDLANGUAGE,
+			USERID,
+			CREATETIME,
+			REELSTATUS,
+			DELFLAG,
+			STARTLANGUAGE,
+			FOLDERID,
+			SHOWNO,
+			ANONYMOUS,
+			ONCECHANCE,
+			INITIATE,
+			RETRIEVE,
+			ISLIMIT,
+			ENDTIME,
+			SETUP,
+			MYYEAR,
+			BKSETTING,
+			CANAL,
+			CANALONLINE,
+			CANALTEXT
+        )values (
+            #{rId},
+			#{title},
+			#{endLanguage},
+			#{userId},
+			#{createTime},
+			#{reelStatus},
+			#{delFlag},
+			#{startLanguage},
+			#{folderId},
+			#{showNo},
+			#{anonymous},
+			#{onceChance},
+			#{initiate},
+			#{retrieve},
+			#{isLimit},
+			#{endTime},
+			#{setup},
+			#{myyear},
+			#{bksetting},
+			#{canal},
+			#{canalOnline},
+			#{canalText}
+        )
+    </insert>
+    <select id="selectPageTempleate" parameterType="String" resultType="com.infoac.cas.dto.PageDTO">
+     select
+     PAGEID,
+     CREATETIME,
+     RID,
+     pagenum
+     from
+     PAGE
+     where RID=#{reelid} order by pagenum asc;
+    </select>
+    <insert id="addPageTempleate" parameterType="com.infoac.cas.dto.PageDTO">
+        insert  into  PAGE(
+            PAGEID,
+			CREATETIME,
+			RID,
+			PAGENUM
+        )values (
+            #{pageId},
+			#{createTime},
+			#{rId},
+			#{pagenum}
+        )
+    </insert>
+   <!-- 查询模板提的类容-->
+    <select id="selectSubjectTemplate"  resultType="com.infoac.cas.dto.SubjectDTO">
+           select
+            SUBJECTID,
+			TOPIC,
+			REMARK,
+			SUBJECTTYPE,
+			MUST,
+			CREATTIME,
+			USERID,
+			PAGEID,
+			USERNAME,
+			TOPICIMGURL,
+			TOPICVIDEOURL,
+			REELID,
+			SUBJECTNUM
+			from
+			SUBJECT
+			where
+			REELID=#{reelid} and PAGEID= #{pageid} order by subjectnum asc ;
+    </select>
+    <!-- 将模板题插入表中-->
+    <insert id="addSubjectTemplate" parameterType="com.infoac.cas.dto.SubjectDTO">
+        insert into  SUBJECT(
+           SUBJECTID,
+			TOPIC,
+			REMARK,
+			SUBJECTTYPE,
+			MUST,
+			CREATTIME,
+			USERID,
+			PAGEID,
+			USERNAME,
+			TOPICIMGURL,
+			TOPICVIDEOURL,
+			REELID,
+			subjectnum
+        )
+        values (
+            #{subjectId},
+			#{topic},
+			#{remark},
+			#{subjectType},
+			#{must},
+			#{creatTime},
+			#{userId},
+			#{pageId},
+			#{userName},
+			#{topicImgUrl},
+			#{topicVideoUrl},
+			#{reelId},
+			#{subjectnum}
+        )
+    </insert>
+    <!-- 将模板选项查询出来-->
+    <select id="selectOptionsTemplate" resultType="com.infoac.cas.dto.OptionsDTO">
+      select
+      OPTIONSID,
+      TOPICID,
+      ORDERID,
+      OPTIONS,
+      SUBJECTID,
+      OPTIONIMGURL,
+      OPTIONVIDEOURL,
+      REELID,
+      CREATETIME,
+      OPTIONNUM
+      from
+      OPTIONS
+      where REELID=#{reelid} and SUBJECTID= #{subjectid}  order by optionnum asc ;
+    </select>
+  <!-- 将模板选项插入表中形成新的数据-->
+    <insert id="addOptionsTemplate" parameterType="com.infoac.cas.dto.OptionsDTO">
+      insert into OPTIONS(
+            OPTIONSID,
+			SUBJECTID,
+			OPTIONS,
+			ORDERID,
+			OPTIONIMGURL,
+			OPTIONVIDEOURL,
+			REELID,
+			CREATETIME,
+			OPTIONNUM
+      )values (
+            #{optionsId},
+			#{subjectId},
+			#{options},
+			#{orderId},
+			#{optionImgUrl},
+			#{optionVideoUrl},
+			#{reelId},
+			#{createTime},
+			#{optionnum}
+      )
+    </insert>
+    <!-- 获取新rid下的页id-->
+    <select id="selectNewPage" parameterType="String" resultType="com.infoac.cas.dto.PageDTO">
+      select
+     PAGEID,
+     CREATETIME,
+     RID
+     from
+     PAGE
+     where RID=#{rid}
+    </select>
+    <select id="selectTemplateCount" resultType="Long">
+         SELECT count(*) FROM  reel where TYPEID=#{typeid}
+    </select>
+    <!-- 模板搜索-->
+    <select id="templateName" resultType="com.infoac.cas.entity.ReelVO">
+        select RID ,TITLE,ISTYPE from  REEL where ISTYPE = '1'
+
+            <if test="title != null and title != ''">
+                AND  title like '%${title}%'
+            </if>
+
+
+    </select>
+</mapper>

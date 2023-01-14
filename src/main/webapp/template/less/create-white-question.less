@@ -1,0 +1,616 @@
+@charset "UTF-8";
+.empty-page{
+  //height: ~"calc(100% - 61px)";
+  height: 100%;
+  /*副标题*/
+  .sub-header{
+      height: 60px;
+      .sub-header-left{
+          float: left;
+          margin-top: 12px;
+          //width: 150px;
+          //height: 100%;
+          margin-left: 20px;
+          .btn{display: block}
+          .btn-primary{
+            //display: inline-block;
+            vertical-align: middle;
+            font-size: 14px;
+            width: 70px;
+            float: left;
+            //height: 20px;
+            padding: 10px 15px;
+              //background: url("../image/icon/icon-add.png") no-repeat left center / 20px 20px;
+            &:first-child{
+              line-height: 1;
+              i{
+                display: inline-block;
+                width: 14px;
+                height: 14px;
+                font-size: 16px;
+                font-weight: bold;
+                vertical-align: middle;
+              }
+            }
+            &.deleteAll{
+              margin-left: 20px;
+              width: 45px;
+              padding: 6px 5px;
+            }
+          }
+        //文件夹当中的返回按钮
+        .btn-back{
+          float: left;
+          width: 30px;
+          height: 35px;
+          margin-right: 20px;
+          background: url(../image/icon/icon-back-gray.png) no-repeat center center / 30px 25px;
+        }
+      }
+      .sub-header-right{
+          float: right;
+          width: ~"calc(100% - 202px)";
+          height: 100%;
+          display: flex;
+          justify-content: flex-end;
+          .sub-header-btn {
+              width: 30px;
+              height: 100%;
+              padding: 0 20px;
+              &:first-child{
+                  background: url("../image/icon/icon-folder-gray.png") no-repeat center center / 30px 30px;
+              }
+              &:nth-child(2){
+                  background: url("../image/icon/icon-delete-gray.png") no-repeat center center / 25px 25px;
+              }
+              &:nth-child(3){
+                  background: url("../image/icon/icon-list-gray.png") no-repeat center center / 25px 25px;
+              }
+              &:nth-child(4){
+                  background: url("../image/icon/icon-grid-gray.png") no-repeat center center / 30px 30px;
+              }
+              &:hover{
+                  &:first-child{
+                      background: url("../image/icon/icon-folder-blue.png") no-repeat center center / 30px 30px;
+                  }
+                  &:nth-child(2){
+                      background: url("../image/icon/icon-delete-blue.png") no-repeat center center / 25px 25px;
+                  }
+                  &:nth-child(3){
+                      background: url("../image/icon/icon-list-blue.png") no-repeat center center / 25px 25px;
+                  }
+                  &:nth-child(4){
+                      background: url("../image/icon/icon-grid-blue.png") no-repeat center center / 30px 30px;
+                  }
+              }
+          }
+      }
+  }
+  /*空问卷页面*/
+  .emptyTip{
+      height: 390px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      background-color: #F4F6F9;
+      p{
+          margin: 20px 0;
+          font-size: 20px;
+          color: #999;
+      }
+      a{
+          width: 100px;
+          height: 30px;
+          line-height: 30px;
+          font-size: 18px;
+          color: #FFF;
+          padding: 5px 10px 5px 30px;
+          text-align: center;
+          background-image: url("../image/icon/icon-add-white.png");
+          background-repeat: no-repeat;
+          background-position: 10px center;
+          background-size: 20px 20px;
+          background-color: #008FFF;
+          text-decoration: none;
+          border-radius: 5px;
+          &:hover{
+              text-decoration: none;
+              color: #FFF;
+          }
+      }
+  }
+  /**副标题**/
+  .sub-header-2{
+    height: 60px;
+    padding:0 20px;
+    display: flex;
+    justify-content: space-between;
+    .btn-back{
+      width: 30px;
+      height: 100%;
+      background: url("../image/icon/icon-back-gray.png") no-repeat center center / 30px 25px;
+      &:hover{
+        background: url("../image/icon/icon-back-blue.png") no-repeat center center / 30px 25px;
+      }
+    }
+    .sub-title{
+      line-height: 60px;
+      font-size: 18px;
+      color: #999999;
+      text-decoration: none;
+      cursor: default;
+    }
+    .sub-header-btn{
+        width: 30px;
+        height: 100%;
+        background: url("../image/icon/icon-list-gray.png") no-repeat center center / 25px 25px;
+        &:hover{
+          background: url("../image/icon/icon-list-blue.png") no-repeat center center / 25px 25px;
+        }
+        &:last-child{
+          background: url("../image/icon/icon-grid-gray.png") no-repeat center center / 30px 30px;
+          &:hover{
+            background: url("../image/icon/icon-grid-blue.png") no-repeat center center / 30px 30px;
+          }
+        }
+    }
+  }
+  /*布局九宫格*/
+  .wrap-grid{
+    width: ~"calc(100% - 40px)";
+    padding: 20px 20px 40px 20px;
+    background-color: #F4F6F9;
+    height: ~"calc(100% - 120px)";
+      //视图
+    .card-grid{
+      float: left;
+      width: ~"calc(100%)";
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      transition: width 0.5s;
+      .grid-point{
+        font-size: 20px;
+        text-align: center;
+        width: 100%;
+        margin-top: 20px;
+      }
+      .card-item{
+        width: 120px;
+        margin: 10px;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        cursor: pointer;
+        //新建文件夹图标
+        .icon-folder{
+          width: 100%;
+          margin-top: 20px;
+          position: relative;
+          height: 105px;
+          .icon-folder-header{
+            display: block;
+            width: 36%;
+            height: 5px;
+            border-radius: 3px 2px 0 0;
+            background-color: #2196f3;
+          }
+          .icon-folder-middle{
+            display: block;
+            width: 100%;
+            height: 20px;
+            background-color: #2196f3;
+          }
+          .icon-folder-main{
+            display: block;
+            width: 100%;
+            height: 80px;
+            background-color: #81c2f6;
+          }
+
+
+        }
+        .folderbtn {
+          height: 125px;
+          .more-btn{
+            display: none;
+            width: 20px;
+            height: 20px;
+            background-image: url("../image/icon/icon-more-blue.png");
+            background-repeat: no-repeat;
+            background-position: left top;
+            background-size: 20px 20px;
+            background-color: #FFF;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            cursor: pointer;
+            ul{
+              display: none;
+            }
+          }
+        }
+        &:hover{
+          .more-btn{
+            display: block;
+          }
+        }
+        .new-folder{
+          width: 100%;
+          height: 20px;
+          text-align: center;
+          line-height: 20px;
+          margin-top: 20px;
+          color: #666;
+          font-size: 14px;
+          cursor: pointer;
+        }
+        .bg-card-image{
+          width: 110px;
+          height: 140px;
+          background-image: url("../image/bg/bg-thumbnail.jpg");
+          background-position: 5px 5px;
+          background-size: 100px 130px;
+          background-repeat: no-repeat;
+          background-color: #FFF;
+          position: relative;
+          cursor: pointer;
+          border: 1px solid #CCC;
+          &:hover{
+            border: 1px solid #008fff;
+          }
+          .more-btn{
+            width: 20px;
+            height: 20px;
+            background: url("../image/icon/icon-more-gray.png") no-repeat left top / 20px 20px;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            cursor: pointer;
+            &:hover{
+              background: url("../image/icon/icon-more-blue.png") no-repeat left top / 20px 20px;
+            }
+            ul{
+              display: none;
+            }
+          }
+          .dropdown{
+            height: 100%;
+          }
+        }
+        .card-desc{
+          width: 100%;
+          .card-desc-title{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: nowrap;
+            margin: 5px 0;
+            i{
+              background-color: #f00;
+              margin-right: 5px;
+              display: block;
+              width: 5px;
+              height: 6px;
+              border-radius: 50%;
+              &.active{
+                background-color: #48c511;
+              }
+            }
+            span{
+              white-space: nowrap;
+              overflow: hidden;
+              max-width: 100px;
+              text-overflow: ellipsis;
+              display: block;
+              text-align: center;
+              line-height: 20px;
+              font-size: 14px;
+              color: #666;
+              cursor: pointer;
+              &:hover{
+                color: #008fff;
+              }
+            }
+          }
+          em{
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            line-height: 12px;
+            color: #999;
+            cursor: pointer;
+            &:hover{
+              color: #008fff;
+            }
+          }
+        }
+      }
+    }
+    .card-grid-decrease{
+      width: ~"calc(100% - 400px)";
+    }
+    /*表格视图*/
+    .table-wrap{
+      float: left;
+      width: ~"calc(100%)";
+      height: 100%;
+      overflow-y: scroll;
+      // 删除按钮
+      .deleteAll{
+        font-family: "微软雅黑";
+        margin-bottom: 10px;
+        outline: none;
+      }
+      .table{
+        width: ~"calc(100%)";
+        margin-bottom: 0;
+        transition: width 0.5s;
+        thead{
+          height: 60px;
+          .all_select{
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            :after,:before{
+              -webkit-box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              box-sizing: border-box;
+            }
+          }
+          tr{
+            th{
+              //height: 60px;
+              //line-height: 60px;
+              padding: 17px 0;
+              font-size: 14px;
+              color: #999;
+              font-weight: normal;
+              //padding: 0;
+              &:first-child{
+                padding-top:20px;
+                padding-bottom:12px;
+              }
+            }
+          }
+        }
+        tbody{
+          vertical-align: top;
+          border-color: #FFF;
+          tr{
+            height: 54px;
+            background-color: #FFF;
+            cursor: pointer;
+            width: ~"calc(100% - 20px)";
+            .list-item{
+              width:30px;
+              box-sizing: border-box;
+              -webkit-box-sizing:border-box;
+              :after,:before{
+                box-sizing: border-box;
+                -webkit-box-sizing:border-box;
+              }
+            }
+            td{
+              height: 20px;
+              padding: 17px 0;
+              line-height: 20px;
+              font-size: 14px;
+              color: #333;
+              position: relative;
+              .icon-folder{
+                width: 21px;
+                height: 21px;
+                float: left;
+                margin: 0 10px;
+                .icon-folder-header{
+                  display: block;
+                  width: 10px;
+                  height: 3px;
+                  border-radius: 3px 2px 0 0;
+                  background-color: #2196f3;
+                }
+                .icon-folder-middle{
+                  display: block;
+                  width: 100%;
+                  height: 5px;
+                  background-color: #2196f3;
+                }
+                .icon-folder-main{
+                  display: block;
+                  width: 100%;
+                  height: 10px;
+                  background-color: #81c2f6;
+                }
+              }
+              i{
+                background-color: #f00;
+                margin-top: 7px;
+                margin-left: 5px;
+                display: inline-block;
+                width: 5px;
+                height: 6px;
+                border-radius: 50%;
+                &.active{
+                  background-color: #48c511;
+                }
+              }
+              span{
+                text-align: left;
+                display: inline-block;
+                max-width: 200px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                vertical-align: middle;
+                line-height: 20px;
+                font-size: 14px;
+                color: #666;
+                cursor: pointer;
+              }
+              em{
+                width: 100%;
+                text-align: center;
+                font-size: 12px;
+                line-height: 12px;
+                color: #999;
+                cursor: pointer;
+              }
+              .more-btn{
+                width: 20px;
+                height: 20px;
+                background: url("../image/icon/icon-more-gray.png") no-repeat left top / 20px 20px;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                cursor: pointer;
+                &:hover{
+                  background: url("../image/icon/icon-more-blue.png") no-repeat left top / 20px 20px;
+                }
+                ul{
+                  display: none;
+                }
+              }
+              .dropdown{
+                height: 100%;
+              }
+            }
+          }
+        }
+      }
+      .dropdown-menu{
+        min-width: 200px;
+      }
+    }
+    .table-decrease{
+      width: ~"calc(100% - 400px)";
+    }
+
+    /*问卷信息详情*/
+    .draw-info{
+      float: right;
+      width: 0px;
+      min-height: 300px;
+      height: 100%;
+      opacity: 0;
+      background-color: #fff;
+      transition: width 0.5s, opacity 0.5s;
+      position: relative;
+      .draw-title{
+        width: ~"calc(400px - 40px)";
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .base-title{
+          width: ~"calc(100%)";
+          padding: 20px 30px 20px 0;
+          font-size: 18px;
+          font-weight: 500;
+          line-height: 1.4;
+        }
+        .base-close{
+          width: 20px;
+          height: 20px;
+          background: url("../image/icon/icon-delete.png") center center / 20px 20px;
+          cursor: pointer;
+          &:hover{
+            background: url("../image/icon/icon-delete1-blue.png") center center / 20px 20px;
+          }
+        }
+      }
+      .alert{
+        display: flex;
+        justify-content: space-around;
+        span{
+          display: block;
+          width: 50%;
+          text-align: left;
+          height: 16px;
+          line-height: 16px;
+          font-size: 12px;
+          &:last-child{
+            text-align: right;
+          }
+        }
+      }
+      ul{
+        .base-info{
+          padding: 0 20px;
+          line-height: 40px;
+          border-bottom: 1px solid #e1e7f2;
+          display: flex;
+          justify-content: space-between;
+          font-size: 14px;
+          background-color: #FFF;
+          .base-info-lt{color: #a9a9a9;}
+          .base-info-rt{
+            i{
+              display: inline-block;
+              line-height: 40px;
+              input{
+                line-height: 40px;
+              }
+            }
+            input{
+              width: 200px;
+              line-height: 40px;
+            }
+          }
+        }
+      }
+    }
+    .draw-increase{
+      width: 400px;
+      opacity: 1;
+    }
+    //编辑统计按钮
+    .drap-btn{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      font-size: 14px;
+      width: 100%;
+      display: flex;
+      background-color: #fff;
+      dl{
+        cursor: pointer;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &:first-child{
+          dt{
+            //background-image: url("../image/icon/icon-edit-btn.png");
+          }
+        }
+        dt{
+          width: 30px;
+          height: 30px;
+          //background-image: url("../image/icon/icon-count.png");
+          background-position: center 30px;
+          background-size: 30px 30px;
+          .icon{
+            fill: #008fff;
+            stroke: #008fff;
+            overflow: inherit;
+          }
+        }
+        dd{
+          margin-top:5px;
+        }
+        &:hover dd{
+          color: #008fff;
+        }
+      }
+    }
+  }
+}
+
+

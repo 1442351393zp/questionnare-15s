@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infoac.cas.dao.SystemLogDao">
+  
+  <insert id ="insert" parameterType="com.infoac.cas.dto.SystemLog">
+  
+    INSERT  INTO  LOGIN
+        (id,operateor, operatetype,operatedate)
+        VALUES
+            (#{id}, #{operateor}, #{operatetype}, #{operatedate}
+            )
+  </insert>
+  <select id = "findbyLoglist" resultType="com.infoac.cas.dto.SystemLog">
+  select id,r ,operateor,operatetype,operatedate from (
+      (select id ,rownum r,operateor,operatetype,operatedate from(
+      select  rownum r,
+           u.id ,u.operateor,u.operatetype,u.operatedate
+		  FROM  LOGIN  u  
+		<where>
+			<if test="operateor != null">
+				AND u.operateor like '%${operateor}%'
+			</if>
+			<if test="operatetype != null ">
+				AND u.operatetype like  '%${operatetype}%'
+			</if>
+		</where>
+      order by operatedate desc
+		)))
+		<if test="page != 0">
+		where 
+		<![CDATA[r>(#{page}-1)*#{recPerPage} and r<=#{page}*#{recPerPage} ]]>
+		</if>
+  </select>
+  <select id="findbyLog" resultType="long">
+  SELECT count(*) FROM LOGIN  u  
+		<where>
+			<if test="operateor != null ">
+				AND u.operateor like '%${operateor}%'
+			</if>
+			<if test="operatetype != null ">
+				AND u.operatetype like  '%${operatetype}%'
+			</if>
+		</where>
+  </select>
+  
+  
+  
+  
+</mapper>

@@ -1,0 +1,1340 @@
+@charset "UTF-8";
+/*操作*/
+.operation {
+  margin: 0 auto;
+  width: 100%;
+  height: 60px;
+  border-top: 1px solid #CCC;
+  /*基本操作*/
+  /*效果预览*/
+}
+.operation .base-operator {
+  float: left;
+  padding: 22px 0;
+  width: 30%;
+  height: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+.operation .base-operator div {
+  flex: 1;
+  border-right: 1px solid #999999;
+  line-height: 16px;
+  text-align: center;
+  font-size: 16px;
+  color: #999999;
+}
+.operation .base-operator div:last-child {
+  border-right: none;
+}
+.operation .base-operator div:hover {
+  cursor: pointer;
+  color: #25a4bb;
+}
+.operation .base-operator .active {
+  color: #25a4bb;
+}
+.operation .effect-operator {
+  float: right;
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.operation .effect-operator > div {
+  font-size: 18px;
+  color: #999999;
+  width: 110px;
+  height: 100%;
+  margin: 0 10px;
+  text-align: center;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+}
+.operation .effect-operator > div i {
+  width: 17px;
+  height: 17px;
+  display: block;
+  background-image: url("../image/sprite/sprites_ico.png");
+  background-repeat: no-repeat;
+  background-position: -334px -381px;
+  margin-right: 10px;
+}
+.operation .effect-operator > div:nth-child(2) i {
+  background-position: -334px -381px;
+}
+.operation .effect-operator > div:nth-child(3) i {
+  width: 20px;
+  height: 14px;
+  background-position: -443px -384px;
+}
+.operation .effect-operator > div:nth-child(4) {
+  height: calc(60%);
+  padding: 5px 20px;
+  background-color: #479de6;
+  border-radius: 5px;
+  color: #FFF;
+}
+.operation .effect-operator > div:nth-child(4) i {
+  background-position: -464px -301px;
+}
+.operation .effect-operator > div span {
+  display: block;
+}
+.operation .effect-operator > div:hover {
+  cursor: pointer;
+}
+.operation .effect-operator > div:hover:nth-child(2) span {
+  color: #479de6;
+}
+.operation .effect-operator > div:hover:nth-child(3) span {
+  color: #479de6;
+}
+.operation .effect-operator > div:hover:nth-child(4) span {
+  color: #FFF;
+}
+.operation .effect-operator .active {
+  color: #479de6;
+}
+/*问卷面板*/
+.main {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+  padding-top: 2px;
+  overflow: hidden;
+  /*菜单*/
+  /*问卷面板*/
+}
+.main .menu {
+  float: left;
+  width: calc(20% - 20px);
+  height: calc(100% - 112px);
+  background-color: #fafafa;
+  padding: 40px 10px 10px 10px;
+}
+.main .menu .menu-tab {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #EEE;
+}
+.main .menu .menu-tab div {
+  float: left;
+  width: 50%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  cursor: pointer;
+}
+.main .menu .menu-tab .active {
+  background-color: #479de6;
+  color: #FFF;
+}
+.main .menu .menu-content {
+  height: calc(100% - 42px);
+  overflow-y: auto;
+}
+.main .menu .components {
+  width: calc(100%);
+  height: 500px;
+}
+.main .menu .components .question-type {
+  border: 1px solid #CCC;
+  width: calc(100% - 30px);
+  height: 30px;
+  line-height: 30px;
+  padding-left: 10px;
+  margin-top: 5px;
+  background-color: #FFF;
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  cursor: pointer;
+}
+.main .menu .components .question-type i {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-image: url("../image/sprite/sprites_ico.png");
+  background-repeat: no-repeat;
+  background-position: -51px -438px;
+  margin: 7px 0;
+}
+/*单选*/
+.main .menu .components .question-type .radio-choice-question {
+  background-position: -51px -438px;
+}
+/*下拉*/
+.main .menu .components .question-type .dropdown-question {
+  background-position: -464px -147px;
+}
+/*多选*/
+.main .menu .components .question-type .multiple-choice-question {
+  background-position: -464px -131px;
+}
+/*单行文本*/
+.main .menu .components .question-type .single-line-text {
+  background-position: -464px -226px;
+}
+/*多行文本*/
+.main .menu .components .question-type .multi-line-text {
+  background-position: -464px 0px;
+}
+.main .menu .components .question-type .scale-question {
+  background-position: -388px -413px;
+}
+.main .menu .components .question-type .matrix-radio {
+  background-position: -17px -438px;
+}
+.main .menu .components .question-type .matrix-multi {
+  background-position: -464px -163px;
+}
+.main .menu .components .question-type .matrix-scale {
+  background-position: -298px -413px;
+}
+.main .menu .components .question-type .sort-question {
+  background-position: -464px -179px;
+}
+.main .menu .components .question-type .linkage-question {
+  background-position: -464px -115px;
+}
+.main .menu .components .question-type .annex-question {
+  background-position: -464px -241px;
+}
+.main .menu .components .question-type .text-description {
+  background-position: -405px -413px;
+}
+.main .menu .components .question-type .fill-in-blank {
+  background-position: -443px -399px;
+}
+.main .menu .components .question-type span {
+  display: block;
+  width: calc(100% - 26px);
+  padding-left: 10px;
+  height: 30px;
+  line-height: 30px;
+}
+.main .menu .outline .drag-shadow {
+  border: 1px solid #fff;
+  background-color: #eee;
+  height: 40px;
+  line-height: 40px;
+  cursor: move;
+}
+.main .menu .outline .drag-shadow i {
+  display: inline-block;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+  background-image: url(../image/sprite/sprites_ico.png);
+  background-repeat: no-repeat;
+}
+.main .menu .outline .drag-shadow i.radio-option {
+  background-position: -51px -438px;
+}
+.main .menu .outline .drag-shadow i.checkbox-option {
+  background-position: -464px -131px;
+}
+.main .menu .outline .drag-shadow em {
+  display: inline-block;
+  width: 210px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  vertical-align: middle;
+}
+.main .menu .outline .drag-shadow img {
+  width: 20px;
+  height: 20px;
+}
+.main .menu .outline .drag-shadow input {
+  width: 20px;
+  border-bottom: 1px solid #000;
+  height: 20px;
+  background-color: transparent;
+}
+.main .menu .outline .drag-shadow video {
+  display: none;
+}
+.main .menu .outline .drag-shadow .videoImage {
+  width: 16px;
+  height: 12px;
+}
+.main .menu .outline-item .pageNum {
+  height: 40px;
+  line-height: 40px;
+}
+.main .menu .outline-item ul {
+  margin-bottom: 0;
+}
+.main .menu .outline-item li {
+  line-height: 30px;
+  cursor: move;
+  padding-left: 20px;
+  border-left: 1px solid #ccc;
+}
+.main .menu .outline-item li i {
+  display: inline-block;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+  background-image: url(../image/sprite/sprites_ico.png);
+  background-repeat: no-repeat;
+}
+/*大纲单选*/
+.main .menu .outline-item li i.radio-option {
+  background-position: -51px -438px;
+}
+/*大纲多选*/
+.main .menu .outline-item li i.checkbox-option {
+  background-position: -464px -131px;
+}
+/** 大纲单行文本 **/
+.main .menu .outline-item li i.single-line__option{
+  background-position: -464px -226px;
+}
+
+.main .menu .outline-item li span {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+.main .menu .outline-item li span img {
+  width: 20px;
+  height: 20px;
+}
+.main .menu .outline-item li span input {
+  width: 20px;
+  border-bottom: 1px solid #000;
+  height: 20px;
+}
+.main .menu .outline-item li span video {
+  display: none;
+}
+.main .menu .outline-item li span .videoImage {
+  width: 16px;
+  height: 12px;
+}
+.main .menu .outline-item li span em {
+  /*display: inline-block;*/
+  width: 210px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  vertical-align: middle;
+}
+.main .menu .outline-item li span b {
+  display: inline-block;
+  vertical-align: middle;
+}
+.main .questionnaire-panel {
+  float: left;
+  width: calc(80% - 275px);
+  transition: width 0.5s;
+  /*height: 700px;*/
+  padding: 40px 30px;
+  overflow: hidden;
+  overflow-y: scroll;
+  /*问卷页tab*/
+  /*面板*/
+}
+.main .questionnaire-panel .tab-page {
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+}
+.main .questionnaire-panel .tab-page div {
+  height: 40px;
+  background-color: #fafafa;
+  cursor: pointer;
+  line-height: 40px;
+  border-top: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  border-left: 1px solid #CCC;
+}
+.main .questionnaire-panel .tab-page .active {
+  background-color: #FFF;
+  border-bottom: none;
+}
+.main .questionnaire-panel .tab-page .tab-page-index {
+  width: 100px;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.main .questionnaire-panel .tab-page .tab-page-index span,
+.main .questionnaire-panel .tab-page .tab-page-index i {
+  display: block;
+}
+.main .questionnaire-panel .tab-page .tab-page-index:hover i {
+  position: absolute;
+  top: 15px;
+  right: 0;
+  display: block;
+  width: 10px;
+  height: 10px;
+  margin: 0 7px;
+  background: url("../image/icon/icon-delete.png") no-repeat left top / 10px 10px;
+}
+.main .questionnaire-panel .tab-page .tab-btn-forward,
+.main .questionnaire-panel .tab-page .tab-btn-next,
+.main .questionnaire-panel .tab-page .tab-btn-add {
+  width: 20px;
+  height: 100%;
+  background-color: #fafafa !important;
+}
+.main .questionnaire-panel .tab-page .tab-btn-next {
+  background: url("../image/icon/icon-next.png") no-repeat center center / 10px 10px;
+}
+.main .questionnaire-panel .tab-page .tab-btn-forward {
+  background: url("../image/icon/icon-froward.png") no-repeat center center / 10px 10px;
+}
+.main .questionnaire-panel .tab-page .tab-btn-add {
+  background: url("../image/icon/icon-add.png") no-repeat center center / 10px 10px;
+  border-right: 1px solid #CCC;
+}
+.main .questionnaire-panel .panel {
+  width: 100%;
+  background-color: #FFF;
+  border: 1px solid #CCC;
+  /*面板具体第几页*/
+}
+.main .questionnaire-panel .panel .panel-page {
+  width: calc(100%);
+  min-height: 500px;
+  padding: 130px 0 30px;
+  counter-reset: count;
+  /*标题和欢迎语以及问卷题目的父元素*/
+  /*问卷题列表*/
+  /* 问卷题目列表*/
+}
+.main .questionnaire-panel .panel .panel-page .wrap {
+  width: calc(100% - 290px);
+  padding: 10px 145px;
+  /* 首页标题*/
+  /*首页说明文字*/
+}
+.main .questionnaire-panel .panel .panel-page .wrap:hover {
+  background-color: #FAFAFA;
+  border: 1px solid #CCC;
+}
+.main .questionnaire-panel .panel .panel-page .wrap p.editTitle {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.main .questionnaire-panel .panel .panel-page .wrap p.editTitle:hover {
+  background-color: #FFF;
+  border: 1px solid #CCC;
+}
+.main .questionnaire-panel .panel .panel-page .wrap p {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 14px;
+  color: #333;
+  letter-spacing: 2px;
+  text-indent: 2rem;
+}
+.main .questionnaire-panel .panel .panel-page .wrap p:hover {
+  background-color: #FFF;
+  /*border: 1px solid #CCC;*/
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content {
+  width: calc(100% - 290px);
+  padding: 10px 145px;
+  position: relative;
+  border: 1px solid #FFF;
+  /* 首页标题*/
+  /*首页说明文字*/
+  /*问卷题目编辑*/
+  /*编辑工具*/
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content:hover {
+  width: calc(100% - 290px);
+  background-color: #FAFAFA;
+  border: 1px solid #CCC;
+}
+/*.main .questionnaire-panel .panel .panel-page .wrap-edit-content:hover p {*/
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content:hover .editable{
+  width: calc(100%);
+  background-color: #FFF;
+  border: 1px solid #CCC;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content p.editTitle {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 20px;
+  font-weight: normal;
+  color: #333;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #FFF;
+  box-sizing: border-box;
+  letter-spacing: 2px;
+  line-height: 30px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content p.editTitle strong {
+  font-weight: bold;
+}
+/*.main .questionnaire-panel .panel .panel-page .wrap-edit-content p {*/
+/*  width: 100%;*/
+/*  min-height: 40px;*/
+/*  line-height: 20px;*/
+/*  padding: 10px 0;*/
+/*  font-size: 14px;*/
+/*  color: #333;*/
+/*  letter-spacing: 2px;*/
+/*  cursor: pointer;*/
+/*  border: 1px solid #FFF;*/
+/*}*/
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .editable strong {
+  font-weight: bold;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .editable .icon-image {
+  width: 20px;
+  height: 20px;
+  margin: 10px 0;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 20px 16px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .editable .completions {
+  border-bottom: 1px solid #ccc;
+  display: inline-block;
+  width: 25px;
+  height: 20px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .editable video {
+  display: none;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .editable i {
+  /*opacity: 0;*/
+  font-size: 0;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .endLanguage {
+  text-align: center;
+  height: 300px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .endLanguage img {
+  margin-top: 15px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .endLanguage span {
+  display: block;
+  margin-top: 50px;
+  opacity: 1;
+  font-size: 13px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question {
+  width: 100%;
+  /*提交区域*/
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 40px;
+  padding: 5px 0;
+  /*删除选项*/
+  /*新建选项*/
+  /*展开高级设置*/
+  /*高级设置*/
+  /*添加其他项，批量更新*/
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset label,
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .label {
+  display: block;
+  width: 40px;
+  text-align: center;
+  color: #333;
+  font-size: 16px;
+  background: none;
+  padding: 0;
+  line-height: 42px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .editable {
+  display: block;
+  width: calc(100% - 52px);
+  word-break: break-all;
+  min-height: 40px;
+  line-height: 40px;
+  border: 1px solid #CCC;
+  font-size: 16px;
+  /*color: #999;*/
+  padding-left: 10px;
+  cursor: pointer;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .editable:hover {
+  border: 1px solid #25a4bb;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset select {
+  border: 1px solid #CCC;
+  width: 100px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset select:hover {
+  border: 1px solid #25a4bb;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .selectType {
+  position: relative;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .selectType .show-title {
+  width: 100px;
+  border: 1px solid #ccc;
+  height: 40px;
+  line-height: 40px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .selectType .show-title span {
+  margin-left: 3px;
+  cursor: default;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .selectType .show-title i {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 5px solid #000;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  top: 50%;
+  margin-top: -2.5px;
+  right: 10px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .selectType .show-title:hover {
+  border: 1px solid #25A4BB;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .selectType ul {
+  position: absolute;
+  border: 1px solid #000;
+  background-color: #fff;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: none;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .selectType ul li:hover {
+  background-color: #1E90FF;
+  color: #fff;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .required-item {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .required-item :after,
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .required-item :before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .required-item label {
+  padding-left: 18px;
+  line-height: 21px;
+  height: 25px;
+  font-size: 14px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .question-option-label {
+  width: 10px;
+  height: 20px;
+  margin: 10px 15px;
+  background-image: url("../image/sprites_survey.png");
+  background-repeat: repeat-y;
+  background-position: -372px -219px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .option {
+  width: 50%;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .question-option {
+  width: 60%;
+  height: 100%;
+  line-height: 40px;
+  border: 1px solid #CCC;
+  padding-left: 10px;
+  font-size: 16px;
+  color: #999;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .question-option:hover {
+  border: 1px solid #25a4bb;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .btn-delete-option {
+  display: block;
+  padding: 15px;
+  width: 10px;
+  height: 10px;
+  background: url("../image/icon/btn-delete-1.png") no-repeat center center / 12px 12px;
+  cursor: pointer;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .btn-add-option,
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .btn-add__other-option {
+  width: 50%;
+  min-height: 40px;
+  padding-left: 10px;
+  line-height: 40px;
+  font-size: 16px;
+  color: #999;
+  border: 1px dashed #CCC;
+  cursor: pointer;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .line {
+  display: block;
+  position: absolute;
+  margin-top: 20px;
+  width: 100%;
+  height: 1px;
+  background-color: #999;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .open-higher-set {
+  width: calc(100% - 20px);
+  height: 40px;
+  margin: 0 10px;
+  line-height: 40px;
+  font-size: 14px;
+  color: #999;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .open-higher-set span {
+  width: 130px;
+  height: 100%;
+  display: block;
+  text-align: center;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .open-higher-set:before,
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .open-higher-set:after {
+  content: "";
+  display: block;
+  width: calc(50%);
+  height: 1px;
+  margin-top: 20px;
+  background-color: #999999;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .senior-option {
+  width: 25%;
+  display: flex;
+  justify-content: flex-start;
+  line-height: 15px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .senior-option input {
+  display: inline;
+  width: 15px;
+  height: 15px;
+  margin: 12px 0;
+  cursor: pointer;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .senior-option label {
+  display: inline-block;
+  width: calc(100% - 30px);
+  padding: 0 10px;
+  text-align: left;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .add-other-option,
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset .batch-update {
+  width: 100px;
+  min-height: 40px;
+  margin: 0 5px;
+  line-height: 40px;
+  font-size: 14px;
+  color: #69b4ff;
+  cursor: pointer;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset-submit {
+  width: 100%;
+  height: 40px;
+  padding: 5px 0;
+  /*确定，取消*/
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset-submit button {
+  width: 70px;
+  height: 100%;
+  margin: -10px 5px;
+  padding: 0 5px;
+  line-height: 40px;
+  color: #69b4ff;
+  background: #FFF;
+  font-size: 14px;
+  float: right;
+  cursor: pointer;
+  border-radius: 0px;
+  border: none;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .question .fieldset-submit .button-active {
+  background: #69b4ff;
+  color: #FFF;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .tool {
+  height: 16px;
+  position: absolute;
+  display: flex;
+  z-index: 1000;
+  border: 1px solid #CCC;
+  padding: 5px 0px;
+  background-color: #fff;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .tool i {
+  width: 20px;
+  height: 100%;
+  background-image: url("../image/icon/icon-image.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 16px 14px;
+  cursor: pointer;
+  padding: 0px 5px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .tool button {
+  width: 20px;
+  height: 100%;
+  background-image: url("../image/icon/icon-image.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 16px 14px;
+  cursor: pointer;
+  padding: 0px 5px;
+  background-color: #fff;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .tool .tool-strong {
+  text-align: center;
+  line-height: 16px;
+  font-weight: bold;
+  font-size: 16px;
+  background-image: url("../image/icon/icon-strong.png");
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .tool .tool-image {
+  background-image: url("../image/icon/icon-image.png");
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .tool .tool-link {
+  background-image: url("../image/icon/icon-link.png");
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .tool .tool-other {
+  background-image: url("../image/icon/icon-blank.png");
+}
+.main .questionnaire-panel .panel .panel-page .wrap-edit-content .tool .tool-video {
+  background-image: url("../image/icon/icon-vedio.png");
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list {
+  width: calc(100% - 290px);
+  padding: 10px 145px;
+  background-color: #FAFAFA;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list:hover {
+  border-top: 1px solid #CCC ;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form {
+  width: 100%;
+  /*提交区域*/
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  height: 40px;
+  padding: 5px 0;
+  /*删除选项*/
+  /*新建选项*/
+  /*展开高级设置*/
+  /*高级设置*/
+  /*添加其他项，批量更新*/
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset label {
+  display: block;
+  width: 40px;
+  height: 100%;
+  line-height: 40px;
+  text-align: center;
+  color: #333;
+  font-size: 16px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset input {
+  display: block;
+  width: calc(100% - 52px);
+  height: 100%;
+  line-height: 40px;
+  border: 1px solid #CCC;
+  font-size: 16px;
+  color: #999;
+  padding-left: 10px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset input:hover {
+  border: 1px solid #25a4bb;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset select {
+  border: 1px solid #CCC;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset select:hover {
+  border: 1px solid #25a4bb;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset .question-option-label {
+  width: 10px;
+  height: 20px;
+  margin: 10px 15px;
+  background-image: url("../image/sprites_survey.png");
+  background-repeat: repeat-y;
+  background-position: -372px -219px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset .question-option {
+  width: 60%;
+  height: 100%;
+  line-height: 40px;
+  border: 1px solid #CCC;
+  padding-left: 10px;
+  font-size: 16px;
+  color: #999;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset .question-option:hover {
+  border: 1px solid #25a4bb;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset .btn-delete-option {
+  display: block;
+  padding: 15px;
+  width: 10px;
+  height: 10px;
+  background: url("../image/icon/btn-delete-1.png") no-repeat center center / 12px 12px;
+  cursor: pointer;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset .btn-add-option {
+  width: 60%;
+  height: 100%;
+  padding-left: 10px;
+  line-height: 40px;
+  font-size: 16px;
+  color: #999;
+  border: 1px dashed #CCC;
+  cursor: pointer;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset .line {
+  display: block;
+  position: absolute;
+  margin-top: 20px;
+  width: 100%;
+  height: 1px;
+  background-color: #999;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset .open-higher-set {
+  width: calc(100% - 20px);
+  height: 100%;
+  margin: 0 10px;
+  line-height: 40px;
+  font-size: 14px;
+  color: #999;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset .open-higher-set span {
+  width: 130px;
+  height: 100%;
+  display: block;
+  text-align: center;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset .open-higher-set:before,
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset .open-higher-set:after {
+  content: "";
+  display: block;
+  width: calc(50%);
+  height: 1px;
+  margin-top: 20px;
+  background-color: #999999;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset .senior-option {
+  width: 25%;
+  display: flex;
+  justify-content: flex-start;
+  line-height: 15px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset .senior-option input {
+  display: inline;
+  width: 15px;
+  height: 15px;
+  margin: 12px 0;
+  cursor: pointer;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset .senior-option label {
+  display: inline-block;
+  width: calc(100% - 30px);
+  padding: 0 10px;
+  text-align: left;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset .add-other-option,
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset .batch-update {
+  width: 100px;
+  height: 100%;
+  margin: 0 5px;
+  line-height: 40px;
+  font-size: 14px;
+  color: #69b4ff;
+  cursor: pointer;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset-submit {
+  width: 100%;
+  height: 40px;
+  padding: 5px 0;
+  /*确定，取消*/
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset-submit button {
+  width: 70px;
+  height: 100%;
+  margin: -10px 5px;
+  padding: 0 5px;
+  line-height: 40px;
+  color: #69b4ff;
+  border: 1px solid #999;
+  background: #FFF;
+  border-radius: 10px;
+  font-size: 14px;
+  float: right;
+  cursor: pointer;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-question-list form .fieldset-submit .button-active {
+  background: #69b4ff;
+  color: #FFF;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-subject {
+  width: calc(100% - 290px);
+  background-color: #fafafa;
+  font-size: 16px;
+  color: #666;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-subject .radio-subject {
+  float: left;
+  width: calc(100% - 30px);
+}
+.main .questionnaire-panel .panel .panel-page .wrap-subject .radio-subject .radio-title {
+  width: 100%;
+  line-height: 30px;
+  font-size: 18px;
+  color: #000000;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-subject .radio-subject .radio-title span:before {
+  content: counter(count) "";
+  counter-increment: count;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-subject .radio-subject .radio-title i {
+  color: #f00;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-subject .radio-subject .radio-remark {
+  font-size: 14px;
+  width: 100%;
+  line-height: 30px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-subject .radio-subject .radio-option {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-subject .radio-subject .radio-option input {
+  width: 16px;
+  height: 100%;
+  margin: 0 8px 0 0;
+  color: #000000;
+  font-size: 14px;
+  background-color: #FFF;
+  border: 1px solid #333;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-subject .subject-operation {
+  float: right;
+  width: 30px;
+  background-color: #f4f4f4;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-subject .subject-operation div {
+  width: calc(100% - 20px);
+  height: 30px;
+  padding: 0 10px;
+  background: url("../image/icon/icon-edit.png") no-repeat center center / 20px 20px;
+  cursor: pointer;
+}
+.main .questionnaire-panel .panel .panel-page .wrap-subject .subject-operation:first-child {
+  background: url("../image/icon/icon-edit.png") no-repeat center center / 20px 20px;
+}
+.upload-container {
+  width: calc(100% - 40px);
+  min-height: 500px;
+  padding: 20px 20px;
+  margin: 0 auto ;
+  background-color: #FFF;
+}
+.upload-container h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+.upload-container .file-input {
+  margin-top: 30px;
+  width: calc(100%);
+}
+.upload-container .file-input .get-upload-path {
+  display: flex;
+  width: calc(100%);
+}
+.upload-container .file-input .get-upload-path .path {
+  width: calc(100% - 150px);
+  margin-right: 20px;
+}
+.upload-container .file-input .get-upload-path .path span {
+  font-size: 14px;
+  color: #666;
+}
+.upload-container .file-input .get-upload-path .path input {
+  width: calc(100%);
+  border: 1px solid #CCC;
+}
+.upload-container .file-input .get-upload-path .btn-upload {
+  width: 108px;
+  height: 30px;
+  padding: 5px 10px;
+  border: 1px solid #CCC;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  margin-top: 21px;
+}
+.upload-container .set-image-area {
+  height: 400px;
+  border-bottom: 1px solid #CCC;
+}
+.upload-container .set-image-area .preview-area img {
+  height: 100%;
+}
+.upload-container .hidden-dialog {
+  display: flex;
+  justify-content: flex-end;
+  height: 40px;
+  margin: 5px 0;
+}
+.upload-container .hidden-dialog div {
+  width: 70px;
+  height: 100%;
+  margin: 0px 5px;
+  padding: 0 5px;
+  line-height: 40px;
+  color: #69b4ff;
+  background: #FFF;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+}
+.upload-container .hidden-dialog .button-active {
+  width: 70px;
+  height: 100%;
+  margin: 0px 5px;
+  padding: 0 5px;
+  line-height: 40px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  background: #69b4ff;
+  color: #FFF;
+}
+.url-container {
+  padding: 0 30px;
+}
+.url-container h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+.url-container .url-ipt {
+  padding: 30px 0;
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+}
+.url-container .url-ipt .select-url {
+  float: left;
+}
+.url-container .url-ipt .select-url p {
+  margin: 0;
+}
+.url-container .url-ipt .select-url select {
+  border: 1px solid #000;
+  width: 80px;
+  height: 20px;
+}
+.url-container .url-ipt .select-url .agreement {
+  position: relative;
+}
+.url-container .url-ipt .select-url .agreement .show-title {
+  width: 80px;
+  border: 1px solid #ccc;
+  height: 20px;
+  line-height: 20px;
+}
+.url-container .url-ipt .select-url .agreement .show-title span {
+  margin-left: 3px;
+  cursor: default;
+}
+.url-container .url-ipt .select-url .agreement .show-title i {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 5px solid #000;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  top: 50%;
+  margin-top: -2.5px;
+  right: 10px;
+}
+.url-container .url-ipt .select-url .agreement .show-title:hover {
+  border: 1px solid #25A4BB;
+}
+.url-container .url-ipt .select-url .agreement ul {
+  position: absolute;
+  border: 1px solid #000;
+  background-color: #fff;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: none;
+  z-index: 99;
+}
+.url-container .url-ipt .select-url .agreement ul li:hover {
+  background-color: #1E90FF;
+  color: #fff;
+}
+.url-container .url-ipt .url-address {
+  float: left;
+  margin-left: 20px;
+}
+.url-container .url-ipt .url-address p {
+  margin: 0;
+}
+.url-container .url-ipt .url-address input {
+  border: 1px solid #69b4ff;
+  width: 300px;
+  height: 35px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding-left: 10px;
+}
+.url-container .hidden-dialog {
+  padding: 20px 0;
+  display: flex;
+  justify-content: flex-end;
+}
+.url-container .hidden-dialog .url-confirm {
+  color: #fff;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  background-color: #69b4ff;
+  cursor: pointer;
+}
+.url-container .hidden-dialog .url-cancel {
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  color: #69b4ff;
+  margin-left: 5px;
+}
+.video-container {
+  padding: 0 30px;
+}
+.video-container h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+.video-container .video-ipt {
+  padding: 30px 0;
+  border-bottom: 1px solid #ccc;
+}
+.video-container .hidden-dialog {
+  padding: 20px 0;
+  display: flex;
+  justify-content: flex-end;
+}
+.video-container .hidden-dialog .video-confirm {
+  color: #fff;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  background-color: #69b4ff;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.video-container .hidden-dialog .video-cancel {
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  color: #69b4ff;
+}
+.completionBox .popover-title h1 {
+  font-size: 20px;
+  color: #000;
+  font-weight: bold;
+}
+.completionBox .popover-content span {
+  display: inline-block;
+  width: 60px;
+  color: #000;
+  font-size: 14px;
+}
+.completionBox .popover-content select {
+  width: 150px !important;
+}
+.completionBox .popover-content input {
+  display: inline-block !important;
+}
+.completionBox .popover-content .number {
+  width: 150px !important;
+  min-height: 25px !important;
+  line-height: 25px !important;
+}
+.completionBox .popover-content .checkBtn {
+  width: 15px !important;
+  height: 15px!important;
+  vertical-align: middle;
+}
+.completionBox .popover-content .bottom-btn {
+  text-align: center;
+}
+.completionBox .popover-content .bottom-btn button {
+  padding: 0 15px;
+  border-radius: 5px;
+}
+.completionBox .popover-content .bottom-btn button:first-child {
+  background-color: #69b4ff;
+  color: #fff;
+}
+.completionBox .popover-content .bottom-btn button:last-child {
+  border: 1px solid #ccc;
+  background-color: #fff ;
+}

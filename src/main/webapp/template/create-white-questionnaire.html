@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>创建空白问卷</title>
+    <title>创建空白问卷- 免费好用的问卷调查系统,调查问卷,免费,简单,模板</title>
+    <meta name="description" content="问卷，是免费、专业的问卷调查系统。提供多种方式创建问卷，简单高效的编辑方式，强大的逻辑设置功能，专业的数据统计和样本甄别，让您轻松开启调研工作。">
+    <meta name="keywords" content="调查问卷,问卷调查,市场调研,问卷系统,问卷,模板,免费,简单,调研,市场调查,满意度,问卷调查网,在线问卷调查,微信问卷,投票小程序,投票">
+    <link rel="shortcut icon" href="image/logo/favicon.ico">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/create-questionnaire.css">
+    <link rel="stylesheet" href="css/create-white-question.css">
+    <script src="js/page.js"></script>
+    <!-- zui -->
+    <link href="./zui/css/zui.min.css" rel="stylesheet">
+    <!--重置样式-->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <script src="js/viewchange.js"></script>
+</head>
+<body>
+    <div class="header">
+        <a class="page-title active" onclick="changePage(event)">问卷调查系统</a>
+        <a class="" onclick="changePage(event)">创建问卷</a>
+        <a onclick="changePage(event)">我的问卷</a>
+        <a onclick="changePage(event)">回答小组</a>
+        <a onclick="changePage(event)">调查资讯</a>
+        <a onclick="changePage(event)">帮助中心</a>
+        <a class="login-area">
+            <div class="bell"></div>
+            <div class="user-icon">
+                <img class="user-header-icon" src="image/icon/icon-header.jpg" alt="" >
+                <span class="nickname ellipsis">小明</span>
+            </div>
+            <div class="btn-exit">退出</div>
+        </a>
+    </div>
+    <div class="empty-page">
+        <!--副标题头-->
+        <div class="sub-header clearfix" style="display: none">
+            <div class="sub-header-left">
+                <a class="btn btn-primary icon icon-plus" title="列表视图">创建问卷</a>
+            </div>
+            <div class="sub-header-right">
+                <a class="sub-header-btn" title="创建文件夹"></a>
+                <a class="sub-header-btn" title="废纸篓" ></a>
+                <a class="sub-header-btn" title="列表视图" data-type="table" onclick="changeToTable(event)"></a>
+                <!--<a class="sub-header-btn" title="九宫格视图" style="display: none" ></a>-->
+            </div>
+        </div>
+       <!-- 问卷为空-->
+        <div class="emptyTip" style="display: none">
+            <img class="emptyTip-pic" src="./image/bg/bg-white.png">
+            <p class="emptyTip-info">您还没有问卷哦</p>
+            <a class="">现在去创建</a>
+        </div>
+        <!--副标题栏2-->
+        <div class="sub-header-2">
+            <a class="btn-back"></a>
+            <a class="sub-title">废纸篓</a>
+            <a class="sub-header-btn" title="列表视图" data-type="grid" onclick="changeToGrid(event)"></a>
+        </div>
+        <!--视图列表-->
+        <div class="wrap-grid clearfix">
+            <!--问卷视图表-->
+            <div class="card-grid" style="display: none">
+                <!--问卷视图-->
+                <div class="card-item">
+                    <div class="bg-card-image" onclick="showInfoDesc(event)">
+                        <i class="more-btn"></i>
+                    </div>
+                    <div class="card-desc">
+                        <div class="card-desc-title">
+                            <i></i><span>问卷标题</span>
+                        </div>
+                        <em>454393595</em>
+                    </div>
+                </div>
+            </div>
+            <!--问卷表格视图-->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <!--<th>投放渠道</th>-->
+                        <th>状态</th>
+                        <th>创建时间</th>
+                        <th>回收量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="showInfoDesc(event)">
+                        <td>
+                            <i></i>
+                            <span>问卷标题</span>
+                            <em>454393595</em>
+                        </td>
+                        <!--<td>问卷分享</td>-->
+                        <td>暂停回收</td>
+                        <td>2019-11-08</td>
+                        <td>0</td>
+                        <td>
+                            <i class="more-btn"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--问卷信息详情-->
+            <div class="draw-info">
+                <div class="draw-title">
+                    <h2 class="base-title">问卷标题</h2>
+                    <a class="base-close" title="关闭" onclick="hiddenInfoDesc(event)"></a>
+                </div>
+                <div class="alert alert-primary">
+                    <span>最近回收概况</span>
+                    <span>回收量:0</span>
+                </div>
+                <ul>
+                    <li class="base-info">
+                        <span class="base-info-lt">基本信息</span>
+                        <span class="base-info-rt">共&nbsp;1&nbsp;页&nbsp;,&nbsp;1&nbsp;题</span>
+                    </li>
+                    <li class="base-info">
+                        <span class="base-info-lt">ID</span>
+                        <span class="base-info-rt">5002787</span>
+                    </li>
+                    <li class="base-info">
+                        <span class="base-info-lt">问卷状态</span>
+                        <span class="base-info-rt">
+                            <i class="base-status pause">暂停回收</i>
+                        </span>
+                    </li>
+                    <li class="base-info">
+                        <span class="base-info-lt">修改时间</span>
+                        <span class="base-info-rt">2019-11-12</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="./jquery/jquery-1.11.0.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="./zui/js/zui.min.js"></script>
+    <script type="text/javascript">
+        // 上下文菜单
+        $('.more-btn').on('click', function(e) {
+            $.zui.ContextMenu.show([{
+                label: '开始回收',
+                onClick: function() {
+                    alert('你点击了新建项目');
+                }
+            }, {
+                label: '导出',
+            }, {
+                label: '打印',
+            }, {
+                label: '复制',
+            },{
+                label: '编辑',
+            }, {
+                label: '重命名',
+            }, {
+                label: '清空数据',
+            }, {
+                label: '移到废纸篓',
+            }
+            ], {
+                event: e
+            }, function() {
+                console.log('上下文菜单已显示。');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infoac.cas.dao.QuestionDao">
+
+    <update id="updateReel" parameterType="com.infoac.cas.dto.ReelDTO">
+		UPDATE REEL
+            <set>
+            <if test="reel.showNo != null and reel.showNo != '' " >
+                SHOWNO = #{reel.showNo},
+            </if>
+            <if test="reel.anonymous != null and reel.anonymous != ''">
+                ANONYMOUS = #{reel.anonymous},
+            </if>
+            <if test="reel.onceChance != null and reel.onceChance != ''">
+                ONCECHANCE = #{reel.onceChance},
+            </if>
+            <if test="reel.initiate != null and reel.initiate != ''">
+                INITIATE = #{reel.initiate},
+            </if>
+            <if test="reel.retrieve != null and reel.retrieve != ''">
+                RETRIEVE = #{reel.retrieve},
+            </if>
+            <if test="reel.isLimit != null and reel.isLimit != ''">
+                ISLIMIT = #{reel.isLimit},
+            </if>
+            <if test="reel.setup != null and reel.setup != ''">
+                SETUP = #{reel.setup},
+            </if>
+            <if test="reel.endTime != null and reel.endTime != ''">
+                ENDTIME = #{reel.endTime},
+            </if>
+            <if test="reel.reelStatus != null and reel.reelStatus != ''">
+                REELSTATUS = #{reel.reelStatus},
+            </if>
+            <if test="reel.canal != null and reel.canal != ''">
+                CANAL = #{reel.canal},
+            </if>
+            <if test="reel.canalOnline != null and reel.canalOnline != ''">
+                CANALONLINE = #{reel.canalOnline},
+            </if>
+            <if test="reel.canalEmail != null and reel.canalEmail != ''">
+                CANALEMAIL = #{reel.canalEmail},
+            </if>
+            <if test="reel.canalMsn != null and reel.canalMsn != ''">
+                CANALMSN = #{reel.canalMsn},
+            </if>
+            <if test="reel.canalText != null and reel.canalText != ''">
+                CANALTEXT = #{reel.canalText},
+            </if>
+        </set>
+		WHERE RID = #{reel.rId}
+	</update>
+
+    <select id="findReelSetup"  parameterType="String" resultType="com.infoac.cas.dto.ReelDTO">
+        SELECT * FROM REEL
+        where RID = #{rId}
+    </select>
+
+
+    <update id="updateReelCanalText" parameterType="String">
+        UPDATE REEL
+        set CANALTEXT = ''
+        WHERE RID = #{rId}
+    </update>
+    <select id="selectuserids"  resultType="String">
+     select ISLIMIT from REEL where RID=#{rid}
+    </select>
+    <select id="selectUsers" resultType="String">
+        select username from  USER  where id not in ('1','2','3','4')and ban='0'
+    </select>
+   <select id="selectUserList" parameterType="String" resultType="String">
+       select USERNAME from  SELECTUSER where REELID =#{rid}
+   </select>
+
+   <select id="getQuestionAllperope" resultType="com.infoac.cas.dto.QuestionStateDTO">
+       select  username ,userid ,u.organid as orgid from  SELECTUSER s  inner join  user u  on s.userid = u.id  where REELID =#{rid}
+   </select>
+   <select id="getAnsweredPeoper" resultType="com.infoac.cas.dto.QuestionStateDTO">
+       select distinct r.user_id , r.user_id as userid ,u.nickname  as username ,u.organid as orgid from  REEL_ANSWER_RECORD r inner join user u   on   r.user_id = u.id where r.reel_id = #{rid} and r.user_id not in ('1','2','3','4')
+   </select>
+    <select id="getNoQuestionAllperope" resultType="com.infoac.cas.dto.QuestionStateDTO">
+         select nickname as username, id as userid  from  USER  where id not in ('1','2','3','4')and ban='0'
+    </select>
+    <select id="getReelUserId" resultType="String">
+        select userid  from  reel where RID = #{rId}
+    </select>
+    <select id="getOrganFather"  resultType="com.infoac.cas.dto.OrganVO">
+       select * from  ORGANIZA start with id= #{id} connect by prior pid = id
+    </select>
+    <select id="getorganList" resultType="com.infoac.cas.dto.OrganVO">
+    select * from  ORGANIZA start with id= #{id} connect by prior id = pid
+    </select>
+</mapper>
+
+
+

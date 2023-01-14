@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infoac.cas.dao.InfoDao">
+
+
+   <!--  <insert id="insertInfo" parameterType="Info">
+        INSERT  INTO info
+        (title, content, img,source_from)
+        VALUES
+            (#{info.title}, #{info.content}, #{info.contentImgString}, #{info.sourceFrom})
+    </insert> -->
+
+
+</mapper>

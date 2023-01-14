@@ -1,0 +1,36 @@
+槐树林2.1:
+    发送人
+
+
+
+14j:
+    统计结果发送发布,count-pic.jsp
+
+
+jdbc.url=jdbc:oscar://192.168.2.215:2003/OSRDB
+
+
+#要改:用户中心,消息中心,
+ssourl=http://192.168.2.211:8087/
+#要改:网关管理系统注册问卷,秘钥为空
+client_id =questionnaire
+client_secret =
+grant_type =client_credentials
+#要改:问卷项目ip端口
+tbzx=http://192.168.2.215:6888/questionnaire/answer/center
+
+#不改:桌面系统:所(suo),中软(zr),都是小写
+desktop=suo
+#不改:1否
+license=1
+#不改: 验证码长度,不改
+randCodeLength=4
+#不改: 验证码类型：1-数字，2-小写字母，3-大写字符，4-字符,5-混合字符串，
+randCodeType=5
+
+#要改:即时通讯(豆豆)对接相关消息推送参数
+pushurl=http://192.168.10.207:10077/
+accessType = CLIENT
+appID =21256822673
+appSecret =jponI1CMmUTdIjqnGgP-YWeCoFEGP-7QS4cqZO_lrjM
+newStatic = http://192.168.2.215:6888/questionnaire/login/newStatis?username=

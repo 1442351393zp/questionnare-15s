@@ -1,0 +1,1443 @@
+@charset "UTF-8";
+/*操作*/
+.operation{
+  margin: 0 auto;
+  width: 100%;
+  height: 60px;
+  border-top: 1px solid #CCC;
+  /*基本操作*/
+  .base-operator{
+    @line-height:16px;
+    @padding-height: 22px;
+    @color:#999;
+    float: left;
+    padding: @padding-height 0;
+    width: 30%;
+    height: @line-height;
+    display: flex;
+    justify-content: space-between;
+    div{
+      flex: 1;
+      border-right: 1px solid @color;
+      line-height: @line-height;
+      text-align: center;
+      font-size: 16px;
+      color: @color;
+      &:last-child{
+        border-right: none;
+      }
+      &:hover{
+        cursor: pointer;
+        color: #25a4bb;
+      }
+    }
+    .active{
+      color: #25a4bb
+    }
+  }
+
+  /*效果预览*/
+  .effect-operator{
+    float: right;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    &>div{
+      @font-size:18px;
+      @color:#999;
+      font-size: @font-size;
+      color: @color;
+      width: 110px;
+      height: 100%;
+      margin: 0 10px;
+      text-align: center;
+      line-height: 20px;
+      display: flex;
+      align-items: center;
+      i{
+        width: 17px;
+        height: 17px;
+        display: block;
+        background-image: url("../image/sprite/sprites_ico.png");
+        background-repeat: no-repeat;
+        background-position: -334px -381px;
+        margin-right: 10px;
+      }
+      &:nth-child(2){
+        i{
+          background-position: -334px -381px;
+        }
+      }
+      &:nth-child(3){
+        i{
+          width: 20px;
+          height: 14px;
+          background-position: -443px -384px;
+        }
+      }
+      &:nth-child(4){
+        height: calc(100% - 40px);
+        padding: 5px 20px;
+        background-color: #479de6;
+        border-radius: 5px;
+        color: #FFF;
+        i{
+          background-position: -464px -301px;
+        }
+      }
+      span{
+        display: block;
+      }
+      &:hover{
+        cursor: pointer;
+        &:nth-child(2){
+          span{color: #479de6;}
+        }
+        &:nth-child(3){
+          span{color: #479de6;}
+        }
+        &:nth-child(4){
+          span{color: #FFF;}
+        }
+      }
+    }
+    .active{
+      color: #479de6;
+    }
+  }
+}
+/*问卷面板*/
+.main{
+  width: 100%;
+ // height: ~"calc(100% - 126px)";
+  height:100%;
+  background-color: #f0f0f0;
+  padding-top: 2px;
+  overflow: hidden;
+  /*菜单*/
+  .menu{
+    float: left;
+    width: ~"calc(20% - 20px)";
+    //height: 550px;
+    height: ~"calc(100% - 112px)";
+    background-color: #fafafa;
+    padding: 40px 10px 10px 10px;
+    .menu-tab{
+      width: 100%;
+      height: 40px;
+      border: 1px solid #EEE;
+      div{
+        float: left;
+        width: 50%;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 16px;
+        color: #666;
+        cursor: pointer;
+      }
+      .active{
+        background-color: #479de6;
+        color: #FFF;
+      }
+    }
+    .menu-content{
+      height: ~"calc(100% - 42px)";
+      overflow-y: auto;
+    }
+    .components{
+      width: ~"calc(100%)";
+      height: 500px;
+      //overflow-y: scroll;
+      .question-type{
+        border: 1px solid #CCC;
+        width: ~"calc(100% - 30px)";
+        height: 30px;
+        line-height: 30px;
+        padding-left: 10px;
+        margin-top: 5px;
+        background-color: #FFF;
+        font-size: 14px;
+        color: #666;
+        display: flex;
+        cursor: pointer;
+       i{
+         display: block;
+         width: 16px;
+         height: 16px;
+         background-image: url("../image/sprite/sprites_ico.png");
+         background-repeat: no-repeat;
+         background-position: -51px -438px;
+         margin: 7px 0;
+       }
+        //单选
+        .radio-choice-question{
+          background-position: -51px -438px;
+        }
+        //下拉
+        .dropdown-question{
+          background-position: -464px -147px;
+        }
+        //多选题
+        .multiple-choice-question{
+          background-position: -464px -131px;
+        }
+        //单行文本
+        .single-line-text{
+          background-position: -464px -226px;
+        }
+        //多行文本
+        .multi-line-text{
+          background-position: -464px 0px;
+        }
+        //量表题
+        .scale-question{
+          background-position: -388px -413px;
+        }
+        //矩阵单选
+        .matrix-radio{
+          background-position: -17px -438px;
+        }
+        //矩阵多选
+        .matrix-multi{
+          background-position: -464px -163px;
+        }
+        //矩阵量表
+        .matrix-scale{
+          background-position: -298px -413px;
+        }
+        //排序题
+        .sort-question{
+          background-position: -464px -179px;
+        }
+        //联动题
+        .linkage-question{
+          background-position: -464px -115px;
+        }
+        //附件题
+        .annex-question{
+          background-position: -464px -241px;
+        }
+        //文本描述
+        .text-description{
+          background-position: -405px -413px;
+        }
+        //填空题
+        .fill-in-blank{
+          background-position: -443px -399px;
+        }
+        span{
+          display: block;
+          width: ~"calc(100% - 26px)";
+          padding-left: 10px;
+          height: 30px;
+          line-height: 30px;
+        }
+      }
+    }
+    // 问卷大纲
+    //.outline{
+    //  ul{
+    //    .pageNum{
+    //      height: 40px;
+    //      line-height: 40px;
+    //    }
+    //    .drag-shadow{
+    //        border:1px solid #fff;
+    //        background-color: #eee;
+    //        height: 40px;
+    //        line-height: 40px;
+    //      }
+    //    li{
+    //      line-height: 30px;
+    //      cursor: move;
+    //      border-left: 1px solid #ccc;
+    //      padding-left: 20px;
+    //      i{
+    //        display: inline-block;
+    //        vertical-align: middle;
+    //        width: 16px;
+    //        height: 16px;
+    //        background-image: url(../image/sprite/sprites_ico.png);
+    //        background-repeat: no-repeat;
+    //        &.radio-option{
+    //          background-position: -51px -438px;
+    //        }
+    //        &.checkbox-option{
+    //          background-position: -464px -131px;
+    //        }
+    //      }
+    //      span{
+    //        display: inline-block;
+    //        vertical-align: middle;
+    //        margin-left: 8px;
+    //      }
+    //    }
+    //  }
+    //}
+    .outline{
+      .drag-shadow{
+        border:1px solid #fff;
+        background-color: #eee;
+        height: 40px;
+        line-height: 40px;
+        cursor: move;
+        i{
+          display: inline-block;
+          vertical-align: middle;
+          width: 16px;
+          height: 16px;
+          background-image: url(../image/sprite/sprites_ico.png);
+          background-repeat: no-repeat;
+          &.radio-option{
+            background-position: -51px -438px;
+          }
+          &.checkbox-option{
+            background-position: -464px -131px;
+          }
+        }
+        em{
+          display: inline-block;
+          width: 210px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          vertical-align: middle;
+        }
+        img{
+          width: 20px;
+          height: 20px;
+        }
+        input{
+          width: 20px;
+          border-bottom: 1px solid #000;
+          height: 20px;
+          background-color: transparent;
+        }
+        video{
+          display: none;
+        }
+        .videoImage{
+          width: 16px;
+          height: 12px;
+        }
+      }
+    }
+    .outline-item{
+      .pageNum{
+        height: 40px;
+        line-height: 40px;
+      }
+
+      ul{
+        margin-bottom:0;
+      }
+      li{
+        line-height: 30px;
+        cursor: move;
+        padding-left: 20px;
+        border-left: 1px solid #ccc;
+        i{
+          display: inline-block;
+          vertical-align: middle;
+          width: 16px;
+          height: 16px;
+          background-image: url(../image/sprite/sprites_ico.png);
+          background-repeat: no-repeat;
+          &.radio-option{
+            background-position: -51px -438px;
+          }
+          &.checkbox-option{
+            background-position: -464px -131px;
+          }
+        }
+        span{
+          display: inline-block;
+          vertical-align: middle;
+          margin-left: 8px;
+          img{
+            width: 20px;
+            height: 20px;
+          }
+          input{
+            width: 20px;
+            border-bottom: 1px solid #000;
+            height: 20px;
+          }
+          video{
+            display: none;
+          }
+          .videoImage{
+            width: 16px;
+            height: 12px;
+          }
+          em{
+            display: inline-block;
+            width: 210px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            vertical-align: middle;
+          }
+          b{
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+
+  }
+  /*问卷面板*/
+  .questionnaire-panel{
+    float: left;
+    width: ~"calc(80% - 275px)";
+    transition: width 0.5s;
+    /*height: 700px;*/
+    padding: 40px 30px;
+    overflow: hidden;
+    overflow-y: scroll;
+    /*问卷页tab*/
+    .tab-page{
+      @tab-height:40px;
+      //width: 100%;
+      height: @tab-height;
+      display: flex;
+      justify-content: flex-start;
+      div{
+        height: @tab-height;
+        background-color: #fafafa;
+        cursor: pointer;
+        line-height: @tab-height;
+        border-top: 1px solid #CCC;
+        border-bottom: 1px solid #CCC;
+        border-left: 1px solid #CCC;
+      }
+      .active{
+        background-color: #FFF;
+        border-bottom: none;
+      }
+      .tab-page-index{
+        width: 100px;
+        text-align: center;
+        font-size: 14px;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        span,i{
+          display: block;
+        }
+        &:hover{
+          i{
+            position: absolute;
+            top: 15px;
+            right: 0;
+            display: block;
+            width: 10px;
+            height: 10px;
+            margin: 0 7px;
+            background: url("../image/icon/icon-delete.png") no-repeat left top / 10px 10px;
+          }
+        }
+      }
+      .tab-btn-forward,.tab-btn-next,.tab-btn-add{
+        width: 20px;
+        height: 100%;
+        background-color: #fafafa !important;
+      }
+      .tab-btn-next{
+        background: url("../image/icon/icon-next.png") no-repeat center center / 10px 10px;
+      }
+      .tab-btn-forward{
+        background: url("../image/icon/icon-froward.png") no-repeat  center center/10px 10px;
+      }
+      .tab-btn-add{
+        background: url("../image/icon/icon-add.png") no-repeat  center center/10px 10px;
+        border-right: 1px solid #CCC;
+      }
+    }
+    /*面板*/
+    .panel{
+      width: 100%;
+      background-color: #FFF;
+      border: 1px solid #CCC;
+      /*面板具体第几页*/
+      .panel-page{
+        width: ~"calc(100%)";
+        min-height: 500px;
+        padding: 130px 0 30px;
+        counter-reset: count;
+        //h1和p标签的父元素
+        .wrap{
+          width: ~"calc(100% - 290px)";
+          padding: 10px 145px;
+          &:hover{
+            background-color: #FAFAFA;
+            border: 1px solid #CCC;
+          }
+         /* 首页标题*/
+          p.editTitle{
+            display:block;
+            width: 100%;
+            padding: 10px 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            &:hover{
+              background-color: #FFF;
+              border: 1px solid #CCC;
+            }
+          }
+          /*首页说明文字*/
+          p{
+            width: 100%;
+            padding: 10px 0;
+            font-size: 14px;
+            color: #333;
+            letter-spacing: 2px;
+            text-indent: 2rem;
+            &:hover{
+              background-color: #FFF;
+              border: 1px solid #CCC;
+            }
+          }
+        }
+        /*标题和欢迎语以及问卷题目的父元素*/
+        .wrap-edit-content{
+          width: ~"calc(100% - 290px)";
+          padding: 10px 145px;
+          position: relative;
+          border:1px solid #FFF;
+          &:hover{
+            width: ~"calc(100% - 290px)";
+            background-color: #FAFAFA;
+            border: 1px solid #CCC;
+            p.editTitle,p{
+              width: ~"calc(100%)";
+              background-color: #FFF;
+              border: 1px solid #CCC;
+            }
+          }
+          /* 首页标题*/
+          p.editTitle{
+            display:block;
+            width: 100%;
+            padding: 10px 0;
+            font-size: 20px;
+            font-weight: normal;
+            color: #333;
+            text-align: center;
+            cursor: pointer;
+            strong{font-weight: bold}
+            border:1px solid #FFF;
+           box-sizing: border-box;
+          }
+          /*首页说明文字*/
+          p{
+            width: 100%;
+            min-height: 40px;
+            line-height: 20px;
+            padding: 10px 0;
+            font-size: 14px;
+            color: #333;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border:1px solid #FFF;
+          }
+          .editable{
+            strong{font-weight: bold};
+            .icon-image{
+              width: 20px;
+              height: 20px;
+              margin:10px 0;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size:20px 16px;
+            }
+            .completions{
+              border-bottom:1px solid #ccc;
+              display:inline-block;
+              width:25px;
+              height: 20px;
+            }
+            video{
+              display: none;
+            }
+            i{
+              opacity: 0;
+              font-size: 0;
+            }
+          }
+          //.editable:empty:before{
+          //  content: attr(data-placeholder);
+          //  color: #666;
+          //}
+          //.editable:focus:before{
+          //  content: "";
+          //}
+          // 结束页样式
+          .endLanguage{
+            text-align: center;
+            height: 300px;
+            img{
+              margin-top:15px;
+            }
+            span{
+              display:block;
+              margin-top:50px;
+              opacity: 1;
+              font-size: 13px;
+            }
+          }
+
+          /*问卷题目编辑*/
+          .question{
+            width: 100%;
+            .fieldset{
+              display: flex;
+              justify-content: flex-start;
+              width: 100%;
+              //@fieldset-height:40px;
+              //height: @fieldset-height;
+              min-height: 40px;
+              padding: 5px 0;
+              label,.label{
+                display: block;
+                width: 40px;
+                //height: 100%;
+                //line-height: @fieldset-height;
+                text-align: center;
+                color: #333;
+                font-size: 16px;
+                background: none;
+                padding: 0;
+              }
+
+              .editable{
+                display: block;
+                width: ~"calc(100% - 52px)";
+                word-break: break-all;
+                //height: 100%;
+                //line-height: @fieldset-height;
+                min-height: 40px;
+                line-height: 40px;
+                border: 1px solid #CCC;
+                font-size: 16px;
+                color: #999;
+                padding-left:10px;
+                cursor: pointer;
+                &:hover{
+                  border: 1px solid #25a4bb;
+                }
+              }
+              //.editable:empty:before{
+              //  content: attr(data-placeholder);
+              //  color: #666;
+              //}
+              //.editable:focus:before{
+              //  content: "";
+              //}
+              select{
+                border: 1px solid #CCC;
+                width: 100px;
+                &:hover{
+                  border: 1px solid #25a4bb;
+                }
+              }
+              .selectType{
+                position: relative;
+                .show-title{
+                  width: 100px;
+                  border:1px solid #ccc;
+                  height: 40px;
+                  line-height: 40px;
+                  span{
+                    margin-left: 3px;
+                    cursor: default;
+                  }
+                  i{
+                    position: absolute;
+                    width: 0;
+                    height: 0;
+                    border:5px solid #000;
+                    border-bottom: 5px solid transparent;
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    top: 50%;
+                    margin-top: -2.5px;
+                    right: 10px;
+                  }
+                  &:hover{
+                    border:1px solid #25A4BB;
+                  }
+                }
+                ul{
+                  position: absolute;
+                  border:1px solid #000;
+                  background-color: #fff;
+                  width: 100%;
+                  -webkit-box-sizing: border-box;
+                  -moz-box-sizing: border-box;
+                  box-sizing: border-box;
+                  cursor: pointer;
+                  display: none;
+                  li{
+                    &:hover{
+                      background-color: #1E90FF;
+                      color: #fff;
+                    }
+                  }
+                }
+              }
+
+
+              .required-item{
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+                margin-left: 20px;
+                margin-top: 10px;
+                :after,:before{
+                  -webkit-box-sizing: border-box;
+                  -moz-box-sizing: border-box;
+                  box-sizing: border-box;
+                }
+                label{
+                  padding-left: 18px;
+                  line-height: 21px;
+                  height: 25px;
+                  font-size: 14px;
+                }
+              }
+              .question-option-label{
+                width: 10px;
+                height: 20px;
+                margin: 10px 15px;
+                background-image: url("../image/sprites_survey.png");
+                background-repeat: repeat-y;
+                background-position: -372px -219px;
+              }
+              .option{
+                width: 50%;
+              }
+              .question-option{
+                width: 60%;
+                height: 100%;
+                //line-height: @fieldset-height;
+                line-height: 40px;
+                border: 1px solid #CCC;
+                padding-left:10px;
+                font-size: 16px;
+                color: #999;
+                &:hover{
+                  border: 1px solid #25a4bb;
+                }
+              }
+              /*删除选项*/
+              .btn-delete-option{
+                display: block;
+                padding: 15px;
+                width: 10px;
+                height: 10px;
+                background: url("../image/icon/btn-delete-1.png") no-repeat center center /12px 12px;
+                cursor: pointer;
+              }
+              /*新建选项*/
+              .btn-add-option{
+                width: 60%;
+                min-height: 40px;
+                padding-left:10px;
+                //line-height: @fieldset-height;
+                line-height: 40px;
+                font-size: 16px;
+                color: #999;
+                border: 1px dashed #CCC;
+                cursor: pointer;
+              }
+              .line{
+                display: block;
+                position: absolute;
+                margin-top: 20px;
+                width: 100%;
+                height: 1px;
+                background-color: #999;
+              }
+              /*展开高级设置*/
+              .open-higher-set{
+                width: ~"calc(100% - 20px)";
+                //height: 100%;
+                height: 40px;
+                margin: 0 10px;
+                //line-height: @fieldset-height;
+                line-height: 40px;
+                font-size: 14px;
+                color: #999;
+                text-align: center;
+                cursor: pointer;
+                display: flex;
+                span{
+                  width: 130px;
+                  height: 100%;
+                  display: block;
+                  text-align: center;
+                }
+              }
+              .open-higher-set:before,.open-higher-set:after{
+                content: "";
+                display: block;
+                width: ~"calc(50%)";
+                height: 1px;
+                margin-top: 20px;
+                background-color: #999999;
+              }
+              /*高级设置*/
+              .senior-option{
+                width: 25%;
+                display: flex;
+                justify-content: flex-start;
+                line-height: 15px;
+                input{
+                  display: inline;
+                  width: 15px;
+                  height: 15px;
+                  margin: 12px 0;
+                  cursor: pointer;
+                }
+                label{
+                  display: inline-block;
+                  width: ~"calc(100% - 30px)";
+                  padding: 0 10px;
+                  text-align: left;
+                  font-size: 14px;
+                  color: #666;
+                  cursor: pointer;
+                }
+              }
+              /*添加其他项，批量更新*/
+              .add-other-option,.batch-update{
+                width: 100px;
+                //height: 100%;
+                min-height: 40px;
+                margin: 0 5px;
+                //line-height: @fieldset-height;
+                line-height: 40px;
+                font-size: 14px;
+                color: #69b4ff;
+                cursor: pointer;
+              }
+            }
+            /*提交区域*/
+            .fieldset-submit{
+              width: 100%;
+              @fieldset-height:40px;
+              height: @fieldset-height;
+              padding: 5px 0;
+              /*确定，取消*/
+              button{
+                width: 70px;
+                height: 100%;
+                margin: -10px 5px;
+                padding: 0 5px;
+                line-height: @fieldset-height;
+                color: #69b4ff;
+                background: #FFF;
+                font-size: 14px;
+                float: right;
+                cursor: pointer;
+                border-radius: 0px;
+                border: none;
+              }
+              .button-active{
+                background: #69b4ff;
+                color: #FFF;
+              }
+            }
+          }
+          /*编辑工具*/
+          .tool{
+            height: 16px;
+            position: absolute;
+            display: flex;
+            z-index: 1000;
+            border: 1px solid #CCC;
+            padding: 5px 0px;
+            background-color: #fff;
+            i{
+              width: 20px;
+              height: 100%;
+              background-image: url("../image/icon/icon-image.png");
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: 16px 14px;
+              cursor: pointer;
+              padding: 0px 5px;
+            }
+            button{
+              width: 20px;
+              height: 100%;
+              background-image: url("../image/icon/icon-image.png");
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: 16px 14px;
+              cursor: pointer;
+              padding: 0px 5px;
+              background-color:#fff;
+            }
+            .tool-strong{
+              text-align: center;
+              line-height: 16px;
+              font-weight: bold;
+              font-size: 16px;
+              background-image: url("../image/icon/icon-strong.png");
+            }
+            .tool-image{
+              background-image: url("../image/icon/icon-image.png");
+            }
+            .tool-link{
+              background-image: url("../image/icon/icon-link.png");
+            }
+            .tool-other{
+              background-image: url("../image/icon/icon-blank.png");
+            }
+            .tool-video{
+              background-image: url("../image/icon/icon-vedio.png");
+            }
+          }
+        }
+        /*问卷题列表*/
+        .wrap-question-list{
+          width: ~"calc(100% - 290px)";
+          padding: 10px 145px;
+          background-color: #FAFAFA;
+          &:hover{
+            border-top: 1px solid #CCC ;
+          }
+          form{
+            width: 100%;
+            .fieldset{
+              display: flex;
+              justify-content: flex-start;
+              width: 100%;
+              @fieldset-height:40px;
+              height: @fieldset-height;
+              padding: 5px 0;
+              label{
+                display: block;
+                width: 40px;
+                height: 100%;
+                line-height: @fieldset-height;
+                text-align: center;
+                color: #333;
+                font-size: 16px;
+              }
+              input{
+                display: block;
+                width: ~"calc(100% - 52px)";
+                height: 100%;
+                line-height: @fieldset-height;
+                border: 1px solid #CCC;
+                font-size: 16px;
+                color: #999;
+                padding-left:10px;
+                &:hover{
+                  border: 1px solid #25a4bb;
+                }
+              }
+              select{
+                border: 1px solid #CCC;
+                &:hover{
+                  border: 1px solid #25a4bb;
+                }
+              }
+              .question-option-label{
+                width: 10px;
+                height: 20px;
+                margin: 10px 15px;
+                background-image: url("../image/sprites_survey.png");
+                background-repeat: repeat-y;
+                background-position: -372px -219px;
+              }
+              .question-option{
+                width: 60%;
+                height: 100%;
+                line-height: @fieldset-height;
+                border: 1px solid #CCC;
+                padding-left:10px;
+                font-size: 16px;
+                color: #999;
+                &:hover{
+                  border: 1px solid #25a4bb;
+                }
+              }
+              /*删除选项*/
+              .btn-delete-option{
+                display: block;
+                padding: 15px;
+                width: 10px;
+                height: 10px;
+                background: url("../image/icon/btn-delete-1.png") no-repeat center center /12px 12px;
+                cursor: pointer;
+              }
+              /*新建选项*/
+              .btn-add-option{
+                width: 60%;
+                height: 100%;
+                padding-left:10px;
+                line-height: @fieldset-height;
+                font-size: 16px;
+                color: #999;
+                border: 1px dashed #CCC;
+                cursor: pointer;
+              }
+              .line{
+                display: block;
+                position: absolute;
+                margin-top: 20px;
+                width: 100%;
+                height: 1px;
+                background-color: #999;
+              }
+              /*展开高级设置*/
+              .open-higher-set{
+                width: ~"calc(100% - 20px)";
+                height: 100%;
+                margin: 0 10px;
+                line-height: @fieldset-height;
+                font-size: 14px;
+                color: #999;
+                text-align: center;
+                cursor: pointer;
+                display: flex;
+                span{
+                  width: 130px;
+                  height: 100%;
+                  display: block;
+                  text-align: center;
+                }
+              }
+              .open-higher-set:before,.open-higher-set:after{
+                content: "";
+                display: block;
+                width: ~"calc(50%)";
+                height: 1px;
+                margin-top: 20px;
+                background-color: #999999;
+              }
+              /*高级设置*/
+              .senior-option{
+                width: 25%;
+                display: flex;
+                justify-content: flex-start;
+                line-height: 15px;
+                input{
+                  display: inline;
+                  width: 15px;
+                  height: 15px;
+                  margin: 12px 0;
+                  cursor: pointer;
+                }
+                label{
+                  display: inline-block;
+                  width: ~"calc(100% - 30px)";
+                  padding: 0 10px;
+                  text-align: left;
+                  font-size: 14px;
+                  color: #666;
+                  cursor: pointer;
+                }
+              }
+              /*添加其他项，批量更新*/
+              .add-other-option,.batch-update{
+                width: 100px;
+                height: 100%;
+                margin: 0 5px;
+                line-height: @fieldset-height;
+                font-size: 14px;
+                color: #69b4ff;
+                cursor: pointer;
+              }
+            }
+            /*提交区域*/
+            .fieldset-submit{
+              width: 100%;
+              @fieldset-height:40px;
+              height: @fieldset-height;
+              padding: 5px 0;
+              /*确定，取消*/
+              button{
+                width: 70px;
+                height: 100%;
+                margin: -10px 5px;
+                padding: 0 5px;
+                line-height: @fieldset-height;
+                color: #69b4ff;
+                border: 1px solid #999;
+                background: #FFF;
+                border-radius: 10px;
+                font-size: 14px;
+                float: right;
+                cursor: pointer;
+              }
+              .button-active{
+                background: #69b4ff;
+                color: #FFF;
+              }
+            }
+          }
+        }
+       /* 问卷题目列表*/
+        .wrap-subject{
+          width: ~"calc(100% - 290px)";
+          background-color: #fafafa;
+          font-size: 16px;
+          color: #666;
+          .radio-subject{
+            float: left;
+            width: ~"calc(100% - 30px)";
+            .radio-title{
+              width: 100%;
+              line-height: 30px;
+              font-size: 18px;
+              color: rgba(0,0,0,1);
+              span:before{
+                content: counter(count) + "";
+                counter-increment: count;
+              }
+              i{
+                color: #f00;
+              }
+            }
+            .radio-remark{
+              font-size: 14px;
+              width: 100%;
+              line-height: 30px;
+            }
+            .radio-option{
+              width: 100%;
+              height: 30px;
+              line-height: 30px;
+              input{
+                width: 16px;
+                height: 100%;
+                margin: 0 8px 0 0;
+                color: rgba(0,0,0,1);
+                font-size: 14px;
+                background-color: #FFF;
+                border:1px solid #333;
+              }
+            }
+          }
+          .subject-operation{
+            float: right;
+            width: 30px;
+            background-color: #f4f4f4;
+            div{
+              width: ~"calc(100% - 20px)";
+              height: 30px;
+              padding: 0 10px;
+              background: url("../image/icon/icon-edit.png") no-repeat center center / 20px 20px;
+              cursor: pointer;
+            }
+            &:first-child{
+              background: url("../image/icon/icon-edit.png") no-repeat center center / 20px 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.upload-container{
+  width: ~"calc(100% - 40px)";
+  min-height: 500px;
+  padding: 20px 20px;
+  margin: 0 auto ;
+  background-color: #FFF;
+  h2{
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+  .file-input{
+    margin-top: 30px;
+    width: ~"calc(100%)";
+    .get-upload-path{
+      display: flex;
+      width: ~"calc(100%)";
+      .path{
+        width: ~"calc(100% - 150px)";
+        margin-right: 20px;
+        span{
+          font-size: 14px;
+          color: #666;
+        }
+        input{
+          width: ~"calc(100%)";
+          border: 1px solid #CCC;
+        }
+      }
+      .btn-upload{
+        width: 108px;
+        height: 30px;
+        padding: 5px 10px;
+        border: 1px solid #CCC;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #333;
+        margin-top: 21px;
+      }
+    }
+  }
+  .set-image-area{
+    //height: 70%;
+    height: 400px;
+    border-bottom: 1px solid #CCC;
+    .preview-area{
+      img{
+        height: 100%;
+      }
+    }
+  }
+  .hidden-dialog{
+    display: flex;
+    justify-content: flex-end;
+    height: 40px;
+    margin: 5px 0;
+    div{
+      width: 70px;
+      height: 100%;
+      margin: 0px 5px;
+      padding: 0 5px;
+      line-height: 40px;
+      color: #69b4ff;
+      background: #FFF;
+      font-size: 14px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .button-active{
+      width: 70px;
+      height: 100%;
+      margin: 0px 5px;
+      padding: 0 5px;
+      line-height: 40px;
+      font-size: 14px;
+      cursor: pointer;
+      text-align: center;
+      background: #69b4ff;
+      color: #FFF;
+    }
+  }
+}
+//超链接对框框
+.url-container{
+  padding: 0 30px;
+  h1{
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .url-ipt{
+    padding: 30px 0;
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+    .select-url{
+      float: left;
+      p{
+        margin: 0;
+      }
+      select{
+        border: 1px solid #000;
+        width: 80px;
+        height: 20px;
+      }
+      .agreement{
+        position: relative;
+        .show-title{
+          width: 80px;
+          border:1px solid #ccc;
+          height: 20px;
+          line-height: 20px;
+          span{
+            margin-left: 3px;
+            cursor: default;
+          }
+          i{
+            position: absolute;
+            width: 0;
+            height: 0;
+            border:5px solid #000;
+            border-bottom: 5px solid transparent;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            top: 50%;
+            margin-top: -2.5px;
+            right: 10px;
+          }
+          &:hover{
+            border:1px solid #25A4BB;
+          }
+        }
+        ul{
+          position: absolute;
+          border:1px solid #000;
+          background-color: #fff;
+          width: 100%;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+          cursor: pointer;
+          display: none;
+          z-index:99;
+          li{
+            &:hover{
+              background-color: #1E90FF;
+              color: #fff;
+            }
+          }
+        }
+      }
+
+    }
+    .url-address{
+      float: left;
+      margin-left:20px;
+      p{
+        margin: 0;
+      }
+      input{
+        border:1px solid #69b4ff;
+        width: 300px;
+        height: 35px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        padding-left: 10px;
+      }
+    }
+  }
+  .hidden-dialog{
+    padding: 20px 0;
+    display: flex;
+    justify-content: flex-end;
+    .url-confirm{
+      color: #fff;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      width: 100px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      background-color: #69b4ff;
+      cursor: pointer;
+    }
+    .url-cancel{
+      cursor: pointer;
+      width: 100px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      color: #69b4ff;
+      margin-left: 5px;
+    }
+  }
+}
+//视频对话框
+.video-container{
+  padding: 0 30px;
+  h1{
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .video-ipt{
+    padding: 30px 0;
+    border-bottom: 1px solid #ccc;
+  }
+  .hidden-dialog{
+    padding: 20px 0;
+    display: flex;
+    justify-content: flex-end;
+    .video-confirm{
+      color: #fff;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      width: 100px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      background-color: #69b4ff;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+    .video-cancel{
+      cursor: pointer;
+      width: 100px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      color: #69b4ff;
+    }
+  }
+}
+//天空设置样式
+.completionBox{
+  .popover-title{
+    h1{
+      font-size: 20px;
+      color: #000;
+      font-weight: bold;
+    }
+  }
+  .popover-content{
+    span{
+      display: inline-block;
+      width: 60px;
+      color:#000;
+      font-size: 14px;
+    }
+    select{
+      width: 150px !important;
+    }
+    input{
+      display: inline-block !important;
+    }
+    .number{
+      width: 150px !important;
+      min-height: 25px !important;
+      line-height: 25px !important;
+    }
+    .checkBtn{
+      width: 15px !important;
+      height: 15px!important;
+      vertical-align: middle;
+    }
+    .bottom-btn{
+      text-align: center;
+      button{
+        padding: 0 15px;
+        border-radius: 5px;
+        &:first-child{
+          background-color: #69b4ff;
+          color:#fff;
+        }
+        &:last-child{
+          border: 1px solid #ccc;
+          background-color: #fff;
+        }
+
+      }
+    }
+  }
+}

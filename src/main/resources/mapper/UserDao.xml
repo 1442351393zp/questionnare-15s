@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infoac.cas.dao.UserDao">
+     <sql id="tableName">
+		USER
+	</sql>
+	<!--字段映射与转换-->
+	<sql id="SelectUserField">
+		ID,
+		REELID,
+		USERID
+	</sql>
+     <insert id="saveSelectUser" parameterType="java.util.List" >
+        INSERT INTO SELECTUSER (
+			<include refid="SelectUserField"></include>
+		) VALUES 
+		<foreach collection="list" index="index" item="item" separator="," >
+		(
+			#{item.id},
+			#{item.reelId},
+			#{item.userId}
+		)
+		</foreach>
+    </insert>
+
+	<insert id="saveSelectUser2" parameterType="String" >
+		INSERT INTO SELECTUSER (
+		ID,
+		REELID,
+		USERID,
+		USERNAME
+		) VALUES
+			(
+			#{id},
+			#{rid},
+			#{uid},
+			#{username}
+			)
+	</insert>
+
+	<delete id="delSelectUser"  parameterType="String">
+	   delete from SELECTUSER where REELID = #{reelId}
+	</delete>
+	
+	<select id="getAllUser" resultType="com.infoac.cas.dto.UserDTO">
+	   SELECT ID,NICKNAME FROM USER
+	</select>
+	
+	<select id="getSelectUser" parameterType="String" resultType="com.infoac.cas.dto.SelectUserDTO">
+	   SELECT ID,USERID,USERNAME FROM SELECTUSER where reelid = #{reelId} 
+	</select>
+	
+	<select id = "finduserlist" resultType="com.infoac.cas.dto.UserDTO">
+       select id ,username,nickname,sex,email,phone,describe from (
+         select  rownum r,
+           u.id ,u.username,u.nickname,u.sex,u.email,u.phone,u.describe
+		  FROM  user u
+		<where>
+            <if test="uservo.username != null and uservo.username != ''">
+                AND u.username like  '%${uservo.username}%'
+            </if>
+			<if test="uservo.nickname != null and uservo.nickname != ''">
+				AND u.nickname like '%${uservo.nickname}%'
+			</if>
+			  and ban='0'
+		</where>
+		)
+		<if test="uservo.page != 0">
+		where
+		<![CDATA[r>(#{uservo.page}-1)*#{uservo.recPerPage} and r<=#{uservo.page}*#{uservo.recPerPage}]]>
+		</if>
+	</select>
+
+ <!-- 分页查询用户 -->
+   <select id = "findUserCount" resultType="Long">
+     SELECT count(*) FROM  USER u
+     <where>
+			<if test="nickname != null and nickname != ''">
+				AND u.nickname  like '%${nickname}%'
+			</if>
+			<if test="phone != null and phone != ''">
+				AND u.phone  like  '%${phone}%'
+			</if>
+			and ban='0'
+
+		</where>
+   </select>
+   
+	<select id="findUser" resultType="com.infoac.cas.dto.UserDTO">
+	SELECT ID,USERNAME,NICKNAME,PASSWORD,ISMANAGER  FROM  USER
+	 where USERNAME = #{username} and PASSWORD = #{password} and ban ='0'
+	</select>
+	<!--同步用户-->
+	 <insert id="insertuser" parameterType="com.infoac.cas.dto.UserDTO">
+     insert into  USER (
+      id,
+      username,
+      password,
+      nickname,
+      sex,
+      email,
+      phone,
+      describe,
+      isManager,
+      organid,
+      ban
+      
+    )VALUES(
+     #{id},
+     #{username},
+     #{password},
+     #{nickname},
+     #{sex},
+     #{email},
+     #{phone},
+     #{describe},
+     #{isManager},
+     #{organid},
+     #{ban}
+    )
+
+    </insert>
+      <update id="updateuser" parameterType="com.infoac.cas.dto.UserDTO">
+      update 
+      USER
+      set
+      username=#{username},
+      nickname=#{nickname},
+      sex=#{sex},
+      email=#{email},
+      phone=#{phone},
+      describe=#{describe}
+      isManager=#{isManager}
+      where id=#{id}
+   </update>
+   
+   <delete id="deleteusers" parameterType="list">
+    delete from user
+    where id in 
+		<foreach collection="list" index="index" item="item"
+			open="(" separator=" , " close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<delete id="deleteuser" parameterType="com.infoac.cas.dto.UserDTO">
+	   delete from user where id = #{id}
+	</delete>
+    <delete id="userdeleteall" parameterType="com.infoac.cas.dto.UserDTO">
+	   delete from user where id not in ('1','2','3','4');
+	</delete>
+	
+	<select  id="userFind" resultType="com.infoac.cas.dto.UserDTO">
+	    SELECT 
+          ID, USERNAME,NICKNAME,SEX,EMAIL,PHONE,DESCRIBE,ISMANAGER
+		  FROM  USER  where id =  #{id}
+	</select>
+	<!-- 清库操作 -->
+	 <delete id="deleteUserRole" parameterType="com.infoac.cas.dto.UserRoleKey">
+      delete from user_role
+      where userid = #{userid} 
+    </delete>
+    <delete id="deleteUserRoleall" >
+      delete from user_role
+      where userid not in ('1','2','3','4')
+    </delete>
+     <!-- 保存用户对应的角色 -->
+	 <insert id="saveroleUser" parameterType="com.infoac.cas.dto.UserRoleKey">
+     insert into user_role(userid,roleid)values(#{userid},#{roleid})
+    </insert>
+
+
+
+    <select  id="findForList" resultType="com.infoac.cas.dto.OrganVO">
+	    SELECT
+          *
+		  FROM  ORGANIZA  where PID =  #{pid}
+	</select>
+
+    <select id="findBydeptid" resultType="com.infoac.cas.dto.OrganVO">
+		select  id,nickname as orname,organid,username
+		from
+		USER
+		where
+			organid = #{deptid} and ban='0'
+
+	</select>
+
+
+    <select id="getSelectUserName" parameterType="String" resultType="com.infoac.cas.dto.SelectDTO">
+	   SELECT u.NICKNAME FROM SELECTUSER s left join USER u on  s.userid=u.id where s.reelid = #{reelId}
+	</select>
+
+    <update id="updateuserismanage" parameterType="com.infoac.cas.dto.UserDTO">
+      update
+      USER
+      set
+      isManager=#{isManager}
+      where id=#{id}
+   </update>
+
+    <select id="getUserName" parameterType="String" resultType="String">
+	   SELECT NICKNAME FROM USER where id =#{id} limit 1
+	</select>
+	<select id="userMessage" resultType="com.infoac.cas.dto.UserDTO">
+		select ID,USERNAME,NICKNAME,PASSWORD,ISMANAGER from user where username=#{username}
+	</select>
+  <insert id="addUserList" parameterType="com.infoac.cas.dto.UserDTO">
+	  insert into  USER
+	  (id,username,password,nickname,sex,organid,ban)
+	  VALUES
+	  (
+	  #{id},
+	  #{username},
+	  #{password},
+	  #{nickname},
+	  #{sex},
+	  #{organid},
+	  #{ban}
+	  )
+  </insert>
+	<insert id="saveroleUserList" parameterType="com.infoac.cas.dto.UserRoleKey">
+      insert into user_role(userid,roleid)values(#{userid},#{roleid})
+  </insert>
+
+
+    <select id="findUserByuid" resultType="com.infoac.cas.dto.UserDTO">
+	SELECT USERNAME,ORGANID  FROM  USER
+	 where  ID = #{userid}
+	</select>
+</mapper>

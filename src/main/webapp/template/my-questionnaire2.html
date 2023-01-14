@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>我的问卷页面</title>
+    <title>我的问卷页面- 免费好用的问卷调查系统,调查问卷,免费,简单,模板</title>
+    <meta name="description" content="问卷，是免费、专业的问卷调查系统。提供多种方式创建问卷，简单高效的编辑方式，强大的逻辑设置功能，专业的数据统计和样本甄别，让您轻松开启调研工作。">
+    <meta name="keywords" content="调查问卷,问卷调查,市场调研,问卷系统,问卷,模板,免费,简单,调研,市场调查,满意度,问卷调查网,在线问卷调查,微信问卷,投票小程序,投票">
+    <link rel="shortcut icon" href="image/logo/favicon.ico">
+    <!--zui样式-->
+    <link rel="stylesheet" href="zui/css/zui.min.css"/>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/my-questionnaire.css">
+    <script src="js/page.js"></script>
+    <script type="text/javascript">
+        window.onload = function (ev) {
+            var page = document.getElementsByClassName("page")[0]
+            var main = page.getElementsByClassName("main")[0]
+            var height = document.body.offsetHeight - 126
+            var panel = main.getElementsByClassName("questionnaire-panel")[0]
+            panel.style.height = (height - 80) + "px"
+        }
+    </script>
+</head>
+<body>
+<div class="page">
+    <div class="header" style="width: 100%;">
+        <a class="page-title active" onclick="changePage(event)">问卷调查系统</a>
+        <a class="" onclick="changePage(event)">创建问卷</a>
+        <a onclick="changePage(event)">我的问卷</a>
+        <a onclick="changePage(event)">回答小组</a>
+        <a onclick="changePage(event)">调查资讯</a>
+        <a onclick="changePage(event)">帮助中心</a>
+        <a class="login-area">
+            <div class="bell"></div>
+            <div class="user-icon">
+                <img class="user-header-icon" src="image/icon/icon-header.jpg" alt="" >
+                <span class="nickname ellipsis">小明</span>
+            </div>
+            <div class="btn-exit">退出</div>
+        </a>
+    </div>
+    <!--操作栏-->
+    <div class="operation clearfix">
+        <!--基本操作-->
+        <div class="base-operator">
+            <div class="active" onclick="changeOperation(event)">编辑</div>
+            <div onclick="changeOperation(event)">皮肤</div>
+            <div onclick="changeOperation(event)">设置</div>
+            <div onclick="changeOperation(event)">投放</div>
+            <div onclick="changeOperation(event)">统计</div>
+        </div>
+        <!--效果预览-->
+        <div class="effect-operator" >
+            <div class="active" onclick="changeOperation(event)"><i></i><span>文本编辑</span></div>
+            <div onclick="changeOperation(event)"><i></i><span>预览</span></div>
+            <div onclick="changeOperation(event)"><i></i><sapn>开始回收</sapn></div>
+        </div>
+    </div>
+    <!--问卷主内容-->
+    <div class="main clearfix">
+        <!--菜单栏-->
+        <div class="menu">
+            <div class="menu-tab clearfix">
+                <div class="tab-component active" data-type="components" onclick="changeMenu(event)">题目控件</div>
+                <div class="tab-outline" data-type="outline" onclick="changeMenu(event)">问卷大纲</div>
+            </div>
+            <div class="menu-content">
+                <!--题目控件列表-->
+                <div class="components">
+                    <div class="question-type" index="1"><i class="radio-choice-question"></i><span>单选题</span></div>
+                    <div class="question-type" index="2"><i class="multiple-choice-question"></i><span>多选题</span></div>
+                    <div class="question-type" index="3"> <i class="dropdown-question"></i><span>下拉题</span></div>
+                    <div class="question-type" index="4"><i class="single-line-text"></i><span>单行文本题</span></div>
+                    <div class="question-type"><i class="multi-line-text"></i><span>多行文本题</span></div>
+                    <div class="question-type"><i class="scale-question"></i><span>量表题</span></div>
+                    <div class="question-type"><i class="matrix-radio"></i><span>矩阵单选题</span></div>
+                    <div class="question-type"><i class="matrix-multi"></i><span>矩阵多选题</span></div>
+                    <div class="question-type"><i class="matrix-scale"></i><span>矩阵量表题</span></div>
+                    <div class="question-type"><i class="sort-question"></i><span>排序题</span></div>
+                    <div class="question-type"><i class="linkage-question"></i><span>联动题</span></div>
+                    <div class="question-type"><i class="annex-question"></i><span>附件题</span></div>
+                    <div class="question-type"><i class="text-description"></i><span>文本描述</span></div>
+                    <div class="question-type"><i class="fill-in-blank"></i><span>填空题</span></div>
+                </div>
+                <!--大纲列表-->
+                <div class="outline" style="display: none"></div>
+            </div>
+        </div>
+        <!--问卷面板-->
+        <div class="questionnaire-panel">
+            <!--问卷页tab-->
+            <div class="tab-page">
+                <!--前一页-->
+                <div class="tab-btn-forward" onclick="toForwardPage(event)"></div>
+                <div class="tab-page-index active" data-index="0" onclick="changeQuestionnairePage(event)">
+                    <span>第一页</span>
+                    <i onclick="deletePage(event)"></i>
+                </div>
+                <!--后一页-->
+                <div class="tab-btn-next" onclick="toNextPage(event)"></div>
+                <!--新建tab页-->
+                <div class="tab-btn-add" onclick="addQuestionnairePage(event)"></div>
+            </div>
+            <!--问卷面板-->
+            <div class="panel">
+                <!--问卷面板页-->
+                <div class="panel-page" data-pageindex="0">
+                    <!--标题-->
+                    <div class="wrap-edit-content">
+                        <h1 class="editable" contenteditable="true" data-type="title" data-placeholder="问卷标题"
+                         onclick="editContent(event)" onblur="cancelEdit(event)" onmouseup="getSelectionText()">问卷标题</h1>
+                    </div>
+                    <!--标题说明-->
+                    <div class="wrap-edit-content">
+                        <p class="editable" contenteditable="true" data-type="hello" onclick="editContent(event)" onblur="cancelEdit(event)" onmouseup="getSelectionText()"
+                        data-placeholder="为了给您提供更好的服务，希望您能抽出几分钟时间，将您的感受和建议告诉我们,我们非常重视每位用户的宝贵意见，期待您的参与！现在我们就马上开始吧">
+                            为了给您提供更好的服务，希望您能抽出几分钟时间，将您的感受和建议告诉我们,我们非常重视每位用户的宝贵意见，期待您的参与！现在我们就马上开始吧！
+                        </p>
+                    </div>
+                    <div class="wrap-edit-content">
+                        <div class="question">
+                            <!-- 题目-->
+                            <div class="fieldset">
+                                <div class="label">题目:</div>
+                                <div class="editable" contenteditable="true" data-type="content"
+                                 onclick="editContent(event)" onblur="cancelEdit(event)" onmouseup="getSelectionText()"></div>
+                            </div>
+                            <!--备注-->
+                            <div class="fieldset">
+                                <div class="label">备注:</div>
+                                <div class="editable remark" contenteditable="true" data-type="content"
+                                 onclick="editContent(event)" onblur="cancelEdit(event)" onmouseup="getSelectionText()"></div>
+                            </div>
+                            <!--题目类型切换-->
+                            <div class="fieldset">
+                                <label for="question-type"></label>
+                                <select id="question-type">
+                                    <option value="单选题" selected>单选题</option>
+                                    <option value="多选题">多选题</option>
+                                    <option value="下拉题">下拉题</option>
+                                    <option value="单行文本题">单行文本题</option>
+                                </select>
+                            </div>
+                            <!--选项一-->
+                            <div class="fieldset">
+                                <div class="question-option-label"></div>
+                                <div class="editable option" contenteditable="true" data-placeholder="选项" data-type="content"
+                                 onclick="editContent(event)" onblur="cancelEdit(event)" onmouseup="getSelectionText()"></div>
+                                <span class="btn-delete-option"></span>
+                            </div>
+                            <!--选项二-->
+                            <div class="fieldset">
+                                <div class="question-option-label"></div>
+                                <div class="editable option" contenteditable="true" data-placeholder="选项" data-type="content"
+                                 onclick="editContent(event)" onblur="cancelEdit(event)" onmouseup="getSelectionText()"></div>
+                                <span class="btn-delete-option"></span>
+                            </div>
+                            <!--新建选项-->
+                            <div class="fieldset">
+                                <div class="label"></div>
+                                <div class="btn-add-option">新建选项</div>
+                            </div>
+                            <!--添加选项-->
+                            <div class="fieldset">
+                                <div></div>
+                                <div class="add-other-option">添加[其他]项</div>
+                                <div class="batch-update">批量修改</div>
+                            </div>
+                            <!--展开高级-->
+                            <div class="fieldset">
+                                <div class="open-higher-set">
+                                    <span class="">展开高级设置</span>
+                                </div>
+                            </div>
+                            <div class="fieldset">
+                                <div class="senior-option">
+                                    <input type="checkbox" name="" value=""/>
+                                    <label for="">选项随即顺序</label>
+                                </div>
+                                <div class="senior-option">
+                                    <input type="checkbox" name="" value=""/>
+                                    <label for="">显示投票结果</label>
+                                </div>
+                                <div class="senior-option">
+                                    <input type="checkbox" name="" value=""/>
+                                    <label for="">设置为测评题目</label>
+                                </div>
+                                <div class="senior-option">
+                                    <input type="checkbox" name="" value=""/>
+                                    <label for="">选项引用</label>
+                                </div>
+                            </div>
+                            <!--确定取消-->
+                            <div class="fieldset-submit">
+                                <div></div>
+                                <button class="button-active">确定</button>
+                                <button>取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="dialogUpload">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="upload-container">
+                <h2>图片属性</h2>
+                <div class="file-input">
+                    <div class="get-upload-path">
+                        <div class="path">
+                            <span>支持小于1M的PNG，JPG，GIF图片</span>
+                            <input type="file" name="image" id="upload-image" value="选择文件"/>
+                        </div>
+                        <div class="btn-upload">上传到服务器</div>
+                    </div>
+                </div>
+                <!--图片设置区域-->
+                <div class="set-image-area">
+                    <!--设置参数-->
+                    <div class="set-args"></div>
+                    <!--预览-->
+                    <div class="preview-area"></div>
+                </div>
+                <div class="hidden-dialog">
+                    <div class="btn-determine button-active" onclick="hiddenDialog()">确定</div>
+                    <div class="btn-cancel" onclick="hiddenDialog()">取消</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./jquery/jquery-1.11.0.min.js"></script>
+<script src="./zui/js/zui.min.js"></script>
+<script src="./js/editorPlgins.js"></script>
+</body>
+</html>

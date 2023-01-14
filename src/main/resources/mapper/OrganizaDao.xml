@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infoac.cas.dao.OrganizaDao">
+    <sql id="tableName">
+		ORGANIZA
+	</sql>
+	<select id="findrolelist" resultType="com.infoac.cas.dto.OrganizaDTO">
+	 SELECT ID,PID,ORNAME,ORAREA,ORCODE,ORSORT,ORRANK  FROM  ORGANIZA order by ORCODE
+	</select>
+	<update id="updateorganiza" parameterType="com.infoac.cas.dto.OrganizaDTO">
+	  update  ORGANIZA
+  <set>
+  <if  test="orname!=null">
+   orname=#{orname},
+  </if>
+  <if test ="pid!=null">
+   pid=#{pid},
+  </if>
+  <if test="orarea!=null">
+   orarea=#{orarea},
+  </if>
+  <if test="orcode!=null">
+  orcode=#{orcode},
+  </if>
+  <if test="orsort!=null">
+    orsort=#{orsort},
+  </if>
+  <if test="orrank!=null">
+   orrank=#{orrank},
+   </if>
+   </set>
+   where id = #{id} 
+	</update>
+	<insert id="insertorganiza" parameterType="com.infoac.cas.dto.OrganizaDTO">
+	 INSERT  INTO  ORGANIZA
+         (ID,PID,ORNAME,ORAREA,ORCODE,ORSORT,ORRANK)
+         VALUES
+         (#{id}, #{pid}, #{orname}, #{orarea},#{orcode},#{orsort},#{orrank})
+	</insert>
+
+	<!-- 查询子节点 -->
+ <select id="findChildPerm" resultType="com.infoac.cas.dto.OrganizaDTO">
+   select ID,PID,ORNAME,ORAREA,ORCODE,ORSORT,ORRANK from ORGANIZA
+   where pid=#{pid}
+ </select>
+	<delete id="deletByorganiza" parameterType="string">
+     delete from organiza
+     where id = #{id}
+</delete>
+    <delete id="organizadeleteall" >
+     delete from organiza
+</delete>
+<!-- 查询所有的机构数数据 -->
+<select id="findOrganlist" resultType="com.infoac.cas.dto.OrganVO">
+  SELECT ID,PID,ORNAME,ORAREA,ORCODE,ORSORT,ORRANK  FROM  ORGANIZA
+</select>
+<!-- 查询用户对应的机构数数据 -->
+<select id="selectUserOrgan" resultType="com.infoac.cas.dto.OrganVO">
+ select o.id,o.orname,o.pid,o.orarea,o.orcode,o.orsort,o.orrank
+ from ORGANIZA o
+ LEFT JOIN USER_ORGANIZA uo ON uo.orgid = o.id
+ where uo.userid = #{userid}
+</select>
+ <insert id="saveroleUser" parameterType="com.infoac.cas.dto.UserOrganKey">
+ insert into USER_ORGANIZA (userid,orgid) values(#{userid},#{orgid})
+ </insert>
+ <delete id="deleteRolePermission" parameterType="com.infoac.cas.dto.UserOrganKey">
+  delete  from  USER_ORGANIZA where userid =#{userid} 
+ </delete>
+    <delete id="deleteRolePermissionall" >
+    delete  from  USER_ORGANIZA
+ </delete>
+ <select id="organFind" resultType="com.infoac.cas.dto.OrganizaDTO">
+  SELECT ID,PID,ORNAME,ORAREA,ORCODE,ORSORT,ORRANK  FROM  ORGANIZA
+  where id =#{organId}
+ </select>
+<insert id="organizaListAdd" parameterType="com.infoac.cas.dto.OrganizaDTO">
+  insert  into  ORGANIZA
+         (ID,PID,ORNAME,ORAREA,ORCODE,ORSORT,ORRANK)
+         VALUES
+        (
+        #{id},
+        #{pid},
+        #{orname},
+        #{orarea},
+        #{orcode},
+        #{orsort},
+        #{orrank}
+        )
+</insert>
+    <insert id="saveOrganUserList" parameterType="com.infoac.cas.dto.UserOrganKey">
+    insert into USER_ORGANIZA (userid,orgid) values
+    (#{userid},#{orgid})
+    </insert>
+</mapper>

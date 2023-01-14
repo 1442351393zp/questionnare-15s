@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infoac.cas.dao.ReelAnswerRecordDao">
+
+    <!-- 新增答题记录 -->
+    <insert id="saveReelAnswerRecord" parameterType="com.infoac.cas.dto.ReelAnswerRecordDTO">
+		INSERT INTO REEL_ANSWER_RECORD(
+			ID,
+			REEL_ID,
+			USER_ID,
+			USER_NAME,
+			TIME_CONSUMING,
+			START_TIME,
+			END_TIME,
+			STATUS,
+			UPDATE_TIME,
+			CREATE_TIME,
+			CREATE_OP_ID,
+			CREATE_OP_NAME,
+			CREATE_ORG_ID,
+			CREATE_ORG_NAME
+		) VALUES
+		(
+			#{answer.id},
+			#{answer.reelId},
+			#{answer.userId},
+			#{answer.userName},
+			#{answer.timeConsuming},
+			#{answer.startTime},
+			#{answer.endTime},
+			1,
+			sysdate,
+			sysdate,
+			#{answer.createOpId},
+			#{answer.createOpName},
+			#{answer.createOrgId},
+			#{answer.createOrgName}
+		)
+	</insert>
+
+	<select id="listReelAnswerRecord" parameterType="String" resultType="com.infoac.cas.dto.ReelAnswerRecordDTO">
+		select * from REEL_ANSWER_RECORD
+		where status = 1
+		<if test="reelId != null and reelId != ''">
+			and reel_id = #{reelId}
+		</if>
+		<if test="userId != null and userId != ''">
+			and user_id = #{userId}
+		</if>
+		<!--控制答题统计展示顺序-->
+		order by start_time desc
+	</select>
+
+	<select id="getReelAnswerAverageTimeConsuming" parameterType="String" resultType="java.lang.String">
+		select round(avg(TIME_CONSUMING)) from REEL_ANSWER_RECORD
+		<if test="reelId != null and reelId != ''">
+			where reel_id = #{reelId}
+		</if>
+	</select>
+
+	<select id="getReceivedCount" parameterType="String" resultType="java.lang.Integer">
+		select count(*) from REEL_ANSWER_RECORD
+		where status = 1
+		<if test="reelId != null and reelId != ''">
+			and reel_id = #{reelId};
+		</if>
+	</select>
+
+	<select id="receiveLineChart" parameterType="String" resultType="com.infoac.cas.dto.ReceiveLineChartDTO">
+		select to_char(create_time,'yyyy-mm-dd') receivedTime , count(*) receivedCount from REEL_ANSWER_RECORD
+		where status = 1
+		<if test="reelId != null and reelId != ''">
+			and reel_id = #{reelId}
+		</if>
+		group by to_char(create_time,'yyyy-mm-dd')
+	</select>
+
+	<update id="updateAnwserRecord" parameterType="com.infoac.cas.dto.ReelAnswerRecordDTO">
+		<if test="reelAnswerRecordIds.size > 0">
+			update REEL_ANSWER_RECORD
+			set update_time = sysdate
+			<if test="status != null">
+			    ,status = #{status}
+			</if>
+			<if test="startTime != null and startTime != ''">
+				,start_time = #{startTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				,end_time = #{endTime}
+			</if>
+			where id in
+			<foreach collection="reelAnswerRecordIds" open="(" close=")" index="index" item="id" separator=",">
+				#{id}
+			</foreach>
+		</if>
+	</update>
+
+	<!--查询问卷答题记录详情-->
+	<select id="listReceivedTableData" parameterType="String" resultType="com.infoac.cas.dto.ReceivedDataInfo">
+
+		<!--按答题记录分页-->
+		select
+		t1 . id AS answerrecordid ,
+		t1 . reel_id AS reelid ,
+		t1 . start_time AS STARTTIME ,
+		t1 . end_time AS endtime ,
+		t1 . user_id AS userid ,
+		t2 . subjectid AS subjectid ,
+		t2 . topic AS topic ,
+		t4. ismultiplechoice as ismultiplechoice,
+		t2 . SUBJECTTYPE AS subjecttype ,
+		t3 . TEXTANSWER,
+		wm_concat (t3 . id) AS anwserid ,
+		wm_concat (t3 . optionsid) AS optionsid ,
+		wm_concat (t4 . options) AS options
+		FROM
+		(
+			select * from (
+				select *,rownum rn  from questionnaire . reel_answer_record
+				where status = 1
+				AND reel_id = #{reelId}
+				<!--控制问卷统计展示顺序-->
+				order by start_time desc
+			)
+			where rn &lt;= #{pageSize}
+		)
+		t1
+		LEFT JOIN
+		questionnaire . subject t2
+		ON t1 . reel_id = t2 . reelid
+		LEFT JOIN
+		(
+		<foreach collection="yearsList" index="index" item="year" open="(" close=")" separator="UNION ALL">
+			select * from
+			<if test="year == '' || year == null">
+				QUESTIONNAIRE.ANSWER_2019
+			</if>
+			<if test="year != '' and year != null">
+				QUESTIONNAIRE.ANSWER_${year}
+			</if>
+		</foreach>
+		) t3
+-- 		ON t1 . user_id = t3 . receiverid
+		ON t1 . id = t3 . answerrecordid
+		AND t2 . subjectid = t3 . subjectid
+		LEFT JOIN
+		questionnaire . options t4
+		ON t3 . optionsid = t4 . optionsid
+		where 1 = 1
+		<if test="startTime != null and startTime != ''">
+			and to_char(t1.start_time,'yyyy-mm-dd hh:mm:ss') &gt;= to_char(to_date(#{startTime}),'yyyy-mm-dd hh:mm:ss')
+		</if>
+		<if test="endTime != null and endTime != ''">
+			and to_char(t1.start_time,'yyyy-mm-dd hh:mm:ss') &lt;= to_char(to_date(#{endTime}),'yyyy-mm-dd hh:mm:ss')
+		</if>
+		GROUP BY
+		t1 . id ,
+		t1 . reel_id ,
+		t2 . subjectid ,
+		t2 . topic ,
+		--t2 . creattime,
+		t2.subjectnum,
+		t1 . start_time ,
+		t1 . end_time ,
+		t3 . TEXTANSWER,
+		t2 . subjecttype,
+		t4. ismultiplechoice,
+		t1 . user_id,
+		t3 . id,
+		t3 . optionsid,
+		t4 . options
+		ORDER BY
+        <!--控制问卷展示顺序和题目展示顺序-->
+		t1 . start_time desc,
+		t2.subjectnum asc
+		--t2 . creattime asc
+
+	</select>
+
+    <select id="getAllReceriveidByReelId" parameterType="String" resultType="String">
+		select s.user_id from
+		(
+		<!--同一人答多份题，去重-->
+		select *,row_number() over(partition by user_id order by start_time desc) as row
+		from
+		questionnaire . REEL_ANSWER_RECORD
+		where status = 1
+		and reel_id = #{reelId}
+
+		) s
+		where s.row = 1
+		<!--控制答题人顺序-->
+		order by s.start_time desc
+	</select>
+
+    <select id="getRecordById" parameterType="String" resultType="com.infoac.cas.dto.ReelAnswerRecordDTO">
+		select *
+		from
+		questionnaire . REEL_ANSWER_RECORD
+		where id = #{id}
+
+	</select>
+
+
+    <select id="countReelAnswerRecord" parameterType="String" resultType="java.lang.Integer">
+        select count(1) from REEL_ANSWER_RECORD
+        where reel_id = #{reelId} and user_id = #{userId}
+    </select>
+
+    <delete id="deleteRecord" parameterType="String">
+		DELETE FROM REEL_ANSWER_RECORD WHERE reel_id = #{reelId}
+	</delete>
+
+	<!--查询问卷答题记录详情-->
+	<select id="OtherlistReceivedTableData" parameterType="String" resultType="com.infoac.cas.dto.ReceivedDataInfo">
+
+		<!--按答题记录分页-->
+		select
+		t1 . id AS answerrecordid ,
+		t1 . reel_id AS reelid ,
+		t1 . start_time AS STARTTIME ,
+		t1 . end_time AS endtime ,
+		t1 . user_id AS userid ,
+		t2 . subjectid AS subjectid ,
+		t2 . topic AS topic ,
+		t4. ismultiplechoice as ismultiplechoice,
+		t2 . SUBJECTTYPE AS subjecttype ,
+		t3 . TEXTANSWER,
+		t3 . id AS anwserid ,
+		t3 . optionsid AS optionsid ,
+		t4 . options AS options
+		FROM
+		(
+		select * from (
+		select *,rownum rn  from questionnaire . reel_answer_record
+		where status = 1
+		AND reel_id = #{reelId}
+		<!--控制问卷统计展示顺序-->
+		order by start_time desc
+		)
+		where rn &lt;= #{pageSize}
+		)
+		t1
+		LEFT JOIN
+		questionnaire . subject t2
+		ON t1 . reel_id = t2 . reelid
+		LEFT JOIN
+		(
+		<foreach collection="yearsList" index="index" item="year" open="(" close=")" separator="UNION ALL">
+			select * from
+			<if test="year == '' || year == null">
+				QUESTIONNAIRE.ANSWER_2019
+			</if>
+			<if test="year != '' and year != null">
+				QUESTIONNAIRE.ANSWER_${year}
+			</if>
+		</foreach>
+		) t3
+		-- 		ON t1 . user_id = t3 . receiverid
+		ON t1 . id = t3 . answerrecordid
+		AND t2 . subjectid = t3 . subjectid
+		LEFT JOIN
+		questionnaire . options t4
+		ON t3 . optionsid = t4 . optionsid
+		where 1 = 1
+		<if test="startTime != null and startTime != ''">
+			and to_char(t1.start_time,'yyyy-mm-dd hh:mm:ss') &gt;= to_char(to_date(#{startTime}),'yyyy-mm-dd hh:mm:ss')
+		</if>
+		<if test="endTime != null and endTime != ''">
+			and to_char(t1.start_time,'yyyy-mm-dd hh:mm:ss') &lt;= to_char(to_date(#{endTime}),'yyyy-mm-dd hh:mm:ss')
+		</if>
+		GROUP BY
+		t1 . id ,
+		t1 . reel_id ,
+		t2 . subjectid ,
+		t2 . topic ,
+		--t2 . creattime,
+		t2.subjectnum,
+		t1 . start_time ,
+		t1 . end_time ,
+		t3 . TEXTANSWER,
+		t2 . subjecttype,
+		t4. ismultiplechoice,
+		t1 . user_id,
+		t3 . id,
+		t3 . optionsid,
+		t4 . options
+		ORDER BY
+		<!--控制问卷展示顺序和题目展示顺序-->
+		t1 . start_time desc,
+		t2.subjectnum asc
+		--t2 . creattime asc
+
+	</select>
+
+</mapper>

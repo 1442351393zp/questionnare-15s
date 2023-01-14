@@ -1,0 +1,37 @@
+.menu-box{
+    padding: 20px;
+}
+#menu-list thead th{
+    height: 44px;
+    /* text-align: center; */
+}
+#menu-list tbody tr{
+    height: 44px;
+}
+#menu-list tr td{
+    border:1px solid #ccc;
+}
+#menu-list tr th{
+    border:1px solid #ccc;
+    width: 20%;
+    background:#eee;
+}
+/* #menu-list tbody tr td:last-child{
+	text-align: center;
+} */
+#menu-list tbody tr td:last-child>span{
+	padding: 5px 10px;
+	border:1px solid #ccc;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+#menu-list  tbody tr td span.addChild{
+	color:#fff;
+	background-color: #3280FC;
+	border-color: #fff;
+}
+#menu-list tbody tr td span.deleteDom{
+	color: #fff;
+	background-color: #FF5722;
+	border-color: #fff;
+}

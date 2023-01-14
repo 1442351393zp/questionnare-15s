@@ -1,0 +1,15 @@
+/*copyright*/
+.footer-copyright {
+    height: 84px;
+    text-align: center;
+  }
+  .footer-copyright p {
+    margin-top: 20px;
+    color: #c5c5c5;
+    font-size: 14px;
+  }
+  .footer-copyright p .link {
+    color: #c5c5c5;
+    font-size: 14px;
+  }
+  

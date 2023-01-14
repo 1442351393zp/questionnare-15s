@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infoac.cas.dao.SystokenDao">
+
+    <select id="getAccessToken" resultType="String" parameterType="String">
+        SELECT ACCESS_TOKEN FROM SYSTOKEN where name = #{name}
+    </select>
+
+    <update id="updateAccessToken" parameterType="Systoken">
+		UPDATE SYSTOKEN SET
+		ACCESS_TOKEN = #{systoken.accessToken},
+		UPDATE_TIME = #{systoken.updateTime}
+		WHERE name = #{systoken.name}
+	</update>
+
+
+</mapper>

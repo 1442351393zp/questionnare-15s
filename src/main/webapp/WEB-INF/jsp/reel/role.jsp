@@ -1,0 +1,108 @@
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="<%=basePath%>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>角色管理</title>
+	<link rel="stylesheet" href="<%=path %>/template/js/zTree_v3/css/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" href="<%=path %>/template/css/role.css">
+</head>
+<body>
+    <div class="container_box">
+        <div class="content-box">
+           <!-- <div class="search-box">
+                <div class="input-box">
+                    <input type="text" class="form-control search-nick" placeholder="请输入昵称">
+                </div>
+                <div class="input-box">
+                    <input type="text" class="form-control search-phone" placeholder="请输入电话">
+                </div>
+                <button class="btn btn-primary search" type="button">查询</button>
+                <button class="btn btn-primary reset" type="button">重置</button>
+            </div> -->
+            <div class="nav-btn">
+                <button class="btn btn-primary add-user" type="button">添加</button>
+                <button class="btn btn-primary upload-user" type="button">修改</button>
+                <button class="btn btn-primary delete-user" type="button">删除</button>
+            </div>
+            <div class="user-list">
+            	<table class="layui-hide" id="userList" lay-filter="userList"></table>
+            </div>
+        </div>
+        <div class="modal fade" id="addUser">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+                        <h4 class="modal-title">添加角色</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- 弹出框主体内容 -->
+                        <div class="addUserBox form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 required">角色名：</label>
+                                <div class="col-md-6 col-sm-10">
+                                    <input type="text" class="form-control roleName" placeholder="请输入角色名">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 required">角色编码：</label>
+                                <div class="col-md-6 col-sm-10">
+                                    <input type="text" class="form-control roleCode" placeholder="请输入编码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2">描述：</label>
+                                <div class="col-md-6 col-sm-10">
+                                <textarea  class="form-control describe"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary saveUser">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="authorityList">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+					<h4 class="modal-title">权限列表</h4>
+				</div>
+				<div class="modal-body">
+					<!-- 弹出框主体内容 -->
+					<div id="treeDemo" class="ztree"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary saveAuth">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/html" id="roleBox">
+		<button type="button" class="layui-btn layui-btn-normal layui-btn-sm" lay-event="info">操作</button>
+	</script>
+	<script src="<%=path %>/template/js/zTree_v3/js/jquery.ztree.core.min.js"></script>
+	<script src="<%=path %>/template/js/zTree_v3/js/jquery.ztree.excheck.min.js"></script>
+    <script src="<%=path %>/template/js/role.js"></script>
+</body>
+    
+</html>

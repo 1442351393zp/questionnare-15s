@@ -1,0 +1,28 @@
+@charset "UTF-8";
+.scrollBar{
+  width: 100%;
+  height: calc(100% - 41px);
+  position: relative;
+  overflow: hidden;
+}
+.clearfix:after{
+  content: '';
+  display: block;
+  clear: both;
+}
+.scrollBar > div{
+  float: left;
+  width: calc(100% - 10px);
+}
+.scrollBar .scroll-box{
+  float: right;
+  width: 10px;
+  height: calc(100%);
+  border-radius: 5px;
+}
+.scrollBar .scroll-box .scrollbar{
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #CCC;
+}

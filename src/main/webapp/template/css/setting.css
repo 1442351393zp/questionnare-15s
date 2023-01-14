@@ -1,0 +1,152 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    font-size: 14px;
+    height: 100%;
+}
+/* .operation{
+	display: flex;
+    align-items: center;
+}
+.operation .base-operator{
+	padding:0;
+} 
+.operation .effect-operator div:last-child{
+	width:140px;
+	height:46px;
+} */
+.setting-box{
+    padding: 20px 20px 80px;
+    background: #F2F2F2;
+    height: 100%;
+}
+.user-box,.user-box ::before,.user-box ::after{
+	box-sizing:border-box;
+	-webkit-box-sizing: border-box;
+}
+.content{
+    display: table;
+    width: 100%;
+    border: 1px solid #e1e7f2;
+}
+.coolumn:first-child{
+    width: 30%;
+}
+.coolumn:nth-child(2){
+    width: 30%;
+}
+.coolumn{
+    display: table-cell;
+    border-left: 1px solid #e1e7f2;
+    background-color: #fff;
+}
+.coolumn>h1.title{
+    margin: 32px 30px;
+    font-size: 16px;
+}
+.setting-list{
+    padding: 0 30px 32px 30px;
+    overflow: hidden;
+}
+.setting-item{
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.switch{
+    margin-left: 5px;
+
+}
+.switch>label{
+	padding-top:7px;
+}
+.collapse-list{
+    float: left;
+}
+.collapse-content{
+    display: none;
+    margin: 10px 150px 0 40px;
+}
+.collapse-content2{
+    display: none;
+    margin: 10px 150px 0 40px;
+}
+.canal{
+    padding: 2px 8px;
+    width: 110px;
+}
+.people{
+    float: left;
+}
+.people:nth-child(2){
+    margin-left: 50px;
+}
+.user-list{
+	width:900px;
+}
+.user-box{
+	/*overflow:hidden !important;*/
+}
+.user-item{
+	float:left;
+	width:100px;
+}
+#userForm .user-box {
+    overflow: hidden !important;
+}
+/*树形图标样式*/
+.user-tree{
+    overflow-y: auto;
+    float: left;
+    height: 550px;
+    width: 35%;
+    box-sizing: border-box;
+}
+.user-list-right{
+    width: 65%;
+    float: right;
+    height: 550px;
+    overflow-y: auto;
+}
+.select-list{
+    height: 400px;
+    overflow-y: auto;
+}
+.user-list-right span,.select-list span{
+    display: inline-block;
+    padding: 8px 15px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #1ea0fa;
+    color: #fff;
+    margin:10px;
+}
+.delete-user{
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -3px;
+    width: 15px;
+    height: 15px;
+    font-size: 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    background: url(../image/btn-delete.png) no-repeat left top / 15px 15px;
+}
+.ztree li span.button.fu_ico_open,.ztree li span.button.fu_ico_close{
+   background-image: url("../image/icon/3.png");
+    background-size: 100% 100%;
+}
+.ztree li span.button.zi_ico_open,.ztree li span.button.zi_ico_close{
+    background-image: url("../image/icon/2.png");
+    background-size: 100% 100%;
+}
+.ztree li span.button.zi_ico_docu{
+    background-image: url("../image/icon/2.png");
+    background-size: 100% 100%;
+
+}
+/*.setUp-foot{*/
+	/*margin-top:193px;*/
+/*}*/

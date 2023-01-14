@@ -1,0 +1,5 @@
+说明:
+http://ip:9091/infoac/
+为了防止和其他项目冲突,统一规定项目访问端口为9091,项目名为infoac
+maven打包时需要跳过测试类mvn package -Dmaven.test.skip=true
+项目相关的文档请放到doc目录下,并上传到svn

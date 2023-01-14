@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的问卷</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/my-questionnaire.css">
+    <script src="js/page.js"></script>
+</head>
+<body>
+    <div class="page" style="width: 90%;margin: 0 auto">
+        <div class="header" style="width: 100%">
+            <a class="page-title active" onclick="changePage(event)">问卷调查系统</a>
+            <a class="" onclick="changePage(event)">创建问卷</a>
+            <a onclick="changePage(event)">我的问卷</a>
+            <a onclick="changePage(event)">回答小组</a>
+            <a onclick="changePage(event)">调查资讯</a>
+            <a onclick="changePage(event)">帮助中心</a>
+            <a class="login-area" onclick="changePage(event)">
+                <div class="remind"></div>
+                <div class="user-icon"></div>
+                <div class="btn-exit">退出</div>
+            </a>
+        </div>
+        <!--操作栏-->
+        <div class="operation clearfix">
+            <!--基本操作-->
+            <div class="base-operator">
+                <div class="active" onclick="changeOperation(event)">编辑</div>
+                <div onclick="changeOperation(event)">皮肤</div>
+                <div onclick="changeOperation(event)">设置</div>
+                <div onclick="changeOperation(event)">投放</div>
+                <div onclick="changeOperation(event)">统计</div>
+            </div>
+            <!--效果预览-->
+            <div class="effect-operator" >
+                <div class="active" onclick="changeOperation(event)">文本编辑</div>
+                <div onclick="changeOperation(event)">预览</div>
+                <div onclick="changeOperation(event)">开始回收</div>
+            </div>
+        </div>
+        <!--问卷主内容-->
+        <div class="main clearfix">
+            <!--菜单栏-->
+            <div class="menu">
+                <div class="menu-tab clearfix">
+                    <div class="tab-component active" data-type="components" onclick="changeMenu(event)">题目控件</div>
+                    <div class="tab-outline" data-type="outline" onclick="changeMenu(event)">问卷大纲</div>
+                </div>
+                <div class="menu-content">
+                    <!--题目控件列表-->
+                    <div class="components">
+                        <div class="question-type" index="1"><i class="radio-choice-question"></i><span>单选题</span></div>
+                        <div class="question-type" index=""> <i class="dropdown-question"></i><span>下拉题</span></div>
+                        <div class="question-type" index="2"><i class="multiple-choice-question"></i><span>多选题</span></div>
+                        <div class="question-type" index="4"><i class="single-line-text"></i><span>单行文本题</span></div>
+                        <div class="question-type"><i class="multi-line-text"></i><span>多行文本题</span></div>
+                        <div class="question-type"><i class="scale-question"></i><span>量表题</span></div>
+                        <div class="question-type"><i class="matrix-radio"></i><span>矩阵单选题</span></div>
+                        <div class="question-type"><i class="matrix-multi"></i><span>矩阵多选题</span></div>
+                        <div class="question-type"><i class="matrix-scale"></i><span>矩阵量表题</span></div>
+                        <div class="question-type"><i class="sort-question"></i><span>排序题</span></div>
+                        <div class="question-type"><i class="linkage-question"></i><span>联动题</span></div>
+                        <div class="question-type"><i class="annex-question"></i><span>附件题</span></div>
+                        <div class="question-type"><i class="text-description"></i><span>文本描述</span></div>
+                        <div class="question-type"><i class="fill-in-blank"></i><span>填空题</span></div>
+                    </div>
+                    <!--大纲列表-->
+                    <div class="outline" style="display: none"></div>
+                </div>
+            </div>
+            <!--问卷面板-->
+            <div class="questionnaire-panel">
+                <!--问卷页tab-->
+                <div class="tab-page">
+                    <!--前一页-->
+                    <div class="tab-btn-forward" onclick="toForwardPage(event)"></div>
+                    <div class="tab-page-index active" data-index="0" onclick="changeQuestionnairePage(event)">
+                        <span>第一页</span>
+                        <i onclick="deletePage(event)"></i>
+                    </div>
+                    <!--后一页-->
+                    <div class="tab-btn-next" onclick="toNextPage(event)"></div>
+                    <!--新建tab页-->
+                    <div class="tab-btn-add" onclick="addQuestionnairePage(event)"></div>
+                </div>
+                <!--问卷面板-->
+                <div class="panel">
+                    <!--问卷面板页-->
+                    <div class="panel-page" data-pageindex="0">
+                        <!--标题-->
+                        <div class="wrap">
+                            <h1>问卷标题</h1>
+                        </div>
+                        <!--标题说明-->
+                        <div class="wrap">
+                            <p>
+                                为了给您提供更好的服务，希望您能抽出几分钟时间，将您的感受和建议告诉我们，
+                                我们非常重视每位用户的宝贵意见，期待您的参与！现在我们就马上开始吧！
+                            </p>
+                        </div>
+                        <div class="wrap-question-list">
+                            <form action="" class="question">
+                               <!-- 题目-->
+                                <div class="fieldset">
+                                    <label for="question-title">题目:</label>
+                                    <input id="question-title" type="text" name="title">
+                                </div>
+                                <!--备注-->
+                                <div class="fieldset">
+                                    <label for="question-remark">备注:</label>
+                                    <input id="question-remark" type="text" name="remark">
+                                </div>
+                                <!--题目类型切换-->
+                                <div class="fieldset">
+                                    <label for="question-type"></label>
+                                    <select id="question-type">
+                                        <option value="单选题" selected>单选题</option>
+                                        <option value="多选题">多选题</option>
+                                        <option value="下拉题">下拉题</option>
+                                        <option value="单行文本题">单行文本题</option>
+                                    </select>
+                                </div>
+                                <!--选项一-->
+                                <div class="fieldset">
+                                    <label class="question-option-label" for="question-option-0"></label>
+                                    <input class="question-option" id="question-option-0" type="text" name="question-option" placeholder="选项"/>
+                                    <span class="btn-delete-option"></span>
+                                </div>
+                                <!--选项二-->
+                                <div class="fieldset">
+                                    <label class="question-option-label" for="question-option-1"></label>
+                                    <input class="question-option" id="question-option-1" type="text" name="question-option" placeholder="选项"/>
+                                    <span class="btn-delete-option"></span>
+                                </div>
+                                <!--新建选项-->
+                                <div class="fieldset">
+                                    <label></label>
+                                    <div class="btn-add-option">新建选项</div>
+                                </div>
+                                <!--添加选项-->
+                                <div class="fieldset">
+                                    <label></label>
+                                    <div class="add-other-option">添加[其他]项</div>
+                                    <div class="batch-update">批量修改</div>
+                                </div>
+                                <!--展开高级-->
+                                <div class="fieldset">
+                                    <div class="open-higher-set">
+                                        <span class="">展开高级设置</span>
+                                    </div>
+                                </div>
+                                <div class="fieldset">
+                                    <div class="senior-option">
+                                        <input type="checkbox" name="" value=""/>
+                                        <label for="">设置为测评题目</label>
+                                    </div>
+                                    <div class="senior-option">
+                                        <input type="checkbox" name="" value=""/>
+                                        <label for="">选项引用</label>
+                                    </div>
+                                </div>
+                                <!--确定取消-->
+                                <div class="fieldset-submit">
+                                    <label></label>
+                                    <button>取消</button>
+                                    <button class="button-active">确定</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

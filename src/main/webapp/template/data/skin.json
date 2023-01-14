@@ -1,0 +1,91 @@
+[{
+  "backgroundAll": "#ebf3fd",
+  "backgroundImage": "",
+  "contentBg": "#fff",
+  "btnBg": "#018fff",
+  "btnColor": "#fff",
+  "progressBg": "#018fff",
+  "checkedColor": "#3280fc",
+  "navTitle": "默认皮肤",
+  "navImage": "/questionnaire/template/image/skin/default.png",
+  "titleBgColor":"#018fff"
+},{
+  "backgroundAll": "#E8F0F0",
+  "backgroundImage": "/questionnaire/template/image/skin/1.png",
+  "contentBg": "#fff",
+  "btnBg": "#9E4948",
+  "btnColor": "#fff",
+  "progressBg": "#9E4948",
+  "checkedColor": "red",
+  "navTitle": "雪地",
+  "navImage": "/questionnaire/template/image/skin/1.png",
+  "titleBgColor":"#9E4948"
+},{
+  "backgroundAll": "#ebf3fd",
+  "backgroundImage": "/questionnaire/template/image/skin/2.png",
+  "contentBg": "#fff",
+  "btnBg": "#F9D456",
+  "btnColor": "#fff",
+  "progressBg": "#F9D456",
+  "checkedColor": "red",
+  "navTitle": "麦田",
+  "navImage": "/questionnaire/template/image/skin/2.png",
+  "titleBgColor":"#F9D456"
+},{
+  "backgroundAll": "#ebf3fd",
+  "backgroundImage": "/questionnaire/template/image/skin/3.png",
+  "contentBg": "#fff",
+  "btnBg": "#98A200",
+  "btnColor": "#fff",
+  "progressBg": "#98A200",
+  "checkedColor": "red",
+  "navTitle": "夕阳",
+  "navImage": "/questionnaire/template/image/skin/3.png",
+  "titleBgColor":"#98A200"
+},{
+  "backgroundAll": "#ebf3fd",
+  "backgroundImage": "/questionnaire/template/image/skin/4.png",
+  "contentBg": "#fff",
+  "btnBg": "#D8EDF9",
+  "btnColor": "#fff",
+  "progressBg": "#D8EDF9",
+  "checkedColor": "red",
+  "navTitle": "稻田",
+  "navImage": "/questionnaire/template/image/skin/4.png",
+  "titleBgColor":"#D8EDF9"
+},{
+  "backgroundAll": "#ebf3fd",
+  "backgroundImage": "/questionnaire/template/image/skin/5.png",
+  "contentBg": "#fff",
+  "btnBg": "#FF4723",
+  "btnColor": "#fff",
+  "progressBg": "#FF4723",
+  "checkedColor": "red",
+  "navTitle": "新年",
+  "navImage": "/questionnaire/template/image/skin/5.png",
+  "titleBgColor":"#FF4723"
+}
+,{
+  "backgroundAll": "#ebf3fd",
+  "backgroundImage": "/questionnaire/template/image/skin/6.png",
+  "contentBg": "#fff",
+  "btnBg": "#91D173",
+  "btnColor": "#fff",
+  "progressBg": "#91D173",
+  "checkedColor": "red",
+  "navTitle": "树林",
+  "navImage": "/questionnaire/template/image/skin/6.png",
+  "titleBgColor":"#91D173"
+},{
+  "backgroundAll": "#ebf3fd",
+  "backgroundImage": "/questionnaire/template/image/skin/7.png",
+  "contentBg": "#fff",
+  "btnBg": "#8DE6F1",
+  "btnColor": "#fff",
+  "progressBg": "#8DE6F1",
+  "checkedColor": "red",
+  "navTitle": "草地",
+  "navImage": "/questionnaire/template/image/skin/7.png",
+  "titleBgColor":"#8DE6F1"
+}
+]

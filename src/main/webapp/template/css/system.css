@@ -1,0 +1,27 @@
+.content{
+	height: 100%;
+}
+.system-nav{
+	height:44px;
+	line-height:44px;
+	border-bottom:1px solid #ccc;
+	background: #ccc;
+    color: #fff;
+}
+.system-nav span{
+	padding: 0 55px;
+	display:inline-block;
+	height:100%;
+	cursor:pointer;
+}
+.system-nav span.active{
+	color:#25a4bb;
+}
+#navbar,#navbar .header{
+	-webkit-box-sizing: content-box; 
+	box-sizing:content-box;
+}
+.systemMain{
+	height: calc(100% - 45px);
+	overflow-y: auto;
+}

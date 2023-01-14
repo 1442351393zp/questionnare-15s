@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="zui/css/zui.min.css"/>
+    <link rel="stylesheet" href="css/subject.css"/>
+    <link rel="stylesheet" href="css/my-questionnaire.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/home.css">
+    <!--jQuery-->
+    <script rel="script" src="jquery/jquery-1.11.0.min.js"></script>
+    <!--题目列表js-->
+    <script src="js/subject.js"></script>
+</head>
+<body>
+    <!--题目列表-->
+    <div class="main">
+        <div class="questionnaire-panel" style="width: 80%;margin: auto;">
+            <div class="panel">
+                <div class="panel-page" data-pageindex="0">
+                    <!--单选题目-->
+                    <div class="question-item clearfix" data-type="radio" onclick="editQuestion(event)" onmouseenter="showSlider(event)" onmouseleave="hideSlider(event)">
+                        <div class="question-item-wrap">
+                            <div class="question-item-title">
+                                <span>1</span>
+                                <span>张鹏的身高？：</span>
+                                <span>*</span>
+                                <div class="question-desc">备注</div>
+                            </div>
+                            <div class="question-item-content">
+                                <div class="radio-primary radio-btn">
+                                    <input type="radio" name="options1" value="131">
+                                    <label>150cm</label>
+                                </div>
+
+                                <div class="radio-primary radio-btn">
+                                    <input type="radio" name="options1" value="132">
+                                    <label>160cm</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-list">
+                            <div class="wrap-item"><div></div></div>
+                            <div class="wrap-item"><div></div></div>
+                            <div class="wrap-item"><div></div></div>
+                            <div class="wrap-item"  onclick="deleteQuestion(event)"><div></div></div>
+                            <div class="wrap-item"><div></div></div>
+                        </div>
+                    </div>
+                    <!--多选题目-->
+                    <div class="question-item clearfix" data-type="checkbox" onclick="editQuestion(event)"  onmouseenter="showSlider(event)" onmouseleave="hideSlider(event)">
+                        <div class="question-item-wrap">
+                            <div class="question-item-title">
+                                <span>4</span>
+                                <span>张鹏暗恋的姑娘？：</span>
+                                <span>*</span>
+                                <div class="question-desc">备注</div>
+                            </div>
+                            <div class="question-item-content">
+                                <div class="checkbox-primary checkbox-btn">
+                                    <input type="checkbox" name="options4" value="138">
+                                    <label>安然</label>
+                                </div>
+
+                                <div class="checkbox-primary checkbox-btn">
+                                    <input type="checkbox" name="options4" value="139">
+                                    <label>徐然</label>
+                                </div>
+
+                                <div class="checkbox-primary checkbox-btn">
+                                    <input type="checkbox" name="options4" value="140">
+                                    <label>庆然</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-list">
+                            <div class="wrap-item"><div></div></div>
+                            <div class="wrap-item"><div></div></div>
+                            <div class="wrap-item"><div></div></div>
+                            <div class="wrap-item" onclick="deleteQuestion(event)"><div></div></div>
+                            <div class="wrap-item"><div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--动画效果-->
+    <!--<div class="mask">-->
+        <!--<div class="loading-animate" style="background-image: url(./image/bg/loading-ffff.gif)"></div>-->
+    <!--</div>-->
+
+   <script src="jquery/jquery-1.11.0.min.js"></script>
+   <script src="zui/js/zui.min.js"></script>
+
+
+    <script type="text/javascript">
+        window.onload = function (ev) {
+            //获取你要加动画的父元素
+            var el = document.getElementsByClassName("container")[0]
+            /* el.style.position = "relative"
+            //创建动画元素
+            var mask = createLoadingEl()
+            //把动画元素添加到父元素
+            el.appendChild(mask)
+            setTimeout(function () {
+                //移除给父元素添加的样式，以免印象父元素的其他属性
+                el.style.position = ""
+                el.removeChild(mask)
+            },1000) */
+            loadAnimate(el)
+            /** 加载动画
+             * arg:el，必须是dom元素
+             */
+            function loadAnimate(el) {
+                if (el) {
+                    el.style.position = "relative"
+                    //创建动画元素
+                    var mask = createLoadingEl()
+                    //把动画元素添加到父元素
+                    el.appendChild(mask)
+                    setTimeout(function () {
+                    	//移除给父元素添加的样式，以免印象父元素的其他属性
+                        el.style.position = ""
+                        el.removeChild(mask)
+                    },1000)
+                } else {
+                    console.log("传进来的dom元素不存在")
+                }
+
+            }
+            /**
+             * 创建加载动画元素
+             * @returns {*}
+             */
+            function createLoadingEl() {
+                var mask = document.createElement("div")
+                mask.className = "mask"
+                var loadingEl = document.createElement("div")
+                loadingEl.style.backgroundImage = "url(./image/bg/loading-ffff.gif)"
+                loadingEl.className = "loading-animate"
+                mask.appendChild(loadingEl)
+                return mask
+            }
+        }
+    </script>
+</body>
+</html>
